@@ -1,10 +1,349 @@
-[gd_scene load_steps=138 format=3 uid="uid://c3bfcr2aaip5g"]
+[gd_scene load_steps=156 format=3 uid="uid://c3bfcr2aaip5g"]
 
 [ext_resource type="Script" uid="uid://cpxy581se2liu" path="res://Scenen/link.gd" id="1_f6plv"]
-[ext_resource type="Texture2D" uid="uid://dp86l2wsyw7d1" path="res://Art/Link.png" id="1_wodqk"]
+[ext_resource type="Texture2D" uid="uid://dp86l2wsyw7d1" path="res://Art/Spieler/Link.png" id="1_wodqk"]
+[ext_resource type="PackedScene" uid="uid://c67tyocqe3jmu" path="res://Scenen/navi.tscn" id="3_1hv6y"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6plv"]
-size = Vector2(21, 20)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f6plv"]
+radius = 7.5
+height = 22.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7n75w"]
+animation = &"AttackKoririschwert_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ifgjv"]
+animation = &"AttackKoririschwert_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x53xe"]
+animation = &"AttackKoririschwert_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xex4p"]
+animation = &"AttackKoririschwert_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_40kpv"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_7n75w")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_ifgjv")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_x53xe")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_xex4p")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1hv6y"]
+animation = &"Idel_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qn3ru"]
+animation = &"Idel_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_78yf1"]
+animation = &"Idel_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f6plv"]
+animation = &"Idel_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_k36wd"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_1hv6y")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_qn3ru")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_78yf1")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_f6plv")
+blend_point_3/pos = Vector2(1, 0)
+min_space = Vector2(-1.1, -1.1)
+max_space = Vector2(1.1, 1.1)
+blend_mode = 1
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_22ny6"]
+animation = &"Roll_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bab6e"]
+animation = &"Roll_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cujib"]
+animation = &"Roll_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1mblj"]
+animation = &"Roll_down"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_7n75w"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_22ny6")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_bab6e")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_cujib")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_1mblj")
+blend_point_3/pos = Vector2(0, 1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k36wd"]
+animation = &"Run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_44sl0"]
+animation = &"Run_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dai26"]
+animation = &"Run_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8mkv7"]
+animation = &"Run_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_f6plv"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_k36wd")
+blend_point_0/pos = Vector2(1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_44sl0")
+blend_point_1/pos = Vector2(-1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_dai26")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_8mkv7")
+blend_point_3/pos = Vector2(0, -1)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
+blend_mode = 1
+sync = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f6plv"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_22ny6"]
+advance_mode = 2
+advance_expression = "velocity <=0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bab6e"]
+advance_mode = 2
+advance_expression = "velocity == 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ifgjv"]
+advance_mode = 2
+advance_expression = "velocity == 0 &
+is_rollimg "
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x53xe"]
+advance_mode = 2
+advance_expression = "velocity == 0 &
+is_rollimg == false
+"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4x6pw"]
+advance_mode = 2
+advance_expression = "velocity ==  0 & 
+is_attacking == false"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b031k"]
+advance_mode = 2
+advance_expression = "is_attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cysjh"]
+advance_mode = 2
+advance_expression = "is_attaking "
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_44sl0"]
+states/Attacke/node = SubResource("AnimationNodeBlendSpace2D_40kpv")
+states/Attacke/position = Vector2(402, 191)
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_k36wd")
+states/Idle/position = Vector2(312, 95)
+states/Roll/node = SubResource("AnimationNodeBlendSpace2D_7n75w")
+states/Roll/position = Vector2(402, 4)
+states/Run/node = SubResource("AnimationNodeBlendSpace2D_f6plv")
+states/Run/position = Vector2(497, 95)
+states/Start/position = Vector2(163, 95)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_f6plv"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_22ny6"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_bab6e"), "Run", "Roll", SubResource("AnimationNodeStateMachineTransition_ifgjv"), "Roll", "Idle", SubResource("AnimationNodeStateMachineTransition_x53xe"), "Attacke", "Idle", SubResource("AnimationNodeStateMachineTransition_4x6pw"), "Idle", "Attacke", SubResource("AnimationNodeStateMachineTransition_b031k"), "Run", "Attacke", SubResource("AnimationNodeStateMachineTransition_cysjh")]
+graph_offset = Vector2(-257, -16.4774)
+
+[sub_resource type="Animation" id="Animation_hp1cg"]
+resource_name = "AttackKoririschwert_down"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0506642, 0.100145, 0.152137, 0.199009, 0.249081),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [238, 239, 240, 241, 242, 243]
+}
+
+[sub_resource type="Animation" id="Animation_76y1s"]
+resource_name = "AttackKoririschwert_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [244, 245, 246, 247, 248, 249]
+}
+
+[sub_resource type="Animation" id="Animation_8mrsw"]
+resource_name = "AttackKoririschwert_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [250, 251, 252, 253, 254, 255]
+}
+
+[sub_resource type="Animation" id="Animation_d3wq0"]
+resource_name = "AttackKoririschwert_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [256, 257, 258, 259, 260, 261]
+}
+
+[sub_resource type="Animation" id="Animation_1xvjs"]
+resource_name = "AttackMasterschwert_down"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [262, 263, 264, 265, 266, 267]
+}
+
+[sub_resource type="Animation" id="Animation_7hipr"]
+resource_name = "AttackMasterschwert_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [268, 269, 270, 271, 272, 273]
+}
+
+[sub_resource type="Animation" id="Animation_cv41m"]
+resource_name = "AttackMasterschwert_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [274, 275, 276, 277, 278, 279]
+}
+
+[sub_resource type="Animation" id="Animation_8woke"]
+resource_name = "AttackMasterschwert_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [280, 281, 282, 283, 284, 285]
+}
+
+[sub_resource type="Animation" id="Animation_m85li"]
+resource_name = "AttackbiggornSchwert_down"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [286, 287, 288, 289, 290, 291]
+}
+
+[sub_resource type="Animation" id="Animation_d14c7"]
+resource_name = "AttackbiggornSchwert_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [292, 293, 294, 295, 296, 297]
+}
+
+[sub_resource type="Animation" id="Animation_mdfmc"]
+resource_name = "AttackbiggornSchwert_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [298, 299, 300, 301, 302, 303]
+}
+
+[sub_resource type="Animation" id="Animation_cucer"]
+resource_name = "AttackbiggornSchwert_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [304, 305, 306, 307, 308, 309]
+}
 
 [sub_resource type="Animation" id="Animation_cysjh"]
 resource_name = "Blauertrank_trinken"
@@ -96,6 +435,70 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [62, 63, 64, 63, 62]
+}
+
+[sub_resource type="Animation" id="Animation_w7a1e"]
+resource_name = "Brennederdekustick_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [113, 114, 115, 116]
+}
+
+[sub_resource type="Animation" id="Animation_htldp"]
+resource_name = "Brennederdekustick_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [117, 118, 119, 120]
+}
+
+[sub_resource type="Animation" id="Animation_m76tw"]
+resource_name = "Brennederdekustick_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [121, 122, 123, 124]
+}
+
+[sub_resource type="Animation" id="Animation_j5dow"]
+resource_name = "Brennederdekustick_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [125, 126, 127, 128]
 }
 
 [sub_resource type="Animation" id="Animation_7n75w"]
@@ -226,6 +629,407 @@ tracks/0/keys = {
 "values": [109, 110, 111, 112]
 }
 
+[sub_resource type="Animation" id="Animation_kltm7"]
+resource_name = "Dropitem_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [135]
+}
+
+[sub_resource type="Animation" id="Animation_0j4ri"]
+resource_name = "Dropitem_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [136]
+}
+
+[sub_resource type="Animation" id="Animation_6lqu8"]
+resource_name = "Dropitem_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [137]
+}
+
+[sub_resource type="Animation" id="Animation_sdld7"]
+resource_name = "Dropitem_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [138]
+}
+
+[sub_resource type="Animation" id="Animation_0jj0c"]
+resource_name = "Enterhaken_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [143]
+}
+
+[sub_resource type="Animation" id="Animation_jx02q"]
+resource_name = "Enterhaken_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [145]
+}
+
+[sub_resource type="Animation" id="Animation_0hkuj"]
+resource_name = "Enterhaken_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [147]
+}
+
+[sub_resource type="Animation" id="Animation_ul7gu"]
+resource_name = "Enterhaken_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [149]
+}
+
+[sub_resource type="Animation" id="Animation_n8wh6"]
+resource_name = "Eponabogen_down"
+length = 0.22
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [338, 339, 340]
+}
+
+[sub_resource type="Animation" id="Animation_2yf3x"]
+resource_name = "Eponabogen_left"
+length = 0.22
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [341, 342, 343]
+}
+
+[sub_resource type="Animation" id="Animation_l4fjj"]
+resource_name = "Eponabogen_right"
+length = 0.22
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [344, 345, 346]
+}
+
+[sub_resource type="Animation" id="Animation_incuu"]
+resource_name = "Eponabogen_up"
+length = 0.22
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [347, 348, 349]
+}
+
+[sub_resource type="Animation" id="Animation_8ui1e"]
+resource_name = "Eponajump_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [350]
+}
+
+[sub_resource type="Animation" id="Animation_rbeif"]
+resource_name = "Eponajump_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [351]
+}
+
+[sub_resource type="Animation" id="Animation_4455g"]
+resource_name = "Eponajump_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [352]
+}
+
+[sub_resource type="Animation" id="Animation_3y5a7"]
+resource_name = "Eponajump_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [353]
+}
+
+[sub_resource type="Animation" id="Animation_ca384"]
+resource_name = "Eponarun_down"
+length = 0.62
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [310, 311, 312, 313, 314, 315, 316]
+}
+
+[sub_resource type="Animation" id="Animation_2wy5k"]
+resource_name = "Eponarun_left"
+length = 0.62
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [317, 318, 319, 320, 321, 322, 323]
+}
+
+[sub_resource type="Animation" id="Animation_astn0"]
+resource_name = "Eponarun_right"
+length = 0.62
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [324, 325, 326, 327, 328, 329, 330]
+}
+
+[sub_resource type="Animation" id="Animation_5t1aw"]
+resource_name = "Eponarun_up"
+length = 0.62
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [331, 332, 333, 334, 335, 336, 337]
+}
+
+[sub_resource type="Animation" id="Animation_jd0xc"]
+resource_name = "Fanghaken_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [144]
+}
+
+[sub_resource type="Animation" id="Animation_2rg4u"]
+resource_name = "Fanghaken_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [146]
+}
+
+[sub_resource type="Animation" id="Animation_yf2ql"]
+resource_name = "Fanghaken_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [148]
+}
+
+[sub_resource type="Animation" id="Animation_r5qfi"]
+resource_name = "Fanghaken_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [150]
+}
+
+[sub_resource type="Animation" id="Animation_ud5h2"]
+resource_name = "FeenOkarina"
+length = 0.61
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [165, 166, 167, 168]
+}
+
 [sub_resource type="Animation" id="Animation_6tyff"]
 resource_name = "Flasche_leeren"
 length = 0.2
@@ -256,6 +1060,186 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [48, 49, 44, 45]
+}
+
+[sub_resource type="Animation" id="Animation_oprbc"]
+resource_name = "Heben_down"
+length = 0.82
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [186, 187, 186, 187, 65]
+}
+
+[sub_resource type="Animation" id="Animation_p7vcs"]
+resource_name = "Heben_left"
+length = 0.82
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [188, 189, 188, 189, 74]
+}
+
+[sub_resource type="Animation" id="Animation_oobwb"]
+resource_name = "Heben_right"
+length = 0.82
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [190, 191, 190, 191, 77]
+}
+
+[sub_resource type="Animation" id="Animation_42dge"]
+resource_name = "Heben_up"
+length = 0.82
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [192, 193, 192, 193, 83]
+}
+
+[sub_resource type="Animation" id="Animation_2ahpy"]
+resource_name = "Hebenzuschwer_down"
+length = 0.62
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [186, 187, 186, 187]
+}
+
+[sub_resource type="Animation" id="Animation_xn0xp"]
+resource_name = "Hebenzuschwer_left"
+length = 0.62
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [188, 189, 188, 189]
+}
+
+[sub_resource type="Animation" id="Animation_aafjh"]
+resource_name = "Hebenzuschwer_right"
+length = 0.62
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [190, 191, 190, 191]
+}
+
+[sub_resource type="Animation" id="Animation_yspfc"]
+resource_name = "Hebenzuschwer_up"
+length = 0.62
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [192, 193, 192, 193]
+}
+
+[sub_resource type="Animation" id="Animation_sgwog"]
+resource_name = "Hurt_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [139]
+}
+
+[sub_resource type="Animation" id="Animation_5um33"]
+resource_name = "Hurt_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [140]
+}
+
+[sub_resource type="Animation" id="Animation_qseq5"]
+resource_name = "Hurt_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [141]
 }
 
 [sub_resource type="Animation" id="Animation_f6plv"]
@@ -326,6 +1310,150 @@ tracks/0/keys = {
 "values": [160]
 }
 
+[sub_resource type="Animation" id="Animation_61tix"]
+resource_name = "Itemerhalten"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [129]
+}
+
+[sub_resource type="Animation" id="Animation_liy2g"]
+resource_name = "Jump_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [161]
+}
+
+[sub_resource type="Animation" id="Animation_3ht3b"]
+resource_name = "Jump_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [162]
+}
+
+[sub_resource type="Animation" id="Animation_rofda"]
+resource_name = "Jump_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [163]
+}
+
+[sub_resource type="Animation" id="Animation_t1umw"]
+resource_name = "Jump_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [164]
+}
+
+[sub_resource type="Animation" id="Animation_77bhe"]
+resource_name = "Magischebohne"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [169]
+}
+
+[sub_resource type="Animation" id="Animation_cw1b6"]
+resource_name = "Megatonhammer_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [170, 171, 172]
+}
+
+[sub_resource type="Animation" id="Animation_kb6v1"]
+resource_name = "Megatonhammer_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [173, 174, 175]
+}
+
+[sub_resource type="Animation" id="Animation_vgimf"]
+resource_name = "Megatonhammer_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [179, 180, 181]
+}
+
 [sub_resource type="Animation" id="Animation_40kpv"]
 resource_name = "Milch_trinken"
 length = 0.4
@@ -340,6 +1468,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [36, 37, 40, 41]
+}
+
+[sub_resource type="Animation" id="Animation_1jv45"]
+resource_name = "Ocarinaderzeit"
+length = 0.61
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [182, 183, 184, 185]
 }
 
 [sub_resource type="Animation" id="Animation_1hv6y"]
@@ -515,846 +1660,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [21, 22, 23, 24, 25, 26, 27]
-}
-
-[sub_resource type="Animation" id="Animation_qgbvw"]
-resource_name = "Tod"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [89]
-}
-
-[sub_resource type="Animation" id="Animation_4uorw"]
-resource_name = "Tragen_down"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [66, 67, 68, 69, 70]
-}
-
-[sub_resource type="Animation" id="Animation_0bbb0"]
-resource_name = "Tragen_left"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [71, 72, 73, 74, 75, 76]
-}
-
-[sub_resource type="Animation" id="Animation_1l21j"]
-resource_name = "Tragen_right"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [77, 78, 79, 80, 81, 82]
-}
-
-[sub_resource type="Animation" id="Animation_p75yo"]
-resource_name = "Tragen_up"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [83, 84, 85, 86, 87, 88]
-}
-
-[sub_resource type="Animation" id="Animation_oingc"]
-resource_name = "Wurf_down"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [93]
-}
-
-[sub_resource type="Animation" id="Animation_s776j"]
-resource_name = "Wurf_left"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [94]
-}
-
-[sub_resource type="Animation" id="Animation_2kqbe"]
-resource_name = "Wurf_right"
-
-[sub_resource type="Animation" id="Animation_aofpt"]
-resource_name = "Wurf_up"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [96]
-}
-
-[sub_resource type="Animation" id="Animation_w7a1e"]
-resource_name = "Brennederdekustick_down"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [113, 114, 115, 116]
-}
-
-[sub_resource type="Animation" id="Animation_j5dow"]
-resource_name = "Brennederdekustick_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [125, 126, 127, 128]
-}
-
-[sub_resource type="Animation" id="Animation_61tix"]
-resource_name = "Itemerhalten"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [129]
-}
-
-[sub_resource type="Animation" id="Animation_cwx4p"]
-resource_name = "itemerhalten_wasser"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [130]
-}
-
-[sub_resource type="Animation" id="Animation_rksrs"]
-resource_name = "Tauchen_down"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [131, 132, 133, 134]
-}
-
-[sub_resource type="Animation" id="Animation_mhwqd"]
-resource_name = "Tauchen_left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [131, 132, 133, 134]
-}
-
-[sub_resource type="Animation" id="Animation_3kds7"]
-resource_name = "Tauchen_right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [131, 132, 133, 134]
-}
-
-[sub_resource type="Animation" id="Animation_upvtu"]
-resource_name = "Tauchen_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [131, 132, 133, 134]
-}
-
-[sub_resource type="Animation" id="Animation_kltm7"]
-resource_name = "Dropitem_down"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [135]
-}
-
-[sub_resource type="Animation" id="Animation_sdld7"]
-resource_name = "Dropitem_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [138]
-}
-
-[sub_resource type="Animation" id="Animation_sgwog"]
-resource_name = "Hurt_down"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [139]
-}
-
-[sub_resource type="Animation" id="Animation_5iji3"]
-resource_name = "hurt_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [142]
-}
-
-[sub_resource type="Animation" id="Animation_0jj0c"]
-resource_name = "Enterhaken_down"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [143]
-}
-
-[sub_resource type="Animation" id="Animation_jd0xc"]
-resource_name = "Fanghaken_down"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [144]
-}
-
-[sub_resource type="Animation" id="Animation_2rg4u"]
-resource_name = "Fanghaken_left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [146]
-}
-
-[sub_resource type="Animation" id="Animation_jx02q"]
-resource_name = "Enterhaken_left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [145]
-}
-
-[sub_resource type="Animation" id="Animation_6lqu8"]
-resource_name = "Dropitem_right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [137]
-}
-
-[sub_resource type="Animation" id="Animation_0j4ri"]
-resource_name = "Dropitem_left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [136]
-}
-
-[sub_resource type="Animation" id="Animation_htldp"]
-resource_name = "Brennederdekustick_left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [117, 118, 119, 120]
-}
-
-[sub_resource type="Animation" id="Animation_m76tw"]
-resource_name = "Brennederdekustick_right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [121, 122, 123, 124]
-}
-
-[sub_resource type="Animation" id="Animation_5um33"]
-resource_name = "Hurt_left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [140]
-}
-
-[sub_resource type="Animation" id="Animation_qseq5"]
-resource_name = "Hurt_right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [141]
-}
-
-[sub_resource type="Animation" id="Animation_0hkuj"]
-resource_name = "Enterhaken_right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [147]
-}
-
-[sub_resource type="Animation" id="Animation_yf2ql"]
-resource_name = "Fanghaken_right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [148]
-}
-
-[sub_resource type="Animation" id="Animation_ul7gu"]
-resource_name = "Enterhaken_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [149]
-}
-
-[sub_resource type="Animation" id="Animation_r5qfi"]
-resource_name = "Fanghaken_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [150]
-}
-
-[sub_resource type="Animation" id="Animation_liy2g"]
-resource_name = "Jump_down"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [161]
-}
-
-[sub_resource type="Animation" id="Animation_3ht3b"]
-resource_name = "Jump_left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [162]
-}
-
-[sub_resource type="Animation" id="Animation_rofda"]
-resource_name = "Jump_right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [163]
-}
-
-[sub_resource type="Animation" id="Animation_t1umw"]
-resource_name = "Jump_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [164]
-}
-
-[sub_resource type="Animation" id="Animation_ud5h2"]
-resource_name = "FeenOkarina"
-length = 0.61
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [165, 166, 167, 168]
-}
-
-[sub_resource type="Animation" id="Animation_77bhe"]
-resource_name = "Magischebohne"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [169]
-}
-
-[sub_resource type="Animation" id="Animation_cw1b6"]
-resource_name = "Megatonhammer_down"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [170, 171, 172]
-}
-
-[sub_resource type="Animation" id="Animation_kb6v1"]
-resource_name = "Megatonhammer_left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [173, 174, 175]
-}
-
-[sub_resource type="Animation" id="Animation_vgimf"]
-resource_name = "Megatonhammer_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [179, 180, 181]
-}
-
-[sub_resource type="Animation" id="Animation_1jv45"]
-resource_name = "Ocarinaderzeit"
-length = 0.61
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [182, 183, 184, 185]
-}
-
-[sub_resource type="Animation" id="Animation_oprbc"]
-resource_name = "Heben_down"
-length = 0.82
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [186, 187, 186, 187, 65]
-}
-
-[sub_resource type="Animation" id="Animation_2ahpy"]
-resource_name = "Hebenzuschwer_down"
-length = 0.62
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [186, 187, 186, 187]
-}
-
-[sub_resource type="Animation" id="Animation_xn0xp"]
-resource_name = "Hebenzuschwer_left"
-length = 0.62
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [188, 189, 188, 189]
-}
-
-[sub_resource type="Animation" id="Animation_p7vcs"]
-resource_name = "Heben_left"
-length = 0.82
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [188, 189, 188, 189, 74]
-}
-
-[sub_resource type="Animation" id="Animation_aafjh"]
-resource_name = "Hebenzuschwer_right"
-length = 0.62
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [190, 191, 190, 191]
-}
-
-[sub_resource type="Animation" id="Animation_oobwb"]
-resource_name = "Heben_right"
-length = 0.82
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [190, 191, 190, 191, 77]
-}
-
-[sub_resource type="Animation" id="Animation_42dge"]
-resource_name = "Heben_up"
-length = 0.82
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [192, 193, 192, 193, 83]
-}
-
-[sub_resource type="Animation" id="Animation_yspfc"]
-resource_name = "Hebenzuschwer_up"
-length = 0.62
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [192, 193, 192, 193]
 }
 
 [sub_resource type="Animation" id="Animation_4wuom"]
@@ -1549,9 +1854,9 @@ tracks/0/keys = {
 "values": [234, 235, 236, 237]
 }
 
-[sub_resource type="Animation" id="Animation_hp1cg"]
-resource_name = "AttackKoririschwert_down"
-length = 0.3
+[sub_resource type="Animation" id="Animation_rksrs"]
+resource_name = "Tauchen_down"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1559,15 +1864,110 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0506642, 0.100145, 0.152137, 0.199009, 0.249081),
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [131, 132, 133, 134]
+}
+
+[sub_resource type="Animation" id="Animation_mhwqd"]
+resource_name = "Tauchen_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [131, 132, 133, 134]
+}
+
+[sub_resource type="Animation" id="Animation_3kds7"]
+resource_name = "Tauchen_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [131, 132, 133, 134]
+}
+
+[sub_resource type="Animation" id="Animation_upvtu"]
+resource_name = "Tauchen_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [131, 132, 133, 134]
+}
+
+[sub_resource type="Animation" id="Animation_qgbvw"]
+resource_name = "Tod"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [89]
+}
+
+[sub_resource type="Animation" id="Animation_4uorw"]
+resource_name = "Tragen_down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [66, 67, 68, 69, 70]
+}
+
+[sub_resource type="Animation" id="Animation_0bbb0"]
+resource_name = "Tragen_left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [238, 239, 240, 241, 242, 243]
+"values": [71, 72, 73, 74, 75, 76]
 }
 
-[sub_resource type="Animation" id="Animation_76y1s"]
-resource_name = "AttackKoririschwert_left"
-length = 0.3
+[sub_resource type="Animation" id="Animation_1l21j"]
+resource_name = "Tragen_right"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1575,15 +1975,15 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [244, 245, 246, 247, 248, 249]
+"values": [77, 78, 79, 80, 81, 82]
 }
 
-[sub_resource type="Animation" id="Animation_8mrsw"]
-resource_name = "AttackKoririschwert_right"
-length = 0.3
+[sub_resource type="Animation" id="Animation_p75yo"]
+resource_name = "Tragen_up"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1591,15 +1991,15 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [250, 251, 252, 253, 254, 255]
+"values": [83, 84, 85, 86, 87, 88]
 }
 
-[sub_resource type="Animation" id="Animation_d3wq0"]
-resource_name = "AttackKoririschwert_up"
-length = 0.3
+[sub_resource type="Animation" id="Animation_oingc"]
+resource_name = "Wurf_down"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1607,15 +2007,15 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [256, 257, 258, 259, 260, 261]
+"values": [93]
 }
 
-[sub_resource type="Animation" id="Animation_1xvjs"]
-resource_name = "AttackMasterschwert_down"
-length = 0.3
+[sub_resource type="Animation" id="Animation_s776j"]
+resource_name = "Wurf_left"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1623,15 +2023,18 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [262, 263, 264, 265, 266, 267]
+"values": [94]
 }
 
-[sub_resource type="Animation" id="Animation_m85li"]
-resource_name = "AttackbiggornSchwert_down"
-length = 0.3
+[sub_resource type="Animation" id="Animation_2kqbe"]
+resource_name = "Wurf_right"
+
+[sub_resource type="Animation" id="Animation_aofpt"]
+resource_name = "Wurf_up"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1639,238 +2042,14 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [286, 287, 288, 289, 290, 291]
+"values": [96]
 }
 
-[sub_resource type="Animation" id="Animation_d14c7"]
-resource_name = "AttackbiggornSchwert_left"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [292, 293, 294, 295, 296, 297]
-}
-
-[sub_resource type="Animation" id="Animation_mdfmc"]
-resource_name = "AttackbiggornSchwert_right"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [298, 299, 300, 301, 302, 303]
-}
-
-[sub_resource type="Animation" id="Animation_cucer"]
-resource_name = "AttackbiggornSchwert_up"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [304, 305, 306, 307, 308, 309]
-}
-
-[sub_resource type="Animation" id="Animation_cv41m"]
-resource_name = "AttackMasterschwert_right"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [274, 275, 276, 277, 278, 279]
-}
-
-[sub_resource type="Animation" id="Animation_7hipr"]
-resource_name = "AttackMasterschwert_left"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [268, 269, 270, 271, 272, 273]
-}
-
-[sub_resource type="Animation" id="Animation_8woke"]
-resource_name = "AttackMasterschwert_up"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [280, 281, 282, 283, 284, 285]
-}
-
-[sub_resource type="Animation" id="Animation_ca384"]
-resource_name = "Eponarun_down"
-length = 0.62
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [310, 311, 312, 313, 314, 315, 316]
-}
-
-[sub_resource type="Animation" id="Animation_2wy5k"]
-resource_name = "Eponarun_left"
-length = 0.62
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [317, 318, 319, 320, 321, 322, 323]
-}
-
-[sub_resource type="Animation" id="Animation_astn0"]
-resource_name = "Eponarun_right"
-length = 0.62
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [324, 325, 326, 327, 328, 329, 330]
-}
-
-[sub_resource type="Animation" id="Animation_5t1aw"]
-resource_name = "Eponarun_up"
-length = 0.62
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [331, 332, 333, 334, 335, 336, 337]
-}
-
-[sub_resource type="Animation" id="Animation_n8wh6"]
-resource_name = "Eponabogen_down"
-length = 0.22
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [338, 339, 340]
-}
-
-[sub_resource type="Animation" id="Animation_2yf3x"]
-resource_name = "Eponabogen_left"
-length = 0.22
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [341, 342, 343]
-}
-
-[sub_resource type="Animation" id="Animation_l4fjj"]
-resource_name = "Eponabogen_right"
-length = 0.22
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [344, 345, 346]
-}
-
-[sub_resource type="Animation" id="Animation_incuu"]
-resource_name = "Eponabogen_up"
-length = 0.22
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [347, 348, 349]
-}
-
-[sub_resource type="Animation" id="Animation_8ui1e"]
-resource_name = "Eponajump_down"
+[sub_resource type="Animation" id="Animation_5iji3"]
+resource_name = "hurt_up"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1882,11 +2061,11 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [350]
+"values": [142]
 }
 
-[sub_resource type="Animation" id="Animation_rbeif"]
-resource_name = "Eponajump_left"
+[sub_resource type="Animation" id="Animation_cwx4p"]
+resource_name = "itemerhalten_wasser"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1898,39 +2077,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [351]
-}
-
-[sub_resource type="Animation" id="Animation_4455g"]
-resource_name = "Eponajump_right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [352]
-}
-
-[sub_resource type="Animation" id="Animation_3y5a7"]
-resource_name = "Eponajump_up"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [353]
+"values": [130]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_44sl0"]
@@ -2056,79 +2203,19 @@ _data = {
 &"itemerhalten_wasser": SubResource("Animation_cwx4p")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1hv6y"]
-animation = &"Idel_right"
+[sub_resource type="CircleShape2D" id="CircleShape2D_1hv6y"]
+radius = 6.0
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qn3ru"]
-animation = &"Idel_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_78yf1"]
-animation = &"Idel_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f6plv"]
-animation = &"Idel_left"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_k36wd"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_1hv6y")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_qn3ru")
-blend_point_1/pos = Vector2(0, 1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_78yf1")
-blend_point_2/pos = Vector2(0, -0.9)
-blend_point_3/node = SubResource("AnimationNodeAnimation_f6plv")
-blend_point_3/pos = Vector2(1, 0)
-blend_mode = 1
-sync = true
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k36wd"]
-animation = &"Run_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_44sl0"]
-animation = &"Run_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dai26"]
-animation = &"Run_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8mkv7"]
-animation = &"Run_up"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_f6plv"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_k36wd")
-blend_point_0/pos = Vector2(1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_44sl0")
-blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_dai26")
-blend_point_2/pos = Vector2(0, 1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_8mkv7")
-blend_point_3/pos = Vector2(0, -1.1)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f6plv"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_22ny6"]
-advance_mode = 2
-advance_expression = "Velocity <=0"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bab6e"]
-advance_mode = 2
-advance_expression = "Velocity == 0"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_44sl0"]
-states/Idel/node = SubResource("AnimationNodeBlendSpace2D_k36wd")
-states/Idel/position = Vector2(312, 95)
-states/Run/node = SubResource("AnimationNodeBlendSpace2D_f6plv")
-states/Run/position = Vector2(495, 95)
-states/Start/position = Vector2(162, 95)
-transitions = ["Start", "Idel", SubResource("AnimationNodeStateMachineTransition_f6plv"), "Idel", "Run", SubResource("AnimationNodeStateMachineTransition_22ny6"), "Run", "Idel", SubResource("AnimationNodeStateMachineTransition_bab6e")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qn3ru"]
+radius = 8.0
+height = 16.0
 
 [node name="Link" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_f6plv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_f6plv")
+shape = SubResource("CapsuleShape2D_f6plv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -2137,19 +2224,46 @@ flip_h = true
 hframes = 19
 vframes = 19
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
+[node name="Animation" type="Node" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="Animation"]
+root_node = NodePath("../../Sprite2D")
+tree_root = SubResource("AnimationNodeStateMachine_44sl0")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Attacke/blend_position = Vector2(0.997888, -0.0134529)
+parameters/Idle/blend_position = Vector2(0.0174234, 0.340359)
+parameters/Roll/blend_position = Vector2(0.146779, -0.309417)
+parameters/Run/blend_position = Vector2(-0.126716, -0.734978)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
+root_node = NodePath("../../Sprite2D")
 libraries = {
 &"": SubResource("AnimationLibrary_44sl0")
 }
 autoplay = "Idel_down"
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../Sprite2D")
-tree_root = SubResource("AnimationNodeStateMachine_44sl0")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Idel/blend_position = Vector2(-1, 0.0313902)
-parameters/Run/blend_position = Vector2(-0.965153, 0)
+[node name="Schaden zufügen" type="Node" parent="."]
+
+[node name="Hurt" type="Area2D" parent="Schaden zufügen"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Schaden zufügen/Hurt"]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_1hv6y")
+disabled = true
+debug_color = Color(0.298733, 0.621531, 0.274619, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[node name="Schaden bekommen" type="Node" parent="."]
+
+[node name="Hit" type="Area2D" parent="Schaden bekommen"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Schaden bekommen/Hit"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_qn3ru")
+debug_color = Color(0.935771, 0.178126, 0.459527, 0.42)
+
+[node name="Navi" parent="." instance=ExtResource("3_1hv6y")]
+position = Vector2(16, -17)
+target_path = NodePath("..")
