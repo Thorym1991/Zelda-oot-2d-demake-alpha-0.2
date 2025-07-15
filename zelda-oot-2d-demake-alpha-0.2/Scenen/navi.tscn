@@ -6,9 +6,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_jxk86"]
 radius = 4.0
 
-[sub_resource type="Animation" id="Animation_jxk86"]
-resource_name = "fly_down"
-length = 1.01
+[sub_resource type="Animation" id="Animation_vld4a"]
+resource_name = "Fly_up"
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -17,10 +16,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.800691, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 0, 5]
+"values": [14, 15, 16, 17, 16, 17]
 }
 
 [sub_resource type="Animation" id="Animation_7w7ls"]
@@ -36,6 +35,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jxk86"]
+resource_name = "fly_down"
+length = 1.01
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 5]
 }
 
 [sub_resource type="Animation" id="Animation_imkip"]
@@ -70,22 +86,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [6, 7, 6, 7, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_vld4a"]
-resource_name = "Fly_up"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.800691, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [14, 15, 16, 17, 16, 17]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_imkip"]
