@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Zelda oot 2d demake alpha 0.2"
-run/main_scene="uid://c3bfcr2aaip5g"
+run/main_scene="uid://htnivnpxgcyx"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
