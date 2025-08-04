@@ -15,6 +15,10 @@ run/main_scene="uid://htnivnpxgcyx"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Signalhub="*res://Globels/Signalhub.gd"
+
 [input]
 
 up={
@@ -103,6 +107,10 @@ Start={
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_render/layer_7="wand"
 
 [rendering]
 

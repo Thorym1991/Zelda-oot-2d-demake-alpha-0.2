@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://htnivnpxgcyx"]
+[gd_scene load_steps=25 format=4 uid="uid://htnivnpxgcyx"]
 
 [ext_resource type="Texture2D" uid="uid://cr7c2afpjypxj" path="res://Art/maps/Testteils.png" id="1_t0bmo"]
 [ext_resource type="Texture2D" uid="uid://jcs2kw1lh6md" path="res://Art/maps/waldlichtung.png" id="2_8m65u"]
 [ext_resource type="PackedScene" uid="uid://c3bfcr2aaip5g" path="res://Scenen/link.tscn" id="2_aamji"]
+[ext_resource type="PackedScene" uid="uid://b7we80a4fe7qv" path="res://leiter.tscn" id="4_fltt0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aamji"]
 texture = ExtResource("1_t0bmo")
@@ -856,7 +857,6 @@ texture = ExtResource("2_8m65u")
 28:39/0 = 0
 28:39/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.06602, -5.99001, 1.74791, -5.84547, 1.97714, -6.87702, 3.86832, -7.04895, 4.04025, -8, 8, -8, 8, 8, -8, 8, -8, 4.18352, -6.96299, 4.0116, -7.02029, 2.12042, -5.98874, 2.06311, -5.75951, 1.08886, -3.98294, 0.916936, -3.81102, 0, -2.03445, 0.0573087, -1.80522, -0.80232, -1.06021, -0.859628, -0.945591, -1.94849, -0.0859632, -2.06311, 0.0286541, -3.89698, 1.06021, -3.89698)
 29:39/0 = 0
-29:39/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 30:39/0 = 0
 30:39/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 31:39/0 = 0
@@ -864,7 +864,6 @@ texture = ExtResource("2_8m65u")
 30:38/0 = 0
 30:38/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.89348, 3.14729, 2.48738, 3.04577, 4.51789, 3.85797, 5.02551, 5.27933, 8, 5.27933, 8, 8, -8, 8, -8, 5.07628, -5.73619, 4.7717, -4.92399, 4.26407)
 29:38/0 = 0
-29:38/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.89348, 3.14729, 2.48738, 3.04577, 4.51789, 3.85797, 5.02551, 5.27933, 8, 5.27933, 8, 8, -8, 8, -8, 5.07628, -5.73619, 4.7717, -4.92399, 4.26407)
 28:38/0 = 0
 31:38/0 = 0
 31:38/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.89348, 3.14729, 2.48738, 3.04577, 4.51789, 3.85797, 5.02551, 5.27933, 8, 5.27933, 8, 8, -8, 8, -8, 5.07628, -5.73619, 4.7717, -4.92399, 4.26407)
@@ -913,7 +912,6 @@ texture = ExtResource("2_8m65u")
 30:40/0 = 0
 30:40/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 29:40/0 = 0
-29:40/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 32:39/0 = 0
 32:39/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 33:39/0 = 0
@@ -9689,3 +9687,6 @@ tile_set = SubResource("TileSet_1oevw")
 z_index = 1
 y_sort_enabled = true
 position = Vector2(406, -1060)
+
+[node name="Leiter" parent="." instance=ExtResource("4_fltt0")]
+position = Vector2(200, -708)
