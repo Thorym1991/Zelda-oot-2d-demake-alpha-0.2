@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=3 uid="uid://c3bfcr2aaip5g"]
+[gd_scene load_steps=188 format=3 uid="uid://c3bfcr2aaip5g"]
 
 [ext_resource type="Script" uid="uid://cpxy581se2liu" path="res://Scenen/link.gd" id="1_f6plv"]
 [ext_resource type="Texture2D" uid="uid://dp86l2wsyw7d1" path="res://Art/Spieler/Link.png" id="1_wodqk"]
@@ -149,7 +149,26 @@ blend_point_3/pos = Vector2(0, 1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p75yo"]
-animation = &"klettern"
+animation = &"kletteren"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qgbvw"]
+animation = &"kletteren"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oingc"]
+animation = &"kletteren"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s776j"]
+animation = &"kletteren"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_2kqbe"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_p75yo")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_qgbvw")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_oingc")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_s776j")
+blend_point_3/pos = Vector2(-1, 0)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_olqe3"]
 animation = &"water_idle_down"
@@ -204,9 +223,6 @@ advance_expression = "is_on_water"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b031k"]
 advance_expression = "is_on_water and velocity <=0"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qgbvw"]
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_44sl0"]
 states/Attacke/node = SubResource("AnimationNodeBlendSpace2D_f6plv")
 states/Attacke/position = Vector2(62, 350)
@@ -222,11 +238,11 @@ states/Swim/node = SubResource("AnimationNodeBlendSpace2D_k36wd")
 states/Swim/position = Vector2(526, 243)
 states/Waten/node = SubResource("AnimationNodeBlendSpace2D_22ny6")
 states/Waten/position = Vector2(375, 342)
-states/klettern/node = SubResource("AnimationNodeAnimation_p75yo")
-states/klettern/position = Vector2(-164, 92.321)
+states/kletteren/node = SubResource("AnimationNodeBlendSpace2D_2kqbe")
+states/kletteren/position = Vector2(-152, 125)
 states/water_Idle/node = SubResource("AnimationNodeBlendSpace2D_dai26")
 states/water_Idle/position = Vector2(375, 125)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_8mkv7"), "Idle", "Roll", SubResource("AnimationNodeStateMachineTransition_22ny6"), "Roll", "Run", SubResource("AnimationNodeStateMachineTransition_bab6e"), "Run", "Waten", SubResource("AnimationNodeStateMachineTransition_cujib"), "Run", "Attacke", SubResource("AnimationNodeStateMachineTransition_1mblj"), "Idle", "Attacke", SubResource("AnimationNodeStateMachineTransition_7n75w"), "Waten", "Swim", SubResource("AnimationNodeStateMachineTransition_ifgjv"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_x53xe"), "Swim", "Waten", SubResource("AnimationNodeStateMachineTransition_40kpv"), "Waten", "Run", SubResource("AnimationNodeStateMachineTransition_4x6pw"), "Waten", "water_Idle", SubResource("AnimationNodeStateMachineTransition_b031k"), "Idle", "klettern", SubResource("AnimationNodeStateMachineTransition_qgbvw")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_8mkv7"), "Idle", "Roll", SubResource("AnimationNodeStateMachineTransition_22ny6"), "Roll", "Run", SubResource("AnimationNodeStateMachineTransition_bab6e"), "Run", "Waten", SubResource("AnimationNodeStateMachineTransition_cujib"), "Run", "Attacke", SubResource("AnimationNodeStateMachineTransition_1mblj"), "Idle", "Attacke", SubResource("AnimationNodeStateMachineTransition_7n75w"), "Waten", "Swim", SubResource("AnimationNodeStateMachineTransition_ifgjv"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_x53xe"), "Swim", "Waten", SubResource("AnimationNodeStateMachineTransition_40kpv"), "Waten", "Run", SubResource("AnimationNodeStateMachineTransition_4x6pw"), "Waten", "water_Idle", SubResource("AnimationNodeStateMachineTransition_b031k")]
 graph_offset = Vector2(-752, 55.321)
 
 [sub_resource type="Animation" id="Animation_hp1cg"]
@@ -2149,21 +2165,6 @@ tracks/0/keys = {
 "values": [131]
 }
 
-[sub_resource type="Animation" id="Animation_je0rf"]
-resource_name = "klettern"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.923725),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [387, 386, 387, 386]
-}
-
 [sub_resource type="Animation" id="Animation_w4033"]
 resource_name = "waten_down"
 length = 0.61
@@ -2292,6 +2293,21 @@ tracks/0/keys = {
 "values": [377]
 }
 
+[sub_resource type="Animation" id="Animation_je0rf"]
+resource_name = "kletteren"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.923725),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [387, 386, 387, 386]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_44sl0"]
 _data = {
 &"AttackKoririschwert_down": SubResource("Animation_hp1cg"),
@@ -2413,7 +2429,7 @@ _data = {
 &"Wurf_up": SubResource("Animation_aofpt"),
 &"hurt_up": SubResource("Animation_5iji3"),
 &"itemerhalten_wasser": SubResource("Animation_cwx4p"),
-&"klettern": SubResource("Animation_je0rf"),
+&"kletteren": SubResource("Animation_je0rf"),
 &"waten_down": SubResource("Animation_w4033"),
 &"waten_left": SubResource("Animation_nr056"),
 &"waten_right": SubResource("Animation_i6fkk"),
@@ -2427,7 +2443,8 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6plv"]
 size = Vector2(17.5, 22)
 
-[node name="Link" type="CharacterBody2D"]
+[node name="Link" type="CharacterBody2D" groups=["player"]]
+z_index = 2
 motion_mode = 1
 script = ExtResource("1_f6plv")
 
@@ -2473,6 +2490,7 @@ parameters/Roll/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 parameters/Swim/blend_position = Vector2(-0.881732, 0.00452495)
 parameters/Waten/blend_position = Vector2(-0.0285111, 0.560538)
+parameters/kletteren/blend_position = Vector2(0.000789285, 0.89011)
 parameters/water_Idle/blend_position = Vector2(-0.1151, 0.314136)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -2484,6 +2502,7 @@ libraries = {
 [node name="überprüffung" type="Node" parent="."]
 
 [node name="Area2D" type="Area2D" parent="überprüffung"]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="überprüffung/Area2D"]
 position = Vector2(0, -1)

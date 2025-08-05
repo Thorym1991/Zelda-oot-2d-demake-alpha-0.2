@@ -1,42 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7we80a4fe7qv"]
+[gd_scene load_steps=5 format=3 uid="uid://b7we80a4fe7qv"]
 
 [ext_resource type="Texture2D" uid="uid://df21umt5knigp" path="res://Art/Probs/image (5) (5).png" id="1_ro0wr"]
-[ext_resource type="Script" uid="uid://dk4y6xwwwj6p6" path="res://leiter.gd" id="1_xctom"]
+[ext_resource type="Script" uid="uid://dgjv08x1qbnrc" path="res://einstigunten.gd" id="2_s7bcw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xctom"]
-size = Vector2(14, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ro0wr"]
-size = Vector2(14, 13)
+size = Vector2(14, 67)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7bcw"]
 size = Vector2(16, 51)
 
 [node name="Leiter" type="StaticBody2D" groups=["Leiter"]]
-script = ExtResource("1_xctom")
+z_index = -1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ro0wr")
 
-[node name="Einstigunten" type="Area2D" parent="."]
-monitorable = false
+[node name="Einstig" type="Area2D" parent="."]
+script = ExtResource("2_s7bcw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Einstigunten"]
-position = Vector2(0, 27)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Einstig"]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_xctom")
 debug_color = Color(0.260651, 0.619873, 0.388139, 0.42)
-
-[node name="Einstigeoben" type="Area2D" parent="."]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Einstigeoben"]
-position = Vector2(0, -30)
-shape = SubResource("RectangleShape2D_ro0wr")
-debug_color = Color(0.754217, 0.429218, 0.426635, 0.42)
 
 [node name="BlockerCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_s7bcw")
 debug_color = Color(0.284756, 0.542003, 0.857877, 0.42)
 
-[connection signal="area_entered" from="Einstigunten" to="." method="_on_einstieg_unten_entered"]
-[connection signal="area_entered" from="Einstigeoben" to="." method="_on_einstieg_oben_entered"]
+[connection signal="area_entered" from="Einstig" to="." method="_on_einstieg_unten_entered"]
