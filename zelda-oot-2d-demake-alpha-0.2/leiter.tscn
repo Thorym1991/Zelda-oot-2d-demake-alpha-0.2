@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dgjv08x1qbnrc" path="res://einstigunten.gd" id="2_s7bcw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xctom"]
-size = Vector2(14, 67)
+size = Vector2(14, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7bcw"]
 size = Vector2(16, 51)
@@ -19,7 +19,6 @@ texture = ExtResource("1_ro0wr")
 script = ExtResource("2_s7bcw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Einstig"]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_xctom")
 debug_color = Color(0.260651, 0.619873, 0.388139, 0.42)
 

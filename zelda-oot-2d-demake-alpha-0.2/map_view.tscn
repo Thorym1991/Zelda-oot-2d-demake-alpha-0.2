@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpi6j5gbxma6k"]
+
+[ext_resource type="Texture2D" uid="uid://cgu46d20fytie" path="res://Art/HuD/Z Button.png" id="1_l78cc"]
+[ext_resource type="Texture2D" uid="uid://dj2h8v4xtyeoj" path="res://Art/HuD/Platzhalter_map.png" id="2_51ccw"]
+[ext_resource type="Texture2D" uid="uid://dq8127arab7au" path="res://Art/HuD/R Button.png" id="2_l1o8s"]
+[ext_resource type="Texture2D" uid="uid://hhlljmbinwcg" path="res://Art/HuD/Rahmenmap.png" id="4_pl0cs"]
+[ext_resource type="Texture2D" uid="uid://buj78al5po8pe" path="res://Art/HuD/Map_name_layer 01.png" id="5_fyrkv"]
+
+[node name="WorldMapView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureButton" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 212.0
+offset_top = 323.0
+offset_right = 252.0
+offset_bottom = 363.0
+texture_normal = ExtResource("1_l78cc")
+stretch_mode = 0
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 922.0
+offset_top = 323.0
+offset_right = 962.0
+offset_bottom = 363.0
+texture = ExtResource("2_l1o8s")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 168.0
+offset_right = 908.0
+offset_bottom = 531.0
+texture = ExtResource("2_51ccw")
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 94.0
+offset_right = 945.0
+offset_bottom = 565.0
+texture = ExtResource("4_pl0cs")
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 548.0
+offset_right = 728.0
+offset_bottom = 588.0
+texture = ExtResource("5_fyrkv")
