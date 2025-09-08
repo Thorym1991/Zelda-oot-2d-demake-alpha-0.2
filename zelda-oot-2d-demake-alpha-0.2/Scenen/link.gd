@@ -7,10 +7,10 @@ class_name Player
 @onready var tiefes_wasser: TileMapLayer = $"../TiefesWasser"
 @onready var wasser: TileMapLayer = $"../wasser"
 @export var speed: float = 100
-@export var roll_speed: float = 200            # Geschwindigkeit während Roll
-@export var roll_duration: float = 0.5         # Dauer des Rolls in Sekunden
-@export var attack_duration: float = 0.3       # Dauer der Angriffsanimation
-@export var climb_speed: float = 80            # Geschwindigkeit beim Klettern
+@export var roll_speed: float = 200          # Geschwindigkeit während Roll
+@export var roll_duration: float = 0.5       # Dauer des Rolls in Sekunden
+@export var attack_duration: float = 0.3     # Dauer der Angriffsanimation
+@export var climb_speed: float = 80          # Geschwindigkeit beim Klettern
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var wasser_tileset = wasser.tile_set

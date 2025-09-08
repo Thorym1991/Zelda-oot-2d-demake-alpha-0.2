@@ -6,21 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://hhlljmbinwcg" path="res://Art/HuD/Rahmenmap.png" id="4_pl0cs"]
 [ext_resource type="Texture2D" uid="uid://buj78al5po8pe" path="res://Art/HuD/Map_name_layer 01.png" id="5_fyrkv"]
 
-[node name="WorldMapView" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -1.0
-offset_right = 2.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="WorldMapView" type="CanvasLayer"]
 
 [node name="TextureRect" type="TextureButton" parent="."]
 z_index = 2
-layout_mode = 0
 offset_left = 212.0
 offset_top = 323.0
 offset_right = 252.0
@@ -30,7 +19,6 @@ stretch_mode = 0
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 z_index = 2
-layout_mode = 0
 offset_left = 922.0
 offset_top = 323.0
 offset_right = 962.0
@@ -38,7 +26,6 @@ offset_bottom = 363.0
 texture = ExtResource("2_l1o8s")
 
 [node name="TextureRect3" type="TextureRect" parent="."]
-layout_mode = 0
 offset_left = 262.0
 offset_top = 168.0
 offset_right = 908.0
@@ -46,7 +33,6 @@ offset_bottom = 531.0
 texture = ExtResource("2_51ccw")
 
 [node name="TextureRect4" type="TextureRect" parent="."]
-layout_mode = 0
 offset_left = 227.0
 offset_top = 94.0
 offset_right = 945.0
@@ -54,7 +40,6 @@ offset_bottom = 565.0
 texture = ExtResource("4_pl0cs")
 
 [node name="TextureRect5" type="TextureRect" parent="."]
-layout_mode = 0
 offset_left = 432.0
 offset_top = 548.0
 offset_right = 728.0
