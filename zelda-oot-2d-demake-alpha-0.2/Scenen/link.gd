@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# 2) Roll-State
-	if is_rolling:
+	if is_rolling and not is_on_water and not is_on_deepwater:
 		roll_timer -= delta
 		velocity = last_input_dir * roll_speed
 		animation_tree.get("parameters/playback").travel("Roll")

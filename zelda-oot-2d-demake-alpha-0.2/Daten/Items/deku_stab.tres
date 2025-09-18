@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bypwqjy4hdmgo"]
+
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_j5vyw"]
+
+[resource]
+script = ExtResource("1_j5vyw")
+id = "deku_stab"
+display_name = "Deku-Stab"
+variants = {}
+usable_by = 0
+stackable = true
+max_stack = 10
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"
