@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://ylfn6s5pqx0v"]
+
+[ext_resource type="Texture2D" uid="uid://dsmqnq7jv22v4" path="res://Daten/Items/Item Icon/Bumerang.png" id="1_7tcso"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_7xjsm"]
+
+[resource]
+script = ExtResource("1_7xjsm")
+id = "bumerang"
+display_name = "Bumerang"
+icon = ExtResource("1_7tcso")
+variants = {}
+usable_by = 0
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

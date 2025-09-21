@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://ckva4vhhool4x"]
+
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_arp77"]
+[ext_resource type="Texture2D" uid="uid://o0b27suctbif" path="res://Daten/Items/Item Icon/Fanghaken.png" id="1_xe7b1"]
+
+[resource]
+script = ExtResource("1_arp77")
+id = "haken"
+display_name = "Fanghaken"
+icon = ExtResource("1_xe7b1")
+variants = {}
+usable_by = 1
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

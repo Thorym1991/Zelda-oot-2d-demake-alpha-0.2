@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b2x8n458hy2ri"]
+
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_3nyie"]
+[ext_resource type="Texture2D" uid="uid://dmr43b0s63la0" path="res://Daten/Items/Item Icon/Lichtpfeil.png" id="1_a62vc"]
+
+[resource]
+script = ExtResource("1_3nyie")
+id = "lichtpfeil"
+display_name = "Lichtpfeil"
+icon = ExtResource("1_a62vc")
+variants = {}
+usable_by = 1
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

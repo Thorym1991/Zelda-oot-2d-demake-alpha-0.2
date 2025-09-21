@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bmyvdthgvjqje"]
+
+[ext_resource type="Texture2D" uid="uid://boiig8bhpd206" path="res://Daten/Items/Item Icon/Feuerpfeil.png" id="1_d52mi"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_g8ayg"]
+
+[resource]
+script = ExtResource("1_g8ayg")
+id = "feuerpfeil"
+display_name = "Feuerpfeil"
+icon = ExtResource("1_d52mi")
+variants = {}
+usable_by = 1
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

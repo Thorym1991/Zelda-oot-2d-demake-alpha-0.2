@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InventoryLayout" load_steps=2 format=3 uid="uid://dg3t3448nt3as"]
+
+[ext_resource type="Script" uid="uid://v06vfcnieqq" path="res://Daten/InventoryLayout.gd" id="1_elqef"]
+
+[resource]
+script = ExtResource("1_elqef")
+slots = Array[String](["deku_stab", "deku_nuss", "bombe", "bogen", "feuerpfeil", "dins_feuerinferno", "feenschleuder", "okarina", "krabbelminen", "haken", "eispfeil", "farores_donnersturm", "bumerang", "auge_der_wahrheit", "wundererbsen", "stahlhammer", "lichtpfeil", "nayrus-umarmun", "flasche", "flasche", "flasche", "flasche", "tausch", "maske"])
+metadata/_custom_type_script = "uid://v06vfcnieqq"

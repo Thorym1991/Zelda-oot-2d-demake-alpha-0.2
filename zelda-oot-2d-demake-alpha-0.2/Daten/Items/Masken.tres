@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://yx88t16ir1uc"]
+
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_72lee"]
+[ext_resource type="Texture2D" uid="uid://ddeqktkatukc8" path="res://Daten/Items/Item Icon/Fuchsmaske.png" id="1_o6mfk"]
+[ext_resource type="Texture2D" uid="uid://cj6w6an1j0m2g" path="res://Daten/Items/Item Icon/Schädelmaske.png" id="3_53rnj"]
+[ext_resource type="Texture2D" uid="uid://d3sactneadnmb" path="res://Daten/Items/Item Icon/Geistermaske.png" id="4_g51t2"]
+[ext_resource type="Texture2D" uid="uid://bckcqybw25yik" path="res://Daten/Items/Item Icon/Hasenohren.png" id="5_w0pgq"]
+[ext_resource type="Texture2D" uid="uid://cjdmvxabcjb2w" path="res://Daten/Items/Item Icon/Goronen Maske.png" id="6_s7brk"]
+[ext_resource type="Texture2D" uid="uid://bqkba315v2qhy" path="res://Daten/Items/Item Icon/Zora Maske.png" id="7_riqv1"]
+[ext_resource type="Texture2D" uid="uid://dtvs86d6redp7" path="res://Daten/Items/Item Icon/Gerudo Maske.png" id="8_7ds64"]
+[ext_resource type="Texture2D" uid="uid://dfm0dckmf4y1d" path="res://Daten/Items/Item Icon/Maske des Wissens.png" id="9_0o1co"]
+
+[resource]
+script = ExtResource("1_72lee")
+id = "maske"
+display_name = "Fuchsmaske"
+icon = ExtResource("1_o6mfk")
+variants = {
+"Geistermaske": ExtResource("4_g51t2"),
+"Gerudomaske": ExtResource("8_7ds64"),
+"Goronenmaske": ExtResource("6_s7brk"),
+"Hasenohren": ExtResource("5_w0pgq"),
+"Maske des Wissens": ExtResource("9_0o1co"),
+"Schädelmaske": ExtResource("3_53rnj"),
+"Zoramaske": ExtResource("7_riqv1")
+}
+usable_by = 0
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

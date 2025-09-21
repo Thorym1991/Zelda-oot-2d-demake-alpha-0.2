@@ -1,0 +1,409 @@
+[gd_scene load_steps=37 format=3 uid="uid://buip7myigsqpj"]
+
+[ext_resource type="PackedScene" uid="uid://c5dm8yxfnj8pp" path="res://Scenen/herz.tscn" id="1_37p78"]
+[ext_resource type="Script" uid="uid://bek035hli2epp" path="res://Scenen/hud.gd" id="1_t8nt0"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="2_2oxjh"]
+[ext_resource type="Texture2D" uid="uid://dqftlj6kgxmqo" path="res://Art/HuD/Spieler Hud/Halbe Magie Leer.png" id="2_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://bmb80dbj3qdwe" path="res://Art/HuD/Spieler Hud/full magie.png" id="3_640wx"]
+[ext_resource type="Script" uid="uid://dbr1hu5ve4ne5" path="res://Daten/ItemDatabase.gd" id="3_epuyx"]
+[ext_resource type="Resource" uid="uid://bypwqjy4hdmgo" path="res://Daten/Items/deku_stab.tres" id="3_me2no"]
+[ext_resource type="Texture2D" uid="uid://csxx43jkj3f4f" path="res://Art/HuD/Spieler Hud/A Knopf.png" id="4_a2258"]
+[ext_resource type="Resource" uid="uid://bw8ltwp5yhb2p" path="res://Daten/Items/deku_nuss.tres" id="4_n1svs"]
+[ext_resource type="Texture2D" uid="uid://c0tw7wliqumxv" path="res://Art/HuD/Spieler Hud/B Knopf.png" id="5_1xsix"]
+[ext_resource type="Resource" uid="uid://s5vxrikojq4o" path="res://Daten/Items/bombe.tres" id="5_iliqp"]
+[ext_resource type="Texture2D" uid="uid://bginbry70f58y" path="res://Art/HuD/Spieler Hud/C knopf.png" id="6_1xsix"]
+[ext_resource type="Resource" uid="uid://darckuytbkosj" path="res://Daten/Items/Feen Bogen.tres" id="6_nbv7o"]
+[ext_resource type="Texture2D" uid="uid://cns8ymne503k1" path="res://Art/HuD/Spieler Hud/Rubin 99.png" id="7_61f8s"]
+[ext_resource type="Texture2D" uid="uid://c5utyhcdwd4qm" path="res://Art/HuD/Spieler Hud/Start Knopf.png" id="7_rftc2"]
+[ext_resource type="Resource" uid="uid://bmyvdthgvjqje" path="res://Daten/Items/Feuerpfeil.tres" id="7_vmvvm"]
+[ext_resource type="Resource" uid="uid://bl5fhqbf8jdcm" path="res://Daten/Items/Dins Feuerinferno.tres" id="8_6lkvj"]
+[ext_resource type="Resource" uid="uid://desnxn25lyi7u" path="res://Daten/Items/Feenschleuder.tres" id="9_g6f1o"]
+[ext_resource type="Resource" uid="uid://cncdkems2ed0m" path="res://Daten/Items/Okarina.tres" id="10_sxa6g"]
+[ext_resource type="Resource" uid="uid://37btv7j0b47p" path="res://Daten/Items/Krabbelminen.tres" id="11_6lfbn"]
+[ext_resource type="Resource" uid="uid://ckva4vhhool4x" path="res://Daten/Items/Haken.tres" id="12_k8k44"]
+[ext_resource type="Resource" uid="uid://cgfta2sfep68v" path="res://Daten/Items/Eispfeil.tres" id="13_gvtjj"]
+[ext_resource type="Resource" uid="uid://cxg3fvax3xjaj" path="res://Daten/Items/Farores Donnersturm.tres" id="14_j64s8"]
+[ext_resource type="Resource" uid="uid://ylfn6s5pqx0v" path="res://Daten/Items/Bumerang.tres" id="15_wqwto"]
+[ext_resource type="Resource" uid="uid://6qpkd625546f" path="res://Daten/Items/Auge der Wahrheit.tres" id="16_yspth"]
+[ext_resource type="Resource" uid="uid://ds7gnembe7idr" path="res://Daten/Items/Wundererbsen.tres" id="17_haxq7"]
+[ext_resource type="Resource" uid="uid://cg0pp5evefl2u" path="res://Daten/Items/Stahlhammer.tres" id="18_bc4ig"]
+[ext_resource type="Resource" uid="uid://b2x8n458hy2ri" path="res://Daten/Items/Lichtpfeil.tres" id="19_v1dtc"]
+[ext_resource type="Resource" uid="uid://dijlhav6vabth" path="res://Daten/Items/Nayrus Umarmung.tres" id="20_gwhyh"]
+[ext_resource type="Resource" uid="uid://d2akdj3wwi6ci" path="res://Daten/Items/Flasche.tres" id="21_5twne"]
+[ext_resource type="Resource" uid="uid://0h081x76wdet" path="res://Daten/Items/Tausch.tres" id="22_pl6at"]
+[ext_resource type="Resource" uid="uid://yx88t16ir1uc" path="res://Daten/Items/Masken.tres" id="23_o2mfy"]
+[ext_resource type="LabelSettings" uid="uid://b3jj5q5nd6pjt" path="res://Scenen/hud.tres" id="29_n1svs"]
+
+[sub_resource type="Resource" id="Resource_55ekv"]
+script = ExtResource("3_epuyx")
+items = Array[ExtResource("2_2oxjh")]([ExtResource("3_me2no"), ExtResource("4_n1svs"), ExtResource("5_iliqp"), ExtResource("6_nbv7o"), ExtResource("7_vmvvm"), ExtResource("8_6lkvj"), ExtResource("9_g6f1o"), ExtResource("10_sxa6g"), ExtResource("11_6lfbn"), ExtResource("12_k8k44"), ExtResource("13_gvtjj"), ExtResource("14_j64s8"), ExtResource("15_wqwto"), ExtResource("16_yspth"), ExtResource("17_haxq7"), ExtResource("18_bc4ig"), ExtResource("19_v1dtc"), ExtResource("20_gwhyh"), ExtResource("21_5twne"), ExtResource("21_5twne"), ExtResource("21_5twne"), ExtResource("21_5twne"), ExtResource("22_pl6at"), ExtResource("23_o2mfy")])
+metadata/_custom_type_script = "uid://dbr1hu5ve4ne5"
+
+[sub_resource type="LabelSettings" id="LabelSettings_g10ll"]
+font_size = 28
+font_color = Color(0.0141476, 0.681525, 4.04298e-06, 1)
+outline_size = 6
+outline_color = Color(0.169245, 0.169245, 0.169245, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_61f8s"]
+font_size = 9
+
+[node name="Hud" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_t8nt0")
+db = SubResource("Resource_55ekv")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Hearts" type="HBoxContainer" parent="Root"]
+texture_filter = 1
+layout_mode = 1
+offset_right = 76.0
+offset_bottom = 40.0
+
+[node name="GridContainer" type="GridContainer" parent="Root/Hearts"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+columns = 10
+
+[node name="Herz" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz2" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz3" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz4" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz5" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz6" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz7" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz8" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz9" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz10" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz11" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz12" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz13" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz14" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz15" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz16" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz17" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz18" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz19" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz20" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Root"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.227
+anchor_bottom = 0.15
+offset_left = 1.0
+offset_top = 57.0
+offset_right = -100.504
+offset_bottom = -19.2
+scale = Vector2(2.7, 1.5)
+max_value = 140.0
+value = 80.0
+texture_under = ExtResource("2_8sq4i")
+texture_over = ExtResource("2_8sq4i")
+texture_progress = ExtResource("3_640wx")
+tint_under = Color(0.843137, 0.854902, 0.854902, 1)
+tint_over = Color(0.821789, 0.821789, 0.821789, 1)
+tint_progress = Color(0.4173, 0.782568, 0.131324, 1)
+
+[node name="ActionGroup" type="HBoxContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 160.0
+offset_top = 1.0
+offset_right = 248.0
+offset_bottom = 41.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+
+[node name="A_Knopf" type="TextureRect" parent="Root/ActionGroup"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("4_a2258")
+expand_mode = 3
+
+[node name="A_text" type="Label" parent="Root/ActionGroup/A_Knopf"]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 0
+offset_top = -5.5
+offset_right = 40.0
+offset_bottom = 43.5
+theme_override_font_sizes/font_size = 7
+text = "Test"
+label_settings = ExtResource("29_n1svs")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="B Knopf" type="TextureRect" parent="Root/ActionGroup"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("5_1xsix")
+expand_mode = 3
+
+[node name="B Icon" type="TextureRect" parent="Root/ActionGroup/B Knopf"]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 2
+offset_left = 19.5
+offset_top = 18.0
+offset_right = 19.5
+offset_bottom = 18.0
+
+[node name="CGroup" type="GridContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -179.0
+offset_top = -39.0
+offset_right = -127.0
+offset_bottom = 13.0
+grow_horizontal = 0
+scale = Vector2(3, 3)
+size_flags_horizontal = 10
+columns = 2
+
+[node name="Control" type="Control" parent="CGroup"]
+layout_mode = 2
+
+[node name="CDown" type="TextureRect" parent="CGroup/Control"]
+layout_mode = 2
+offset_left = 11.0
+offset_top = 42.6667
+offset_right = 35.0
+offset_bottom = 66.6667
+texture = ExtResource("6_1xsix")
+
+[node name="CDown_ Icon" type="TextureRect" parent="CGroup/Control/CDown"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 1.00001
+offset_top = 1.33333
+offset_right = 23.0
+offset_bottom = 23.3333
+
+[node name="CDown_count" type="Label" parent="CGroup/Control/CDown"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -0.666667
+offset_top = 15.3333
+offset_right = 15.3333
+offset_bottom = 35.3333
+scale = Vector2(0.5, 0.5)
+text = "10"
+label_settings = ExtResource("29_n1svs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="CGroup"]
+layout_mode = 2
+
+[node name="CLeft" type="TextureRect" parent="CGroup/Control2"]
+layout_mode = 2
+offset_left = -13.6667
+offset_top = 26.6667
+offset_right = 10.3333
+offset_bottom = 50.6667
+texture = ExtResource("6_1xsix")
+
+[node name="CLeft_Icon" type="TextureRect" parent="CGroup/Control2/CLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 1.01328e-05
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+
+[node name="CLeft_count" type="Label" parent="CGroup/Control2/CLeft"]
+layout_mode = 0
+offset_left = 4.1008e-05
+offset_top = 15.6666
+offset_right = 16.0
+offset_bottom = 35.6666
+scale = Vector2(0.5, 0.5)
+text = "10"
+label_settings = ExtResource("29_n1svs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="CGroup"]
+layout_mode = 2
+
+[node name="CRight" type="TextureRect" parent="CGroup/Control3"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 22.6667
+offset_right = 56.0
+offset_bottom = 46.6667
+texture = ExtResource("6_1xsix")
+
+[node name="CRight_Icon" type="TextureRect" parent="CGroup/Control3/CRight"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 2.0
+offset_top = 2.33333
+offset_right = 24.0
+offset_bottom = 24.3333
+expand_mode = 3
+
+[node name="CRight_count" type="Label" parent="CGroup/Control3/CRight"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 17.3333
+offset_right = 18.0
+offset_bottom = 37.3333
+scale = Vector2(0.5, 0.5)
+text = "10"
+label_settings = ExtResource("29_n1svs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control4" type="Control" parent="CGroup"]
+visible = false
+layout_mode = 2
+
+[node name="CUP_Icon" type="TextureRect" parent="CGroup/Control4"]
+layout_mode = 2
+offset_left = 7.0
+offset_top = 9.0
+offset_right = 31.0
+offset_bottom = 33.0
+texture = ExtResource("6_1xsix")
+
+[node name="Label" type="Label" parent="CGroup/Control4/CUP_Icon"]
+layout_mode = 0
+offset_left = 3.33332
+offset_top = 5.0
+offset_right = 38.3333
+offset_bottom = 28.0
+scale = Vector2(0.5, 0.5)
+text = "Navi"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rubine" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="RubinIcon" type="TextureRect" parent="Rubine"]
+layout_mode = 2
+texture = ExtResource("7_61f8s")
+expand_mode = 3
+
+[node name="RubinLabel" type="Label" parent="Rubine/RubinIcon"]
+layout_mode = 2
+offset_left = 40.0
+offset_right = 72.0
+offset_bottom = 39.0
+text = "99"
+label_settings = SubResource("LabelSettings_g10ll")
+
+[node name="Start" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.462
+anchor_right = 0.535
+anchor_bottom = 0.068
+offset_left = 59.776
+offset_top = 1.0
+offset_right = 15.68
+offset_bottom = -3.064
+grow_horizontal = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="StartKnopf" type="TextureRect" parent="Start"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = 1.0
+offset_right = 14.0
+offset_bottom = 41.0
+texture = ExtResource("7_rftc2")
+
+[node name="Zurück" type="Label" parent="Start"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.662
+anchor_top = -0.6
+anchor_right = 3.3
+anchor_bottom = 2.95
+offset_left = 5.81334
+offset_top = 37.3333
+offset_right = -98.6667
+offset_bottom = -81.6667
+text = "Zurück"
+label_settings = SubResource("LabelSettings_61f8s")

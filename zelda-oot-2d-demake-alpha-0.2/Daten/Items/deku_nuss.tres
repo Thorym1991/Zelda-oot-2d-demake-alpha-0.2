@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bw8ltwp5yhb2p"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bw8ltwp5yhb2p"]
 
 [ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_8ug4m"]
+[ext_resource type="Texture2D" uid="uid://dv6x01k6qprky" path="res://Daten/Items/Item Icon/Dekunuss.png" id="1_boup8"]
 
 [resource]
 script = ExtResource("1_8ug4m")
 id = "deku_nuss"
 display_name = "Deku_Nuss"
+icon = ExtResource("1_boup8")
 variants = {}
 usable_by = 2
 stackable = true

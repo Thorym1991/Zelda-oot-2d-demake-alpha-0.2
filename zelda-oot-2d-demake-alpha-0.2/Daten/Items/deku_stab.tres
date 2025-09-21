@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bypwqjy4hdmgo"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bypwqjy4hdmgo"]
 
+[ext_resource type="Texture2D" uid="uid://y37qlrh4160j" path="res://Daten/Items/Item Icon/Dekustab.png" id="1_ca5s8"]
 [ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_j5vyw"]
 
 [resource]
 script = ExtResource("1_j5vyw")
 id = "deku_stab"
 display_name = "Deku-Stab"
+icon = ExtResource("1_ca5s8")
 variants = {}
 usable_by = 0
 stackable = true

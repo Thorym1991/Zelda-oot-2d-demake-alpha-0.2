@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cxg3fvax3xjaj"]
+
+[ext_resource type="Texture2D" uid="uid://3hbiks4tpbkc" path="res://Daten/Items/Item Icon/Farores Donnersturm.png" id="1_pnr6p"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_tx1oy"]
+
+[resource]
+script = ExtResource("1_tx1oy")
+id = "farores_donnersturm"
+display_name = "Farores Donnersturm"
+icon = ExtResource("1_pnr6p")
+variants = {}
+usable_by = 2
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

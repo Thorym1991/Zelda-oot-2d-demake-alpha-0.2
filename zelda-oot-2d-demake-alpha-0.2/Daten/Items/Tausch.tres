@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=14 format=3 uid="uid://0h081x76wdet"]
+
+[ext_resource type="Texture2D" uid="uid://bjpe6026lpjg5" path="res://Daten/Items/Item Icon/Ei.png" id="1_fxo32"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="2_w2w4y"]
+[ext_resource type="Texture2D" uid="uid://ewcdo6fyv3f2" path="res://Daten/Items/Item Icon/Huhn.png" id="3_a4ult"]
+[ext_resource type="Texture2D" uid="uid://ctsa16e4lhx3l" path="res://Daten/Items/Item Icon/Zeldas Brief.png" id="4_wh6gd"]
+[ext_resource type="Texture2D" uid="uid://dn8jsk1n7egu4" path="res://Daten/Items/Item Icon/Blaues Huhn.png" id="5_1i7i8"]
+[ext_resource type="Texture2D" uid="uid://dq7qb7w148pc5" path="res://Daten/Items/Item Icon/Pilz.png" id="6_icm3e"]
+[ext_resource type="Texture2D" uid="uid://chpssocnjaiw2" path="res://Daten/Items/Item Icon/Medizin.png" id="7_bwixw"]
+[ext_resource type="Texture2D" uid="uid://bjai4cf5lbc3d" path="res://Daten/Items/Item Icon/Säge.png" id="8_cya4m"]
+[ext_resource type="Texture2D" uid="uid://8ry8fjvt7gxk" path="res://Daten/Items/Item Icon/Gebrochenes Schwert.png" id="9_qcnqh"]
+[ext_resource type="Texture2D" uid="uid://cfww0xejd2fgp" path="res://Daten/Items/Item Icon/Zettel.png" id="10_hf1j5"]
+[ext_resource type="Texture2D" uid="uid://2coyjsbkbd05" path="res://Daten/Items/Item Icon/Glotzfrosch.png" id="11_nwm1x"]
+[ext_resource type="Texture2D" uid="uid://ddk4m0qn7eo3n" path="res://Daten/Items/Item Icon/Augentropfen.png" id="12_x8pqv"]
+[ext_resource type="Texture2D" uid="uid://dq42v5jgb21pb" path="res://Daten/Items/Item Icon/Zertifikat.png" id="13_nn5fj"]
+
+[resource]
+script = ExtResource("2_w2w4y")
+id = "tausch"
+display_name = "Kind Ei"
+icon = ExtResource("1_fxo32")
+variants = {
+"Erwasen Augentropfen": ExtResource("12_x8pqv"),
+"Erwasen Baues Huhn": ExtResource("5_1i7i8"),
+"Erwasen Ei": ExtResource("1_fxo32"),
+"Erwasen Frosch": ExtResource("11_nwm1x"),
+"Erwasen Huhn": ExtResource("3_a4ult"),
+"Erwasen Kapuutes Schwert": ExtResource("9_qcnqh"),
+"Erwasen Medizin": ExtResource("7_bwixw"),
+"Erwasen Pilz": ExtResource("6_icm3e"),
+"Erwasen Säge": ExtResource("8_cya4m"),
+"Erwasen Zertifikat": ExtResource("13_nn5fj"),
+"Erwasen Zettel": ExtResource("10_hf1j5"),
+"Kind Huhn": ExtResource("3_a4ult"),
+"Kind Zeldas Brief": ExtResource("4_wh6gd")
+}
+usable_by = 0
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemDatabase" load_steps=24 format=3 uid="uid://b7xfw86n1dp7b"]
+
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_521ca"]
+[ext_resource type="Resource" uid="uid://bypwqjy4hdmgo" path="res://Daten/Items/deku_stab.tres" id="2_35d84"]
+[ext_resource type="Script" uid="uid://dbr1hu5ve4ne5" path="res://Daten/ItemDatabase.gd" id="2_wut7m"]
+[ext_resource type="Resource" uid="uid://bw8ltwp5yhb2p" path="res://Daten/Items/deku_nuss.tres" id="3_1hoq8"]
+[ext_resource type="Resource" uid="uid://s5vxrikojq4o" path="res://Daten/Items/bombe.tres" id="4_amha6"]
+[ext_resource type="Resource" uid="uid://darckuytbkosj" path="res://Daten/Items/Feen Bogen.tres" id="5_wwy45"]
+[ext_resource type="Resource" uid="uid://bmyvdthgvjqje" path="res://Daten/Items/Feuerpfeil.tres" id="6_1eqxv"]
+[ext_resource type="Resource" uid="uid://bl5fhqbf8jdcm" path="res://Daten/Items/Dins Feuerinferno.tres" id="7_vcpvv"]
+[ext_resource type="Resource" uid="uid://desnxn25lyi7u" path="res://Daten/Items/Feenschleuder.tres" id="8_owwfb"]
+[ext_resource type="Resource" uid="uid://cncdkems2ed0m" path="res://Daten/Items/Okarina.tres" id="9_x40c6"]
+[ext_resource type="Resource" uid="uid://37btv7j0b47p" path="res://Daten/Items/Krabbelminen.tres" id="10_il681"]
+[ext_resource type="Resource" uid="uid://ckva4vhhool4x" path="res://Daten/Items/Haken.tres" id="11_6w7mi"]
+[ext_resource type="Resource" uid="uid://cgfta2sfep68v" path="res://Daten/Items/Eispfeil.tres" id="12_by6sk"]
+[ext_resource type="Resource" uid="uid://cxg3fvax3xjaj" path="res://Daten/Items/Farores Donnersturm.tres" id="13_i27w4"]
+[ext_resource type="Resource" uid="uid://ylfn6s5pqx0v" path="res://Daten/Items/Bumerang.tres" id="14_iyg1u"]
+[ext_resource type="Resource" uid="uid://6qpkd625546f" path="res://Daten/Items/Auge der Wahrheit.tres" id="15_q1yi0"]
+[ext_resource type="Resource" uid="uid://ds7gnembe7idr" path="res://Daten/Items/Wundererbsen.tres" id="16_5it6h"]
+[ext_resource type="Resource" uid="uid://cg0pp5evefl2u" path="res://Daten/Items/Stahlhammer.tres" id="17_iy8iv"]
+[ext_resource type="Resource" uid="uid://b2x8n458hy2ri" path="res://Daten/Items/Lichtpfeil.tres" id="18_blufs"]
+[ext_resource type="Resource" uid="uid://dijlhav6vabth" path="res://Daten/Items/Nayrus Umarmung.tres" id="19_qhvb6"]
+[ext_resource type="Resource" uid="uid://d2akdj3wwi6ci" path="res://Daten/Items/Flasche.tres" id="20_j4nfo"]
+[ext_resource type="Resource" uid="uid://0h081x76wdet" path="res://Daten/Items/Tausch.tres" id="21_spqmr"]
+[ext_resource type="Resource" uid="uid://yx88t16ir1uc" path="res://Daten/Items/Masken.tres" id="22_yurrd"]
+
+[resource]
+script = ExtResource("2_wut7m")
+items = Array[ExtResource("1_521ca")]([ExtResource("2_35d84"), ExtResource("3_1hoq8"), ExtResource("4_amha6"), ExtResource("5_wwy45"), ExtResource("6_1eqxv"), ExtResource("7_vcpvv"), ExtResource("8_owwfb"), ExtResource("9_x40c6"), ExtResource("10_il681"), ExtResource("11_6w7mi"), ExtResource("12_by6sk"), ExtResource("13_i27w4"), ExtResource("14_iyg1u"), ExtResource("15_q1yi0"), ExtResource("16_5it6h"), ExtResource("17_iy8iv"), ExtResource("18_blufs"), ExtResource("19_qhvb6"), ExtResource("20_j4nfo"), ExtResource("21_spqmr"), ExtResource("22_yurrd")])
+metadata/_custom_type_script = "uid://dbr1hu5ve4ne5"

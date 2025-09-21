@@ -1,6 +1,6 @@
 [gd_scene load_steps=188 format=3 uid="uid://c3bfcr2aaip5g"]
 
-[ext_resource type="Script" uid="uid://cpxy581se2liu" path="res://Scenen/link.gd" id="1_f6plv"]
+[ext_resource type="Script" uid="uid://cpxy581se2liu" path="res://Skripts/link.gd" id="1_f6plv"]
 [ext_resource type="Texture2D" uid="uid://dp86l2wsyw7d1" path="res://Art/Spieler/Link.png" id="1_wodqk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f6plv"]

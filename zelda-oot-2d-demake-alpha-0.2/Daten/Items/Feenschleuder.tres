@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://desnxn25lyi7u"]
+
+[ext_resource type="Texture2D" uid="uid://ca0vdh6d14te3" path="res://Daten/Items/Item Icon/Feenschleuder.png" id="1_egv3j"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="2_euba2"]
+
+[resource]
+script = ExtResource("2_euba2")
+id = "feenschleuder"
+display_name = "Feenschleuder"
+icon = ExtResource("1_egv3j")
+variants = {}
+usable_by = 0
+stackable = true
+max_stack = 30
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

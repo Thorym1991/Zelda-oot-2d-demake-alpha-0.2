@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cg0pp5evefl2u"]
+
+[ext_resource type="Texture2D" uid="uid://dvmi3dmdxscxe" path="res://Daten/Items/Item Icon/Stahlhammer.png" id="1_1rhn7"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="2_2bo0a"]
+
+[resource]
+script = ExtResource("2_2bo0a")
+id = "stahlhammer"
+display_name = "Stahlhammer"
+icon = ExtResource("1_1rhn7")
+variants = {}
+usable_by = 1
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

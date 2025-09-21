@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cgfta2sfep68v"]
+
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_aany1"]
+[ext_resource type="Texture2D" uid="uid://bi4ene2ueimrl" path="res://Daten/Items/Item Icon/Eispfeil.png" id="1_sqldb"]
+
+[resource]
+script = ExtResource("1_aany1")
+id = "eispfeil"
+display_name = "Eispfeil"
+icon = ExtResource("1_sqldb")
+variants = {}
+usable_by = 1
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

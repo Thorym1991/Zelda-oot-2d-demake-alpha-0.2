@@ -1,11 +1,12 @@
-[gd_scene load_steps=27 format=4 uid="uid://htnivnpxgcyx"]
+[gd_scene load_steps=28 format=4 uid="uid://htnivnpxgcyx"]
 
 [ext_resource type="Script" uid="uid://d01k54kai7gsx" path="res://Scenen/Level/Main.gd" id="1_qhijw"]
 [ext_resource type="Texture2D" uid="uid://cr7c2afpjypxj" path="res://Art/maps/Testteils.png" id="1_t0bmo"]
 [ext_resource type="Texture2D" uid="uid://jcs2kw1lh6md" path="res://Art/maps/waldlichtung.png" id="2_8m65u"]
 [ext_resource type="PackedScene" uid="uid://c3bfcr2aaip5g" path="res://Scenen/link.tscn" id="2_aamji"]
-[ext_resource type="PackedScene" uid="uid://b7we80a4fe7qv" path="res://leiter.tscn" id="4_fltt0"]
-[ext_resource type="PackedScene" uid="uid://dwlc72ivf7qkc" path="res://pause_menu.tscn" id="5_phjdb"]
+[ext_resource type="PackedScene" uid="uid://b7we80a4fe7qv" path="res://Scenen/leiter.tscn" id="4_fltt0"]
+[ext_resource type="PackedScene" uid="uid://dwlc72ivf7qkc" path="res://Scenen/pause_menu.tscn" id="5_phjdb"]
+[ext_resource type="PackedScene" uid="uid://buip7myigsqpj" path="res://Scenen/hud.tscn" id="7_j4qf7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aamji"]
 texture = ExtResource("1_t0bmo")
@@ -9696,3 +9697,5 @@ y_sort_enabled = true
 position = Vector2(406, -1060)
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_phjdb")]
+
+[node name="Hud" parent="." instance=ExtResource("7_j4qf7")]

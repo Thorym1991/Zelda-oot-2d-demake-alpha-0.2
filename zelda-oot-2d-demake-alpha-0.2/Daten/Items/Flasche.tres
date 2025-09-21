@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=15 format=3 uid="uid://d2akdj3wwi6ci"]
+
+[ext_resource type="Texture2D" uid="uid://cq876fyarqfek" path="res://Daten/Items/Item Icon/Leere Flasche.png" id="1_0d3yv"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_u4ino"]
+[ext_resource type="Texture2D" uid="uid://bpkgjq8nlpmgw" path="res://Daten/Items/Item Icon/Rotes Elixier.png" id="3_psn48"]
+[ext_resource type="Texture2D" uid="uid://cacqlct6gwyhm" path="res://Daten/Items/Item Icon/Grünes Elixier.png" id="4_qroke"]
+[ext_resource type="Texture2D" uid="uid://hffekj8h767h" path="res://Daten/Items/Item Icon/Blaues Elixier.png" id="5_kbmlv"]
+[ext_resource type="Texture2D" uid="uid://b1eixv5iupdhf" path="res://Daten/Items/Item Icon/Fee in Flasche.png" id="6_g2r70"]
+[ext_resource type="Texture2D" uid="uid://c6tfgmjarw1i0" path="res://Daten/Items/Item Icon/Milch.png" id="7_x6rl4"]
+[ext_resource type="Texture2D" uid="uid://codqwjpnsbcme" path="res://Daten/Items/Item Icon/Halbvolle Milch.png" id="8_l4cuc"]
+[ext_resource type="Texture2D" uid="uid://r3gbykdcltql" path="res://Daten/Items/Item Icon/Fisch.png" id="9_x7ed7"]
+[ext_resource type="Texture2D" uid="uid://c4jjdk7laqn1q" path="res://Daten/Items/Item Icon/Rutos Brief.png" id="10_1ewgq"]
+[ext_resource type="Texture2D" uid="uid://de41mb6o1jwvv" path="res://Daten/Items/Item Icon/Blaues Feuer.png" id="11_53mf6"]
+[ext_resource type="Texture2D" uid="uid://lm4smrnqj0qi" path="res://Daten/Items/Item Icon/Käfer.png" id="12_ln0uw"]
+[ext_resource type="Texture2D" uid="uid://dnih0oum3p4y1" path="res://Daten/Items/Item Icon/Nachtschwärmer.png" id="13_eq7hf"]
+[ext_resource type="Texture2D" uid="uid://bux3deqxuc7v3" path="res://Daten/Items/Item Icon/Irrlicht.png" id="14_dkrt7"]
+
+[resource]
+script = ExtResource("1_u4ino")
+id = "flasche"
+display_name = "Leer"
+icon = ExtResource("1_0d3yv")
+variants = {
+"Blaues Elixier": ExtResource("5_kbmlv"),
+"Blaues Feuer": ExtResource("11_53mf6"),
+"Fee": ExtResource("6_g2r70"),
+"Fisch": ExtResource("9_x7ed7"),
+"Grünes Elixier": ExtResource("4_qroke"),
+"Halbe Milch": ExtResource("8_l4cuc"),
+"Irrlicht": ExtResource("14_dkrt7"),
+"Käfer": ExtResource("12_ln0uw"),
+"Milch": ExtResource("7_x6rl4"),
+"Nachtschwärmer": ExtResource("13_eq7hf"),
+"Rotes Elixier": ExtResource("3_psn48"),
+"Rutos Brief": ExtResource("10_1ewgq")
+}
+usable_by = 2
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

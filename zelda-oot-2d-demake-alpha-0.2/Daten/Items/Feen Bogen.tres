@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://darckuytbkosj"]
+
+[ext_resource type="Texture2D" uid="uid://ka6qenwaok7h" path="res://Daten/Items/Item Icon/Feen Bogen.png" id="1_2wjqa"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="2_74tb5"]
+[ext_resource type="Texture2D" uid="uid://cq6ynoksc6dtb" path="res://Daten/Items/Item Icon/Feuerpfeil & Bogen.png" id="3_rnspb"]
+[ext_resource type="Texture2D" uid="uid://bulegadur4376" path="res://Daten/Items/Item Icon/Eispfeil & Bogen.png" id="4_0r8er"]
+[ext_resource type="Texture2D" uid="uid://cam47bqwefspr" path="res://Daten/Items/Item Icon/Lichtpfeil & Bogen.png" id="5_iltc6"]
+
+[resource]
+script = ExtResource("2_74tb5")
+id = "bogen"
+display_name = "Feen Bogen"
+icon = ExtResource("1_2wjqa")
+variants = {
+"Eis": ExtResource("4_0r8er"),
+"Feuer": ExtResource("3_rnspb"),
+"Licht": ExtResource("5_iltc6")
+}
+usable_by = 1
+stackable = false
+max_stack = 30
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

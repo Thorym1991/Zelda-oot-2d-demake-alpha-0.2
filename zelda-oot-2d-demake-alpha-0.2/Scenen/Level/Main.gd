@@ -1,7 +1,7 @@
 # res://PauseOpener.gd
 extends Node
 
-const PAUSE_MENU_SCENE := preload("res://pause_menu.tscn")  # Pfad anpassen, falls anders
+const PAUSE_MENU_SCENE := preload("res://Scenen/pause_menu.tscn")  # Pfad anpassen, falls anders
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Nutzt 'pause' falls vorhanden, sonst 'Start' (falls du die Action so benannt hast)

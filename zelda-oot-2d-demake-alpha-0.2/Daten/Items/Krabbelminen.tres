@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://37btv7j0b47p"]
+
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_1vpww"]
+[ext_resource type="Texture2D" uid="uid://bp63wed1qbsta" path="res://Daten/Items/Item Icon/Krabbelminen.png" id="1_k778n"]
+
+[resource]
+script = ExtResource("1_1vpww")
+id = "krabbelminen"
+display_name = "Krabbelminen"
+icon = ExtResource("1_k778n")
+variants = {}
+usable_by = 2
+stackable = true
+max_stack = 20
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

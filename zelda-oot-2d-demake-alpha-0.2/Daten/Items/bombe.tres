@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://s5vxrikojq4o"]
+
+[ext_resource type="Texture2D" uid="uid://b0wbv2x8tih2v" path="res://Daten/Items/Item Icon/Bombe.png" id="1_i00pj"]
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_meouv"]
+
+[resource]
+script = ExtResource("1_meouv")
+id = "bombe"
+display_name = "Bombe"
+icon = ExtResource("1_i00pj")
+variants = {}
+usable_by = 2
+stackable = true
+max_stack = 20
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

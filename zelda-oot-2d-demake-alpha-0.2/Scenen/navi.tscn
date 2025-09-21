@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://c67tyocqe3jmu"]
 
-[ext_resource type="Script" uid="uid://clcgmwtf4pq1d" path="res://Scenen/navi.gd" id="1_jxk86"]
+[ext_resource type="Script" uid="uid://clcgmwtf4pq1d" path="res://Skripts/navi.gd" id="1_jxk86"]
 [ext_resource type="Texture2D" uid="uid://dutcifg3j3t32" path="res://Art/Spieler/Navi.png" id="1_xt0ov"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jxk86"]

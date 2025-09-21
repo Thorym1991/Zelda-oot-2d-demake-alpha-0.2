@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://6qpkd625546f"]
+
+[ext_resource type="Script" uid="uid://bxp6j57e1fx26" path="res://Daten/ItemData.gd" id="1_8e3fb"]
+[ext_resource type="Texture2D" uid="uid://ds35g6r0m6wnv" path="res://Daten/Items/Item Icon/Auge der Wahrheit.png" id="1_b5gcc"]
+
+[resource]
+script = ExtResource("1_8e3fb")
+id = "auge_der_wahrheit"
+display_name = "Auge der Wahrheit"
+icon = ExtResource("1_b5gcc")
+variants = {}
+usable_by = 2
+stackable = false
+max_stack = 1
+metadata/_custom_type_script = "uid://bxp6j57e1fx26"

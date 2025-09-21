@@ -1,0 +1,275 @@
+[gd_scene load_steps=13 format=3 uid="uid://buip7myigsqpj"]
+
+[ext_resource type="PackedScene" uid="uid://c5dm8yxfnj8pp" path="res://Scenen/herz.tscn" id="1_37p78"]
+[ext_resource type="Script" uid="uid://bek035hli2epp" path="res://Scenen/hud.gd" id="1_t8nt0"]
+[ext_resource type="Texture2D" uid="uid://dqftlj6kgxmqo" path="res://Art/HuD/Spieler Hud/Halbe Magie Leer.png" id="2_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://bmb80dbj3qdwe" path="res://Art/HuD/Spieler Hud/full magie.png" id="3_640wx"]
+[ext_resource type="Texture2D" uid="uid://csxx43jkj3f4f" path="res://Art/HuD/Spieler Hud/A Knopf.png" id="4_a2258"]
+[ext_resource type="Texture2D" uid="uid://c0tw7wliqumxv" path="res://Art/HuD/Spieler Hud/B Knopf.png" id="5_1xsix"]
+[ext_resource type="Texture2D" uid="uid://bginbry70f58y" path="res://Art/HuD/Spieler Hud/C knopf.png" id="6_1xsix"]
+[ext_resource type="Texture2D" uid="uid://cns8ymne503k1" path="res://Art/HuD/Spieler Hud/Rubin 99.png" id="7_61f8s"]
+[ext_resource type="Texture2D" uid="uid://c5utyhcdwd4qm" path="res://Art/HuD/Spieler Hud/Start Knopf.png" id="7_rftc2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a2258"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g10ll"]
+font_size = 28
+font_color = Color(0.0141476, 0.681525, 4.04298e-06, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_61f8s"]
+font_size = 9
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_t8nt0")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Hearts" type="HBoxContainer" parent="Root"]
+layout_mode = 1
+offset_right = 76.0
+offset_bottom = 40.0
+
+[node name="GridContainer" type="GridContainer" parent="Root/Hearts"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+columns = 10
+
+[node name="Herz" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz2" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz3" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz4" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz5" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz6" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz7" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz8" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz9" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz10" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz11" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz12" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz13" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz14" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz15" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz16" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz17" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz18" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz19" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Herz20" parent="Root/Hearts/GridContainer" instance=ExtResource("1_37p78")]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Root"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.227
+anchor_bottom = 0.15
+offset_left = 1.0
+offset_top = 57.0
+offset_right = -100.504
+offset_bottom = -19.2
+scale = Vector2(2.7, 1.5)
+max_value = 140.0
+value = 80.0
+texture_under = ExtResource("2_8sq4i")
+texture_over = ExtResource("2_8sq4i")
+texture_progress = ExtResource("3_640wx")
+tint_under = Color(0.843137, 0.854902, 0.854902, 1)
+tint_over = Color(0.821789, 0.821789, 0.821789, 1)
+tint_progress = Color(0.4173, 0.782568, 0.131324, 1)
+
+[node name="ActionGroup" type="HBoxContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 187.0
+offset_top = 1.0
+offset_right = 275.0
+offset_bottom = 41.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+
+[node name="A Knopf" type="TextureRect" parent="Root/ActionGroup"]
+layout_mode = 2
+texture = ExtResource("4_a2258")
+expand_mode = 3
+
+[node name="A Text" type="Label" parent="Root/ActionGroup/A Knopf"]
+layout_mode = 2
+offset_left = 6.50001
+offset_top = 8.5
+offset_right = 35.5
+offset_bottom = 31.5
+text = "Roll
+"
+label_settings = SubResource("LabelSettings_a2258")
+max_lines_visible = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="B Icon" type="TextureRect" parent="Root/ActionGroup"]
+layout_mode = 2
+
+[node name="B Knopf" type="TextureRect" parent="Root/ActionGroup"]
+layout_mode = 2
+texture = ExtResource("5_1xsix")
+expand_mode = 3
+
+[node name="CGroup" type="GridContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 205.0
+offset_right = -44.0
+offset_bottom = 257.0
+grow_horizontal = 0
+rotation = 3.89383
+scale = Vector2(3, 3)
+size_flags_horizontal = 8
+columns = 2
+
+[node name="CDown_ Icon" type="TextureRect" parent="CGroup"]
+layout_mode = 2
+texture = ExtResource("6_1xsix")
+
+[node name="CLeft_Icon" type="TextureRect" parent="CGroup"]
+layout_mode = 2
+texture = ExtResource("6_1xsix")
+
+[node name="CRight_Icon" type="TextureRect" parent="CGroup"]
+layout_mode = 2
+texture = ExtResource("6_1xsix")
+
+[node name="CUP_Icon" type="TextureRect" parent="CGroup"]
+visible = false
+layout_mode = 2
+texture = ExtResource("6_1xsix")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 1032.0
+offset_top = 22.0
+offset_right = 1067.0
+offset_bottom = 71.0
+text = "Navi
+"
+
+[node name="Rubine" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Rubine"]
+layout_mode = 2
+texture = ExtResource("7_61f8s")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="Rubine/TextureRect"]
+layout_mode = 2
+offset_left = 40.0
+offset_right = 72.0
+offset_bottom = 39.0
+text = "99"
+label_settings = SubResource("LabelSettings_g10ll")
+
+[node name="Start" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.462
+anchor_right = 0.535
+anchor_bottom = 0.068
+offset_left = 59.776
+offset_top = 1.0
+offset_right = 15.68
+offset_bottom = -3.064
+grow_horizontal = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="StartKnopf" type="TextureRect" parent="Start"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = 1.0
+offset_right = 14.0
+offset_bottom = 41.0
+texture = ExtResource("7_rftc2")
+
+[node name="Zurück" type="Label" parent="Start"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.662
+anchor_top = -0.6
+anchor_right = 3.3
+anchor_bottom = 2.95
+offset_left = 5.81334
+offset_top = 37.3333
+offset_right = -98.6667
+offset_bottom = -81.6667
+text = "Zurück"
+label_settings = SubResource("LabelSettings_61f8s")
