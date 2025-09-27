@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://bewdja614jffh"]
+
+[ext_resource type="Texture2D" uid="uid://bw3yn3ctj8c8y" path="res://Daten/Ausrüstung/Ausrüstung Icon/Kokiri-Rüstung.png" id="1_xyvlh"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="2_b0g1x"]
+
+[resource]
+script = ExtResource("2_b0g1x")
+id = "kokiri_rüstung"
+name = "Kokiri-Rüstung"
+icon = ExtResource("1_xyvlh")
+category = "Rüstung"
+description = "Standardkleidung der Kokiri."
+Kind = false
+Erwachen = false
+Beides = true
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://mu448d0ak127"]
+
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="1_1r8vt"]
+[ext_resource type="Texture2D" uid="uid://b13j0xh63p7qf" path="res://Daten/Ausrüstung/Ausrüstung Icon/Biggoronen_schwert.png" id="1_x0loc"]
+
+[resource]
+script = ExtResource("1_1r8vt")
+id = "biggoron_schwert"
+name = "Biggoron-Schwert"
+icon = ExtResource("1_x0loc")
+category = "Schwert"
+description = "Ein riesiges Zweihandschwert. Sehr stark, aber du kannst dabei keinen Schild tragen."
+Kind = false
+Erwachen = true
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

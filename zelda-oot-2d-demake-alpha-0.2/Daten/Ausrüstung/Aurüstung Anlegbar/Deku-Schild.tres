@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://d4be0piw4fyqa"]
+
+[ext_resource type="Texture2D" uid="uid://b367uhp0wg131" path="res://Daten/Ausrüstung/Ausrüstung Icon/Deku_schild.png" id="1_6pq7j"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="2_tk7yo"]
+
+[resource]
+script = ExtResource("2_tk7yo")
+id = "deku_schild"
+name = "Deku-Schild"
+icon = ExtResource("1_6pq7j")
+category = "Schid"
+description = "Ein einfacher Holzschild. Er fängt Feuer, wenn er mit Flammen in Berührung kommt."
+Kind = true
+Erwachen = false
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

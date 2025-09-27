@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://mwsvhoryq5ws"]
+
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="1_6j7i3"]
+[ext_resource type="Texture2D" uid="uid://cu5gh5me2obba" path="res://Daten/Ausrüstung/Ausrüstung Icon/Master_schwert.png" id="1_et5io"]
+
+[resource]
+script = ExtResource("1_6j7i3")
+id = "master_schwert"
+name = "Master-Schwert"
+icon = ExtResource("1_et5io")
+category = "Schwert"
+description = "Das Bannschwert des Bösen. Es liegt tief im Zeit-Tempel verborgen."
+Kind = false
+Erwachen = true
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

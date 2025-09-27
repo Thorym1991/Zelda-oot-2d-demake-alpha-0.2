@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://bcq11w4d16er8"]
+
+[ext_resource type="Texture2D" uid="uid://dqllk3270ksrm" path="res://Daten/Ausrüstung/Ausrüstung Icon/Eisenstiefel.png" id="1_1uloi"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="2_k3reu"]
+
+[resource]
+script = ExtResource("2_k3reu")
+id = "eisen_stiefel"
+name = "Eisen-Stiefel"
+icon = ExtResource("1_1uloi")
+category = "Stifel"
+description = "Sehr schwer. Du kannst damit unter Wasser laufen."
+Kind = false
+Erwachen = true
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

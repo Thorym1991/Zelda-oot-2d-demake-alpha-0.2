@@ -29,6 +29,7 @@ grow_vertical = 2
 
 [node name="Item" type="Control" parent="Root"]
 process_mode = 3
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 15
@@ -149,7 +150,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Ausrüstung" type="Control" parent="Root"]
-visible = false
 anchors_preset = 0
 offset_right = 820.0
 offset_bottom = 520.0
@@ -158,13 +158,60 @@ offset_bottom = 520.0
 layout_mode = 0
 offset_right = 820.0
 offset_bottom = 520.0
-color = Color(0.0117647, 0.0117647, 0.0117647, 0.427451)
+color = Color(0.0117647, 0.0117647, 0.0117647, 0.784314)
 
 [node name="TextureRect2" type="TextureRect" parent="Root/Ausrüstung"]
 layout_mode = 0
 offset_right = 820.0
 offset_bottom = 520.0
 texture = ExtResource("7_28u6h")
+
+[node name="Ausrüstung (reihe 1 -4" type="GridContainer" parent="Root/Ausrüstung"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 417.0
+offset_top = 108.0
+offset_right = -68.0
+offset_bottom = -55.0
+columns = 4
+
+[node name="Vorschau" type="TextureRect" parent="Root/Ausrüstung"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 265.0
+offset_top = 252.0
+offset_right = 305.0
+offset_bottom = 292.0
+
+[node name="Progausrüstung 1" type="TextureRect" parent="Root/Ausrüstung"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 97.0
+offset_right = 115.0
+offset_bottom = 161.0
+
+[node name="Progausrüstung 2" type="TextureRect" parent="Root/Ausrüstung"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 202.0
+offset_right = 115.0
+offset_bottom = 264.0
+
+[node name="Progausrüstung 3" type="TextureRect" parent="Root/Ausrüstung"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 305.0
+offset_right = 115.0
+offset_bottom = 366.0
+
+[node name="Progausrüstung 4" type="TextureRect" parent="Root/Ausrüstung"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 408.0
+offset_right = 115.0
+offset_bottom = 468.0
 
 [node name="Quest-Status" type="Control" parent="Root"]
 visible = false

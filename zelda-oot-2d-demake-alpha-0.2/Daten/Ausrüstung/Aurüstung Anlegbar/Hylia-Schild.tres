@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://qm42xv602vkd"]
+
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="1_a5kto"]
+[ext_resource type="Texture2D" uid="uid://xfjlfpwhr5yp" path="res://Daten/Ausrüstung/Ausrüstung Icon/Hylia_schild.png" id="1_gekxv"]
+
+[resource]
+script = ExtResource("1_a5kto")
+id = "hylia_schild"
+name = "Hylia-Schild"
+icon = ExtResource("1_gekxv")
+category = "Schild"
+description = "Ein schwerer Schild aus Metall. Kann Feuer und Magie widerstehen."
+Kind = false
+Erwachen = false
+Beides = true
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

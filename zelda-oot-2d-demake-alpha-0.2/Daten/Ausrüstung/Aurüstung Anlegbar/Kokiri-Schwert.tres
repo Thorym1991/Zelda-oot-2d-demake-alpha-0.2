@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://b0qym0rny1qrr"]
+
+[ext_resource type="Texture2D" uid="uid://d6i8aq7usuty" path="res://Daten/Ausrüstung/Ausrüstung Icon/Kokiri_schwert.png" id="1_w8ub7"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="2_y82rx"]
+
+[resource]
+script = ExtResource("2_y82rx")
+id = "kokiri_schwert"
+name = "Kokiri-Schwert"
+icon = ExtResource("1_w8ub7")
+category = "Schwert"
+description = "Ein kleines Schwert, das dir die Kokiri überlassen haben."
+Kind = true
+Erwachen = false
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

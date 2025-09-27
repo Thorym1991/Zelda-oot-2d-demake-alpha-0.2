@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://bgxgj5fwu7nau"]
+
+[ext_resource type="Texture2D" uid="uid://c2g02xtu67yqy" path="res://Daten/Ausrüstung/Ausrüstung Icon/Silberschuppe.png" id="1_chjvh"]
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_m8547"]
+
+[resource]
+script = ExtResource("1_m8547")
+id = "silberne_schuppe"
+name = "Silberne-Schuppe"
+icon = ExtResource("1_chjvh")
+kind = "Schuppe"
+tier = 1
+capacity = 0
+description = "Erlaubt dir, länger zu tauchen."
+Kind = false
+Erwachsen = false
+Beide = true
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

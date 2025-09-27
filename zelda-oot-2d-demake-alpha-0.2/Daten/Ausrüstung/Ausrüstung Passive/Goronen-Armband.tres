@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://cqhr2npti0agj"]
+
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_lw3ea"]
+[ext_resource type="Texture2D" uid="uid://jae8l4gjwhq6" path="res://Daten/Ausrüstung/Ausrüstung Icon/Goronenarmband.png" id="1_yc6rc"]
+
+[resource]
+script = ExtResource("1_lw3ea")
+id = "goronen_armband"
+name = "Goronen-Armband"
+icon = ExtResource("1_yc6rc")
+kind = "Stärke"
+tier = 1
+capacity = 0
+description = "Erhöht deine Kraft. Du kannst mit kleinen Bombenblumen umgehen."
+Kind = true
+Erwachsen = false
+Beide = true
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

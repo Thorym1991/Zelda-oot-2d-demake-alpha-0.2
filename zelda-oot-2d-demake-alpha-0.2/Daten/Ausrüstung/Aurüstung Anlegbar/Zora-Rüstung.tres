@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://djqw0xlg8c8yh"]
+
+[ext_resource type="Texture2D" uid="uid://dhipqrowakyk2" path="res://Daten/Ausrüstung/Ausrüstung Icon/Zora-Rüstung.png" id="1_txxok"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="2_c3c4p"]
+
+[resource]
+script = ExtResource("2_c3c4p")
+id = "zora_rüstung"
+name = "Zora-Rüstung"
+icon = ExtResource("1_txxok")
+category = "Rüstung"
+description = "Wasserschutz! Damit kannst du unter Wasser atmen."
+Kind = false
+Erwachen = true
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

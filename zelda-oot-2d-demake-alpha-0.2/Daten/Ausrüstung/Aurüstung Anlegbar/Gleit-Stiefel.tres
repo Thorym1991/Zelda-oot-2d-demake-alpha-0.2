@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://cxdlcwmwywr8o"]
+
+[ext_resource type="Texture2D" uid="uid://bhc0m1fd0vbfa" path="res://Daten/Ausrüstung/Ausrüstung Icon/Gleitstiefel.png" id="1_iscui"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="2_gtlid"]
+
+[resource]
+script = ExtResource("2_gtlid")
+id = "gleit_stiefel"
+name = "Gleit-Stiefel"
+icon = ExtResource("1_iscui")
+category = "Stiefel"
+description = "Magische Stiefel, mit denen du kurze Zeit in der Luft laufen kannst."
+Kind = false
+Erwachen = true
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

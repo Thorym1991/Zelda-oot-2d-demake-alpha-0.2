@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://die5xp5ptfjib"]
+
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_nm1ws"]
+[ext_resource type="Texture2D" uid="uid://bv7pq78v6bhdv" path="res://Daten/Ausrüstung/Ausrüstung Icon/Große Munitionstasche.png" id="1_qbunw"]
+
+[resource]
+script = ExtResource("1_nm1ws")
+id = "große_kerntasche"
+name = "Große-Kerntasche"
+icon = ExtResource("1_qbunw")
+kind = "Munition"
+tier = 3
+capacity = 50
+description = "Kann bis zu 50 Deku-Kerne tragen."
+Kind = true
+Erwachsen = false
+Beide = false
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

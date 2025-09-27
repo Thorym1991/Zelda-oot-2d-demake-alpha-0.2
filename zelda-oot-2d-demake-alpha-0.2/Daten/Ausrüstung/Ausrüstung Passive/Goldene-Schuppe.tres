@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://bo7mfwp7ob7dx"]
+
+[ext_resource type="Texture2D" uid="uid://cxxovw5k1f3tv" path="res://Daten/Ausrüstung/Ausrüstung Icon/Goldschuppe.png" id="1_h141d"]
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_jx6a5"]
+
+[resource]
+script = ExtResource("1_jx6a5")
+id = "goldene_schuppe"
+name = "Goldene-Schuppe"
+icon = ExtResource("1_h141d")
+kind = "Schuppe"
+tier = 2
+capacity = 0
+description = "Erlaubt dir, sehr lange unter Wasser zu bleiben."
+Kind = false
+Erwachsen = false
+Beide = true
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

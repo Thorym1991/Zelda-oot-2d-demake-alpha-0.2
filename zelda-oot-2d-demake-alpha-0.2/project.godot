@@ -19,9 +19,7 @@ config/icon="res://icon.svg"
 
 Signalhub="*res://Globels/Signalhub.gd"
 InventoryState="*res://Globels/InventoryState.gd"
-GameEvents="*res://game_events.gd"
-PlayerState="*res://player_state.gd"
-ItemDb="*res://item_db.gd"
+ItemDb="*res://Skripts/item_db.gd"
 ui_bus="*res://Skripts/ui_bus.gd"
 
 [file_customization]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://dpa2tckgknfrc"]
+
+[ext_resource type="Texture2D" uid="uid://bjyoa15lhl8hm" path="res://Daten/Ausrüstung/Ausrüstung Icon/Lederstiefel.png" id="1_01su3"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="1_jgrqy"]
+
+[resource]
+script = ExtResource("1_jgrqy")
+id = "leder_stiefel"
+name = "Leder-Stiefel"
+icon = ExtResource("1_01su3")
+category = "Stiefel"
+description = "Standardstiefel. Nichts Besonderes."
+Kind = false
+Erwachen = false
+Beides = true
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

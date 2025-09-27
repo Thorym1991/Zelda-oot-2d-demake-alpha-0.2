@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://d2i63sdtxh0as"]
+
+[ext_resource type="Texture2D" uid="uid://lnuvkdhm4fi8" path="res://Daten/Ausrüstung/Ausrüstung Icon/Goronen-Rüstung.png" id="1_tydcx"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="2_bew55"]
+
+[resource]
+script = ExtResource("2_bew55")
+id = "goronen_rüstung"
+name = "Goronen-Rüstung"
+icon = ExtResource("1_tydcx")
+category = "Rüstung"
+description = "Feuerschutz! Erlaubt es, große Hitze zu überstehen."
+Kind = false
+Erwachen = true
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

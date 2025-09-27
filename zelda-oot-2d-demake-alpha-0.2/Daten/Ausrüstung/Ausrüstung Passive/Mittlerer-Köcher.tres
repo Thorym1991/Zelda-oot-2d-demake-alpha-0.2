@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://bgs05n6ox4kox"]
+
+[ext_resource type="Texture2D" uid="uid://bg01shvuvlxiv" path="res://Daten/Ausrüstung/Ausrüstung Icon/Köcher2.png" id="1_jbtby"]
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_k32jd"]
+
+[resource]
+script = ExtResource("1_k32jd")
+id = "mittlerer_köcher"
+name = "Mittlerer-Köcher"
+icon = ExtResource("1_jbtby")
+kind = "Munition"
+tier = 2
+capacity = 30
+description = "Kann bis zu 40 Pfeile tragen."
+Kind = false
+Erwachsen = true
+Beide = false
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

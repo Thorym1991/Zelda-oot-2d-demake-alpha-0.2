@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://dk3gtjiu5uown"]
+
+[ext_resource type="Texture2D" uid="uid://fykwsw8adw7p" path="res://Daten/Ausrüstung/Ausrüstung Icon/Spiegel_schild.png" id="1_76o1a"]
+[ext_resource type="Script" uid="uid://c8pl4iwwgspc1" path="res://Skripts/equipment_data.gd" id="1_t3ntn"]
+
+[resource]
+script = ExtResource("1_t3ntn")
+id = "spiegel_schild"
+name = "Spiegel-Schild"
+icon = ExtResource("1_76o1a")
+category = "Schild"
+description = "Ein magischer Schild, der Licht reflektieren kann."
+Kind = false
+Erwachen = true
+Beides = false
+metadata/_custom_type_script = "uid://c8pl4iwwgspc1"

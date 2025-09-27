@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://77ij61slv63r"]
+
+[ext_resource type="Texture2D" uid="uid://ioee3245p707" path="res://Daten/Ausrüstung/Ausrüstung Icon/M Bombentasche.png" id="1_0birw"]
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_w4ait"]
+
+[resource]
+script = ExtResource("1_w4ait")
+id = "bomben_tasche_mittel"
+name = "Mittlere-Bombentasche"
+icon = ExtResource("1_0birw")
+kind = "Bombe"
+tier = 2
+capacity = 30
+description = "Kann bis zu 30 Bomben tragen.bomben_tasche_gross"
+Kind = false
+Erwachsen = false
+Beide = true
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

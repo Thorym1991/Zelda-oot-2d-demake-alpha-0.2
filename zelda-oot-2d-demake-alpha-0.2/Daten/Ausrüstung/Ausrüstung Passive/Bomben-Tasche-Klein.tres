@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://byyrwutu6tid2"]
+
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_o0fcp"]
+[ext_resource type="Texture2D" uid="uid://h6k58jk2vdp8" path="res://Daten/Ausrüstung/Ausrüstung Icon/K Bombentasche.png" id="1_tv0yb"]
+
+[resource]
+script = ExtResource("1_o0fcp")
+id = "bomben_tasche_klein"
+name = "Bomben-Tasche-Klein"
+icon = ExtResource("1_tv0yb")
+kind = "Bomben"
+tier = 1
+capacity = 20
+description = "Kann bis zu 20 Bomben tragen."
+Kind = false
+Erwachsen = false
+Beide = true
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

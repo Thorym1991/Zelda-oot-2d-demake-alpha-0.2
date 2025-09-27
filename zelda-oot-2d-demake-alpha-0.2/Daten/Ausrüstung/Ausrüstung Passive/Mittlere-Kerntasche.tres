@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://cohg32whty1a0"]
+
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_csixh"]
+[ext_resource type="Texture2D" uid="uid://bsypscwegpml" path="res://Daten/Ausrüstung/Ausrüstung Icon/Munitionstasche .png" id="1_qb65e"]
+
+[resource]
+script = ExtResource("1_csixh")
+id = "mittlere_kerntasche"
+name = "Mittlere-Kerntasche"
+icon = ExtResource("1_qb65e")
+kind = "Munition"
+tier = 2
+capacity = 40
+description = "Kann bis zu 40 Deku-Kerne tragen."
+Kind = true
+Erwachsen = false
+Beide = false
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

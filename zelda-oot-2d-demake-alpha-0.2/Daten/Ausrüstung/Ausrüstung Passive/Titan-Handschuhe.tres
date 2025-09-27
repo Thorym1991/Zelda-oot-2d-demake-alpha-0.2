@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://bd3lkg0yjoqsc"]
+
+[ext_resource type="Texture2D" uid="uid://c5gnxkd0nfchk" path="res://Daten/Ausrüstung/Ausrüstung Icon/Titanhandschu.png" id="1_dl201"]
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="1_xo8oe"]
+
+[resource]
+script = ExtResource("1_xo8oe")
+id = "titan_handschuh"
+name = "Titan-Handschuh"
+icon = ExtResource("1_dl201")
+kind = "Stärke"
+tier = 3
+capacity = 0
+description = "Maximale Kraft! Du kannst riesige Objekte heben."
+Kind = false
+Erwachsen = true
+Beide = false
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"

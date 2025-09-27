@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=3 format=3 uid="uid://di5loa8bbhbq0"]
+
+[ext_resource type="Texture2D" uid="uid://dhmoyuobdhyto" path="res://Daten/Ausrüstung/Ausrüstung Icon/Köcher3.png" id="1_kribp"]
+[ext_resource type="Script" uid="uid://cibxibi5lx5a0" path="res://Skripts/upgrade_data.gd.gd" id="2_4w6pc"]
+
+[resource]
+script = ExtResource("2_4w6pc")
+id = "gross_koecher"
+name = "Gross-Köcher"
+icon = ExtResource("1_kribp")
+kind = "Munition"
+tier = 3
+capacity = 50
+description = "Kann bis zu 50 Pfeile tragen."
+Kind = false
+Erwachsen = true
+Beide = false
+metadata/_custom_type_script = "uid://cibxibi5lx5a0"
