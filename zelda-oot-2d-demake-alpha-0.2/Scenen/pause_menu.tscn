@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwlc72ivf7qkc"]
+[gd_scene load_steps=14 format=3 uid="uid://dwlc72ivf7qkc"]
 
 [ext_resource type="Script" uid="uid://b62qqw0la3dq1" path="res://Skripts/pauseMenu.gd" id="1_2q6ei"]
 [ext_resource type="Script" uid="uid://cv3pvvq83shi7" path="res://Skripts/ItemsTab.gd" id="2_dpy1j"]
@@ -7,9 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://ccao41bmfl7h1" path="res://Art/HuD/Zelda hud/Menu/Gegenstände/Gegenstände.png" id="5_k3n2e"]
 [ext_resource type="PackedScene" uid="uid://pldl6tce8kbx" path="res://Scenen/item_slot.tscn" id="6_772r3"]
 [ext_resource type="Texture2D" uid="uid://dyt13mjhs5rch" path="res://Art/HuD/Zelda hud/Menu/Ausrüstung/Ausrüstungs_rahmen.png" id="7_28u6h"]
+[ext_resource type="PackedScene" uid="uid://b8t86e0c7ciom" path="res://Skripts/ausrüstungs_slot.tscn" id="8_dpy1j"]
 [ext_resource type="Texture2D" uid="uid://doq5fkalupjec" path="res://Art/HuD/Zelda hud/Menu/Status/Dtatus.png" id="8_qkgnx"]
 [ext_resource type="Texture2D" uid="uid://dj2h8v4xtyeoj" path="res://Art/HuD/Platzhalter_map.png" id="9_yduwy"]
 [ext_resource type="Texture2D" uid="uid://c7oasm33uvkf" path="res://Art/HuD/Zelda hud/Menu/Dungeonmap/Rahmenmap.png" id="10_il4o6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dpy1j"]
+font_size = 39
+font_color = Color(0, 0, 0, 0.929412)
+outline_size = 16
+outline_color = Color(0.0326824, 0.562873, 3.85046e-07, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dpy1j"]
+load_path = "res://.godot/imported/Paperdoll - Body - Green.png-4d328189082ea311df719ccee9ce8696.ctex"
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -51,10 +61,8 @@ color = Color(0.0117647, 0.0117647, 0.0117647, 0.784314)
 
 [node name="TextureRect" type="TextureRect" parent="Root/Item"]
 layout_mode = 0
-offset_left = -6.0
-offset_top = -10.0
-offset_right = 814.0
-offset_bottom = 510.0
+offset_right = 820.0
+offset_bottom = 520.0
 texture = ExtResource("5_k3n2e")
 
 [node name="SlotContainer" type="GridContainer" parent="Root/Item"]
@@ -67,10 +75,10 @@ anchor_left = 0.054
 anchor_top = 0.144
 anchor_right = 0.951
 anchor_bottom = 0.929
-offset_left = 0.719997
-offset_top = 0.119995
-offset_right = 1.17999
-offset_bottom = -0.0800171
+offset_left = 8.72
+offset_top = 11.12
+offset_right = 9.17999
+offset_bottom = 10.92
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 12
@@ -166,52 +174,186 @@ offset_right = 820.0
 offset_bottom = 520.0
 texture = ExtResource("7_28u6h")
 
-[node name="Ausrüstung (reihe 1 -4" type="GridContainer" parent="Root/Ausrüstung"]
+[node name="Label" type="Label" parent="Root/Ausrüstung"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.0
+offset_top = 12.0
+offset_right = 112.0
+offset_bottom = 66.0
+grow_horizontal = 2
+text = "Ausrüstung"
+label_settings = SubResource("LabelSettings_dpy1j")
+
+[node name="Ausrüstung reihe 1" type="GridContainer" parent="Root/Ausrüstung"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 417.0
-offset_top = 108.0
-offset_right = -68.0
-offset_bottom = -55.0
-columns = 4
+offset_left = 425.0
+offset_top = 90.0
+offset_right = -315.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/v_separation = 23
 
-[node name="Vorschau" type="TextureRect" parent="Root/Ausrüstung"]
+[node name="Kokiri-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Deku-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Kokiri-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Leder-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Ausrüstung reihe 2" type="GridContainer" parent="Root/Ausrüstung"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
-anchors_preset = -1
-offset_left = 265.0
-offset_top = 252.0
-offset_right = 305.0
-offset_bottom = 292.0
+offset_left = 547.0
+offset_top = 90.0
+offset_right = 627.0
+offset_bottom = 422.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 23
 
-[node name="Progausrüstung 1" type="TextureRect" parent="Root/Ausrüstung"]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 97.0
-offset_right = 115.0
-offset_bottom = 161.0
+[node name="Master-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
 
-[node name="Progausrüstung 2" type="TextureRect" parent="Root/Ausrüstung"]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 202.0
-offset_right = 115.0
-offset_bottom = 264.0
+[node name="Hylia-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
 
-[node name="Progausrüstung 3" type="TextureRect" parent="Root/Ausrüstung"]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 305.0
-offset_right = 115.0
-offset_bottom = 366.0
+[node name="Goronen-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
 
-[node name="Progausrüstung 4" type="TextureRect" parent="Root/Ausrüstung"]
-layout_mode = 0
-offset_left = 51.0
-offset_top = 408.0
-offset_right = 115.0
-offset_bottom = 468.0
+[node name="Eisen-Stifel" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Ausrüstung reihe 3" type="GridContainer" parent="Root/Ausrüstung"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 671.0
+offset_top = 90.0
+offset_right = -69.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/v_separation = 23
+
+[node name="Biggoronen-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Spiegel-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Zora-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Gleit-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Vorschau" type="Sprite2D" parent="Root/Ausrüstung"]
+position = Vector2(289, 264)
+texture = SubResource("CompressedTexture2D_dpy1j")
+hframes = 13
+vframes = 13
+frame = 150
+
+[node name="GridContainer" type="GridContainer" parent="Root/Ausrüstung"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = 86.0
+offset_right = -695.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 22
+
+[node name="Munition" type="Control" parent="Root/Ausrüstung/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="ausrüstungs_slot" parent="Root/Ausrüstung/GridContainer/Munition" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 4.0
+offset_right = 80.0
+offset_bottom = 84.0
+stretch_mode = 0
+
+[node name="Bomben" type="Control" parent="Root/Ausrüstung/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="ausrüstungs_slot2" parent="Root/Ausrüstung/GridContainer/Bomben" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 4.0
+offset_right = 80.0
+offset_bottom = 84.0
+stretch_mode = 0
+
+[node name="Tauchen" type="Control" parent="Root/Ausrüstung/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="ausrüstungs_slot3" parent="Root/Ausrüstung/GridContainer/Tauchen" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 8.0
+offset_right = 80.0
+offset_bottom = 88.0
+stretch_mode = 0
+
+[node name="Stärke" type="Control" parent="Root/Ausrüstung/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="ausrüstungs_slot4" parent="Root/Ausrüstung/GridContainer/Stärke" instance=ExtResource("8_dpy1j")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 4.0
+offset_right = 80.0
+offset_bottom = 84.0
+stretch_mode = 0
 
 [node name="Quest-Status" type="Control" parent="Root"]
 visible = false
