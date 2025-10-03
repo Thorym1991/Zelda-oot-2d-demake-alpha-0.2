@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx3nioij811hg"
-path="res://.godot/imported/Paperdoll - Erwachsen-Kokiri.png-f6e1f4ad636fa5eea347f78a529b2033.ctex"
+uid="uid://xr4823y81t73"
+path="res://.godot/imported/kid_goron_bracelet.png-a3bc20c124cccef7838d2fe4aafc3621.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Erwachsen/Paperdoll - Erwachsen-Kokiri.png"
-dest_files=["res://.godot/imported/Paperdoll - Erwachsen-Kokiri.png-f6e1f4ad636fa5eea347f78a529b2033.ctex"]
+source_file="res://Art/Spieler/paperdolls/Kind/kid_goron_bracelet.png"
+dest_files=["res://.godot/imported/kid_goron_bracelet.png-a3bc20c124cccef7838d2fe4aafc3621.ctex"]
 
 [params]
 

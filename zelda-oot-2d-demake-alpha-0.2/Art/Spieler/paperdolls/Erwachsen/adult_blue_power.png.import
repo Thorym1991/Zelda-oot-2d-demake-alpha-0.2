@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3opylf31mdbd"
-path="res://.godot/imported/Paperdoll - Erwachsen-Goronen Krafthandschuhe.png-bfeadf842cbbb4754bfeaec8f65095cb.ctex"
+uid="uid://dm2130dc1r7y2"
+path="res://.godot/imported/adult_blue_power.png-e37eed314c2fc48504f4d2cef189517d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Erwachsen/Paperdoll - Erwachsen-Goronen Krafthandschuhe.png"
-dest_files=["res://.godot/imported/Paperdoll - Erwachsen-Goronen Krafthandschuhe.png-bfeadf842cbbb4754bfeaec8f65095cb.ctex"]
+source_file="res://Art/Spieler/paperdolls/Erwachsen/adult_blue_power.png"
+dest_files=["res://.godot/imported/adult_blue_power.png-e37eed314c2fc48504f4d2cef189517d.ctex"]
 
 [params]
 

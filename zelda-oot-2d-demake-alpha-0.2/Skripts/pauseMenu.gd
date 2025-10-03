@@ -110,27 +110,27 @@ func _use_item(id: String) -> void:
 
 	match id:
 		"bogen":
-			if InventoryState.arrows <= 0:
+			if Inventar.arrows <= 0:
 				return
 			# TODO: Pfeil instanzieren & schießen
-			InventoryState.arrows -= 1
-			InventoryState.emit_signal("changed")  # HUD updaten
+			Inventar.arrows -= 1
+			Inventar.emit_signal("changed")  # HUD updaten
 
 		"bombe":
-			var n := InventoryState.get_amount("bombe")
+			var n := Inventar.get_amount("bombe")
 			if n <= 0:
 				return
 			# TODO: Bombe instanzieren & werfen
-			InventoryState.owned["bombe"] = n - 1
-			InventoryState.emit_signal("changed")
+			Inventar.owned["bombe"] = n - 1
+			Inventar.emit_signal("changed")
 
 		"deku_nuss":
-			var m := InventoryState.get_amount("deku_nuss")
+			var m := Inventar.get_amount("deku_nuss")
 			if m <= 0:
 				return
 			# TODO: Effekt auslösen
-			InventoryState.owned["deku_nuss"] = m - 1
-			InventoryState.emit_signal("changed")
+			Inventar.owned["deku_nuss"] = m - 1
+			Inventar.emit_signal("changed")
 
 		_:
 			print("Benutze Item:", id)

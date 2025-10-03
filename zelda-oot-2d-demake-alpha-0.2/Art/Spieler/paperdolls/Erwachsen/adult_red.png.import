@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4cxt60icc141"
-path="res://.godot/imported/Paperdoll - Erwachsen-Goronen Titanhandschuhe.png-15bf6a22362561eebbb7e8198cde48f4.ctex"
+uid="uid://tdljr3t8kk65"
+path="res://.godot/imported/adult_red.png-f89f7508173c8f5ccc779f4dd84acfac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Erwachsen/Paperdoll - Erwachsen-Goronen Titanhandschuhe.png"
-dest_files=["res://.godot/imported/Paperdoll - Erwachsen-Goronen Titanhandschuhe.png-15bf6a22362561eebbb7e8198cde48f4.ctex"]
+source_file="res://Art/Spieler/paperdolls/Erwachsen/adult_red.png"
+dest_files=["res://.godot/imported/adult_red.png-f89f7508173c8f5ccc779f4dd84acfac.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ktmdqlatt3sb"
-path="res://.godot/imported/Paperdoll - Erwachsen-Kokiri-Titanhandschuh.png-d3981d71f4fa3eae9f0ccadb6640ad4c.ctex"
+uid="uid://nklsu3td0aq4"
+path="res://.godot/imported/adult_blue_titan.png-847555dfb444864e698d284b94251176.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Erwachsen/Paperdoll - Erwachsen-Kokiri-Titanhandschuh.png"
-dest_files=["res://.godot/imported/Paperdoll - Erwachsen-Kokiri-Titanhandschuh.png-d3981d71f4fa3eae9f0ccadb6640ad4c.ctex"]
+source_file="res://Art/Spieler/paperdolls/Erwachsen/adult_blue_titan.png"
+dest_files=["res://.godot/imported/adult_blue_titan.png-847555dfb444864e698d284b94251176.ctex"]
 
 [params]
 

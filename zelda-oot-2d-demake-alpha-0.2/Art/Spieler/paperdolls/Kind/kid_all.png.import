@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcmhkr7vxlffa"
-path="res://.godot/imported/Paperdoll - Erwachsen-Zora.png-7ff18d0a0a2baca7e37cc9e35a00034c.ctex"
+uid="uid://cjtr7d1qye1yk"
+path="res://.godot/imported/kid_all.png-a11cafe549fdddf38df51e35e276122e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Erwachsen/Paperdoll - Erwachsen-Zora.png"
-dest_files=["res://.godot/imported/Paperdoll - Erwachsen-Zora.png-7ff18d0a0a2baca7e37cc9e35a00034c.ctex"]
+source_file="res://Art/Spieler/paperdolls/Kind/kid_all.png"
+dest_files=["res://.godot/imported/kid_all.png-a11cafe549fdddf38df51e35e276122e.ctex"]
 
 [params]
 

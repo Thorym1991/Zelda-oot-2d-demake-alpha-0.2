@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xr4823y81t73"
-path="res://.godot/imported/Paperdoll - Kind-Armband.png-42aacb988ffd2d0bb3d4535111b3aa72.ctex"
+uid="uid://ktmdqlatt3sb"
+path="res://.godot/imported/adult_green_titan.png-173282dccb89a33ee092136149725597.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Kind/Paperdoll - Kind-Armband.png"
-dest_files=["res://.godot/imported/Paperdoll - Kind-Armband.png-42aacb988ffd2d0bb3d4535111b3aa72.ctex"]
+source_file="res://Art/Spieler/paperdolls/Erwachsen/adult_green_titan.png"
+dest_files=["res://.godot/imported/adult_green_titan.png-173282dccb89a33ee092136149725597.ctex"]
 
 [params]
 

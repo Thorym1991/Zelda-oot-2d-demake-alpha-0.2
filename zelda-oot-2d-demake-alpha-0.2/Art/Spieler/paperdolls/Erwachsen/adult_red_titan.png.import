@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm2130dc1r7y2"
-path="res://.godot/imported/Paperdoll - Erwachsen-Zora Krafthandschuh.png-f1d49a2bf6883f9fa9d56c79b97a9d4d.ctex"
+uid="uid://b4cxt60icc141"
+path="res://.godot/imported/adult_red_titan.png-9e84e96ea53046397eb8a0675db46f7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Erwachsen/Paperdoll - Erwachsen-Zora Krafthandschuh.png"
-dest_files=["res://.godot/imported/Paperdoll - Erwachsen-Zora Krafthandschuh.png-f1d49a2bf6883f9fa9d56c79b97a9d4d.ctex"]
+source_file="res://Art/Spieler/paperdolls/Erwachsen/adult_red_titan.png"
+dest_files=["res://.godot/imported/adult_red_titan.png-9e84e96ea53046397eb8a0675db46f7e.ctex"]
 
 [params]
 

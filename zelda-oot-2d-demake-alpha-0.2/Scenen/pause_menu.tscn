@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwlc72ivf7qkc"]
+[gd_scene load_steps=15 format=3 uid="uid://dwlc72ivf7qkc"]
 
 [ext_resource type="Script" uid="uid://b62qqw0la3dq1" path="res://Skripts/pauseMenu.gd" id="1_2q6ei"]
 [ext_resource type="Script" uid="uid://cv3pvvq83shi7" path="res://Skripts/ItemsTab.gd" id="2_dpy1j"]
@@ -7,9 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://ccao41bmfl7h1" path="res://Art/HuD/Zelda hud/Menu/Gegenstände/Gegenstände.png" id="5_k3n2e"]
 [ext_resource type="PackedScene" uid="uid://pldl6tce8kbx" path="res://Scenen/item_slot.tscn" id="6_772r3"]
 [ext_resource type="Texture2D" uid="uid://dyt13mjhs5rch" path="res://Art/HuD/Zelda hud/Menu/Ausrüstung/Ausrüstungs_rahmen.png" id="7_28u6h"]
+[ext_resource type="Script" uid="uid://b1kq8dk0i234k" path="res://Scenen/ausrüstung.gd" id="7_c2sir"]
 [ext_resource type="PackedScene" uid="uid://b8t86e0c7ciom" path="res://Skripts/ausrüstungs_slot.tscn" id="8_dpy1j"]
 [ext_resource type="Texture2D" uid="uid://doq5fkalupjec" path="res://Art/HuD/Zelda hud/Menu/Status/Dtatus.png" id="8_qkgnx"]
 [ext_resource type="Texture2D" uid="uid://dj2h8v4xtyeoj" path="res://Art/HuD/Platzhalter_map.png" id="9_yduwy"]
+[ext_resource type="Script" uid="uid://cbwe4lksssv0w" path="res://Skripts/EquipToggle.gd" id="10_12115"]
 [ext_resource type="Texture2D" uid="uid://c7oasm33uvkf" path="res://Art/HuD/Zelda hud/Menu/Dungeonmap/Rahmenmap.png" id="10_il4o6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dpy1j"]
@@ -17,9 +19,6 @@ font_size = 39
 font_color = Color(0, 0, 0, 0.929412)
 outline_size = 16
 outline_color = Color(0.0326824, 0.562873, 3.85046e-07, 1)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dpy1j"]
-load_path = "res://.godot/imported/Paperdoll - Body - Green.png-4d328189082ea311df719ccee9ce8696.ctex"
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -161,6 +160,7 @@ layout_mode = 2
 anchors_preset = 0
 offset_right = 820.0
 offset_bottom = 520.0
+script = ExtResource("7_c2sir")
 
 [node name="ColorRect2" type="ColorRect" parent="Root/Ausrüstung"]
 layout_mode = 0
@@ -204,18 +204,35 @@ theme_override_constants/v_separation = 23
 [node name="Kokiri-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+value = 1
+owned_id = "\"kokiri_schwert\""
+requires_child = true
 
 [node name="Deku-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 1
+value = 1
+owned_id = "\"deku_schild\""
+requires_child = true
 
 [node name="Kokiri-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 2
+value = 1
+owned_id = "\"kokiri_rüstung\""
 
 [node name="Leder-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 3
+value = 1
+owned_id = "\"leder_stiefel\""
 
 [node name="Ausrüstung reihe 2" type="GridContainer" parent="Root/Ausrüstung"]
 custom_minimum_size = Vector2(80, 80)
@@ -230,18 +247,36 @@ theme_override_constants/v_separation = 23
 [node name="Master-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+value = 2
+owned_id = "\"master_schwert\""
+requires_adult = true
 
 [node name="Hylia-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 1
+value = 2
+owned_id = "\"hylia_schild\""
 
 [node name="Goronen-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 2
+value = 2
+owned_id = "\"goronen_rüstung\""
+requires_adult = true
 
 [node name="Eisen-Stifel" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 3
+value = 2
+owned_id = "\"eisen_stiefel\""
+requires_adult = true
 
 [node name="Ausrüstung reihe 3" type="GridContainer" parent="Root/Ausrüstung"]
 custom_minimum_size = Vector2(80, 80)
@@ -260,25 +295,40 @@ theme_override_constants/v_separation = 23
 [node name="Biggoronen-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+value = 3
+owned_id = "\"biggoron_schwert\""
+requires_adult = true
 
 [node name="Spiegel-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 1
+value = 3
+owned_id = "\"spiegel_schild\""
+requires_adult = true
 
 [node name="Zora-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 2
+value = 3
+owned_id = "\"zora_rüstung\""
+requires_adult = true
 
 [node name="Gleit-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+script = ExtResource("10_12115")
+type = 3
+value = 3
+owned_id = "\"gleit_stiefel\""
+requires_adult = true
 
-[node name="Vorschau" type="Sprite2D" parent="Root/Ausrüstung"]
-position = Vector2(289, 264)
-texture = SubResource("CompressedTexture2D_dpy1j")
-hframes = 13
-vframes = 13
-frame = 150
+[node name="PaperdollSprite" type="Sprite2D" parent="Root/Ausrüstung"]
+position = Vector2(283, 264)
 
 [node name="GridContainer" type="GridContainer" parent="Root/Ausrüstung"]
 custom_minimum_size = Vector2(80, 80)

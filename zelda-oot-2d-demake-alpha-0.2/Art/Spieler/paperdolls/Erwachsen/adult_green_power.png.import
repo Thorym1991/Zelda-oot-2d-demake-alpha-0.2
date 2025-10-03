@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://slnnemqbgamu"
-path="res://.godot/imported/Paperdoll - Erwachsen-Kokiri-Krafthandschuh.png-00fd3d3d4d5cbd7c5a98776003d7dbda.ctex"
+path="res://.godot/imported/adult_green_power.png-c0475566b3e0019a93233f31cebfae51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Erwachsen/Paperdoll - Erwachsen-Kokiri-Krafthandschuh.png"
-dest_files=["res://.godot/imported/Paperdoll - Erwachsen-Kokiri-Krafthandschuh.png-00fd3d3d4d5cbd7c5a98776003d7dbda.ctex"]
+source_file="res://Art/Spieler/paperdolls/Erwachsen/adult_green_power.png"
+dest_files=["res://.godot/imported/adult_green_power.png-c0475566b3e0019a93233f31cebfae51.ctex"]
 
 [params]
 

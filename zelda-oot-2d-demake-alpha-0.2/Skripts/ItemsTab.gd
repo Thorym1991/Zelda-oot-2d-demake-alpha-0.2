@@ -31,12 +31,14 @@ func _focus_first_slot() -> void:
 	_select_slot(0)
 
 
-	InventoryState.owned = {
+
+
+	Inventar.owned = {
 		"deku_stab": 10,
 		"bogen": 30,
 		"bombe": 10
 	}
-	InventoryState.variants = {
+	Inventar.variants = {
 		"bogen": "Feuer"
 	}
 	update_inventory()
@@ -89,14 +91,14 @@ func _get_item_for_slot(slot_index: int) -> String:
 				var col: int = slot_index % grid.columns
 				if col > 3: return ""
 				var idx: int = bottle_page * 4 + col
-				if idx < 0 or idx >= InventoryState.bottles.size():
+				if idx < 0 or idx >= Inventar.bottles.size():
 					return ""
-				var b: Dictionary = InventoryState.bottles[idx]
-				return String(b.get("id", ""))
+				var b: int = Inventar.bottles[idx]
+				return Inventar._bottle_content_to_string(b)
 			":trade":
-				return InventoryState.current_trade
+				return Inventar.current_trade
 			":mask":
-				return InventoryState.current_mask
+				return Inventar.current_mask
 		return ""
 	return spec
 
@@ -160,7 +162,7 @@ func _fill_fixed(slot: Node, id: String) -> void:
 	# --- Variante für's MENÜ bestimmen ---
 	var variant: String = "default"
 	if id != "bogen":
-		variant = String(InventoryState.variants.get(id, "default"))
+		variant = String(Inventar.variants.get(id, "default"))
 
 	var tex: Texture2D = db.get_icon(id, variant)
 	if tex == null:
@@ -169,20 +171,20 @@ func _fill_fixed(slot: Node, id: String) -> void:
 	# --- Menge bestimmen ---
 	var amount: int = 1
 	if id == "bogen":
-		amount = InventoryState.arrows           # << Pfeile anzeigen
+		amount = Inventar.arrows           # << Pfeile anzeigen
 	elif item.stackable:
-		amount = InventoryState.get_amount(id)
+		amount = Inventar.get_amount(id)
 
 	slot.set_item(id, tex, amount)
 
 	# optisches Ausgrauen, falls nicht im Besitz
-	var owned := (id == "bogen") or InventoryState.has(id)  # Bogen-Icon darf immer sichtbar sein
+	var owned := (id == "bogen") or Inventar.has(id)  # Bogen-Icon darf immer sichtbar sein
 	slot.modulate = Color(1,1,1,1) if owned else Color(1,1,1,0.35)
 
 
 
 func _fill_bottle_slot(slot: Node, slot_index: int) -> void:
-	var list: Array = InventoryState.bottles
+	var list: Array = Inventar.bottles
 	if list.is_empty():
 		slot.clear_item()
 		return
@@ -209,7 +211,7 @@ func _fill_bottle_slot(slot: Node, slot_index: int) -> void:
 	slot.set_item(bid, tex, 1)
 
 func _fill_trade_slot(slot: Node) -> void:
-	var id: String = InventoryState.current_trade
+	var id: String = Inventar.current_trade
 	if id == "":
 		slot.clear_item()
 		return
@@ -217,7 +219,7 @@ func _fill_trade_slot(slot: Node) -> void:
 	slot.set_item(id, tex, 1)
 
 func _fill_mask_slot(slot: Node) -> void:
-	var id: String = InventoryState.current_mask
+	var id: String = Inventar.current_mask
 	if id == "":
 		slot.clear_item()
 		return
@@ -239,14 +241,14 @@ func _get_item_for_selected_slot() -> String:
 				var col: int = selected_index % grid.columns
 				if col > 3: return ""
 				var idx: int = bottle_page * 4 + col
-				if idx < 0 or idx >= InventoryState.bottles.size():
+				if idx < 0 or idx >= Inventar.bottles.size():
 					return ""
-				var b: Dictionary = InventoryState.bottles[idx]
-				return String(b.get("id", ""))
+				var b: int = Inventar.bottles[idx]
+				return Inventar._bottle_content_to_string(b)
 			":trade":
-				return InventoryState.current_trade
+				return Inventar.current_trade
 			":mask":
-				return InventoryState.current_mask
+				return Inventar.current_mask
 		return ""
 	
 	# feste Slots
@@ -266,9 +268,9 @@ func _map_selected_to_c(dir: String) -> void:
 		print(id, " darf nicht auf C-", dir, " gelegt werden.")
 		return
 	# Nur mappen, wenn im Besitz (Bogen-Icon darf immer, Benutzung checkt Pfeile separat)
-	if id != "bogen" and not InventoryState.has(id):
+	if id != "bogen" and not Inventar.has(id):
 		print("Nicht im Besitz: ", id)
 		return
 
-	InventoryState.set_equip_c(dir, id)  # emit_signal("changed") kommt aus dem Setter
+	Inventar.set_equip_c(dir, id)  # emit_signal("changed") kommt aus dem Setter
 	print("Mapped ", id, " -> C-", dir)

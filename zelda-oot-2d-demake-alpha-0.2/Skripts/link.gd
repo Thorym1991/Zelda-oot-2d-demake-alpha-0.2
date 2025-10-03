@@ -133,13 +133,13 @@ func _unhandled_input(e: InputEvent) -> void:
 	# C-Buttons nach deiner InputMap
 	if e.is_action_pressed("item1_Linkes"):
 		print("C-Left pressed")
-		_use_item(InventoryState.equip_c.get("left", ""))
+		_use_item(Inventar.equip_c.get("left", ""))
 	elif e.is_action_pressed("item2_Unten"):
 		print("C-Down pressed")
-		_use_item(InventoryState.equip_c.get("down", ""))
+		_use_item(Inventar.equip_c.get("down", ""))
 	elif e.is_action_pressed("item3_Rechts"):
 		print("C-Right pressed")
-		_use_item(InventoryState.equip_c.get("right", ""))
+		_use_item(Inventar.equip_c.get("right", ""))
 
 
 #endregion
@@ -224,26 +224,26 @@ func _use_item(id: String) -> void:
 
 	match id:
 		"bogen":
-			if InventoryState.arrows <= 0:
+			if Inventar.arrows <= 0:
 				return
 			# TODO: Pfeil instanzieren & schießen
-			InventoryState.arrows -= 1
-			InventoryState.emit_signal("changed") # HUD-Update
+			Inventar.arrows -= 1
+			Inventar.emit_signal("changed") # HUD-Update
 
 		"bombe":
-			var n := InventoryState.get_amount("bombe")
+			var n := Inventar.get_amount("bombe")
 			if n <= 0:
 				return
 			# TODO: Bombe instanzieren & werfen
-			InventoryState.owned["bombe"] = n - 1
-			InventoryState.emit_signal("changed")
+			Inventar.owned["bombe"] = n - 1
+			Inventar.emit_signal("changed")
 
 		"deku_nuss":
 			# TODO: Deku-Nuss werfen / Flash
-			var m := InventoryState.get_amount("deku_nuss")
+			var m := Inventar.get_amount("deku_nuss")
 			if m > 0:
-				InventoryState.owned["deku_nuss"] = m - 1
-				InventoryState.emit_signal("changed")
+				Inventar.owned["deku_nuss"] = m - 1
+				Inventar.emit_signal("changed")
 
 		_:
 			# Platzhalter für weitere Items

@@ -10,17 +10,17 @@ config_version=5
 
 [application]
 
-config/name="Zelda oot 2d demake alpha 0.2"
+config/name="Zelda Ocarina of Time 2d demake alpha "
+config/version="0.1"
 run/main_scene="uid://htnivnpxgcyx"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
 Signalhub="*res://Globels/Signalhub.gd"
-InventoryState="*res://Globels/InventoryState.gd"
 ItemDb="*res://Skripts/item_db.gd"
 ui_bus="*res://Skripts/ui_bus.gd"
+Inventar="*res://Globels/Inventar.gd"
 
 [file_customization]
 
@@ -30,6 +30,28 @@ folder_colors={
 "res://Globels/": "teal",
 "res://Scenen/": "orange",
 "res://Skripts/": "red"
+}
+
+[importer_defaults]
+
+texture={
+"compress/channel_pack": 0,
+"compress/hdr_compression": 1,
+"compress/high_quality": false,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d/compress_to": 1,
+"mipmaps/generate": false,
+"mipmaps/limit": -1,
+"process/fix_alpha_border": true,
+"process/hdr_as_srgb": false,
+"process/hdr_clamp_exposure": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"process/size_limit": 0,
+"roughness/mode": 0,
+"roughness/src_normal": ""
 }
 
 [input]

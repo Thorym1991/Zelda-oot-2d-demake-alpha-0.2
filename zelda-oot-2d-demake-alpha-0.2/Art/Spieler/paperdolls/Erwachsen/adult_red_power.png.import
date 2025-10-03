@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tdljr3t8kk65"
-path="res://.godot/imported/Paperdoll - Erwachsen-Goronen.png-9977229699481e0cb9e8ae73a85bc44a.ctex"
+uid="uid://d3opylf31mdbd"
+path="res://.godot/imported/adult_red_power.png-9490296a8df39b6bdaa31e5b72b27d15.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Spieler/Erwachsen/Paperdoll - Erwachsen-Goronen.png"
-dest_files=["res://.godot/imported/Paperdoll - Erwachsen-Goronen.png-9977229699481e0cb9e8ae73a85bc44a.ctex"]
+source_file="res://Art/Spieler/paperdolls/Erwachsen/adult_red_power.png"
+dest_files=["res://.godot/imported/adult_red_power.png-9490296a8df39b6bdaa31e5b72b27d15.ctex"]
 
 [params]
 

@@ -1,31 +1,30 @@
 extends Node
 signal changed
 
-var owned: Dictionary = {}
-var variants: Dictionary = {}
-var is_child: bool = true
+# kein doppeltes owned mehr – wir nutzen Inventory
+# var owned: Dictionary = {}
 
-# Pfeile (für Bogen)
-var _arrows: int = 0
-var arrows: int:
-	get: return _arrows
-	set(value):
-		_arrows = max(0, value)
-		emit_signal("changed")
-
-# Flaschen, Tausch, Maske
 var bottles: Array[Dictionary] = []
 var current_trade: String = ""
 var current_mask: String = ""
-# ─────────────────────────────────────────────────────────────────
 
-# Helpers (damit das UI leicht aktualisiert)
-func has(id: String) -> bool: return owned.get(id, 0) > 0
-func get_amount(id: String) -> int: return int(owned.get(id, 0))
+var equip_a: String = ""
+var equip_b: String = ""
+var equip_c := {"left":"", "right":"", "down":""}
+
+func has(id: String) -> bool:
+	return Inventar.has(id)
+
+func get_amount(id: String) -> int:
+	if Inventar.has_method("get_amount"):
+		return Inventar.get_amount(id)
+	return 0
 
 func set_bottles(arr: Array[Dictionary]) -> void:
 	bottles = arr.duplicate()
 	emit_signal("changed")
+
+# … deine set_current_* und set_equip_* bleiben gleich
 
 func set_current_trade(id: String) -> void:
 	current_trade = id
@@ -35,10 +34,6 @@ func set_current_mask(id: String) -> void:
 	current_mask = id
 	emit_signal("changed")
 
-# Ausgewählte Items
-var equip_a: String = ""   # z. B. "bombe"
-var equip_b: String = ""   # z. B. "bogen"
-var equip_c := {"left":"", "right":"", "down":""}
 
 func set_equip_a(id: String) -> void:
 	equip_a = id
