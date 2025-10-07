@@ -1,11 +1,18 @@
-[gd_scene format=3 uid="uid://b8t86e0c7ciom"]
+[gd_scene load_steps=3 format=3 uid="uid://b8t86e0c7ciom"]
+
+[ext_resource type="Texture2D" uid="uid://boi18beuw6x2w" path="res://Art/HuD/Zelda hud/Menu/Ausrüstung/Coursor.png" id="1_8ivdn"]
+[ext_resource type="Texture2D" uid="uid://dahxq3rvkul0r" path="res://Art/HuD/Zelda hud/Menu/Ausrüstung/Ausgewählt.png" id="1_rrvp2"]
 
 [node name="ausrüstungs_slot" type="TextureButton"]
+custom_minimum_size = Vector2(64, 64)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture_disabled = ExtResource("1_rrvp2")
+texture_focused = ExtResource("1_8ivdn")
+stretch_mode = 4
 
 [node name="Icon" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(64, 64)
@@ -21,3 +28,4 @@ offset_right = 32.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch_mode = 4

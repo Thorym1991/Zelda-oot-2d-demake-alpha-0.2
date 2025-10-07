@@ -35,6 +35,16 @@ enum BottleContent {
 # Für Paperdoll-Key
 const ARMOR_NAMES: PackedStringArray = ["green", "red", "blue"]
 
+# --- ID-Aliase, um DB/Spiel-IDs auf Inventory-IDs zu mappen ---
+const ID_ALIAS := {
+	"goronen_armband": "goron_bracelet",
+	# ...falls du noch weitere Unterschiede hast, hier ergänzen
+}
+
+func _norm_id(id: String) -> String:
+	return String(ID_ALIAS.get(id, id))
+
+
 # =========================
 # Signale
 # =========================
@@ -54,7 +64,7 @@ var variants: Dictionary = {}
 # Besitz (binäre Items)
 var owned: Dictionary = {
 	# Schwerter
-	"kokiri_schwert": false,
+	"kokiri_schwert": true,
 	"master_schwert": false,
 	"biggoron_schwert": false,
 
@@ -133,9 +143,9 @@ func equip_boots(v: int) -> void:
 	emit_signal("changed")
 
 # falls du fürs B-Icon beim Schwert etwas setzt:
-func set_equip_b(id: String) -> void:
-	equip_b = id
-	emit_signal("changed")
+#func set_equip_b(id: String) -> void:
+#	equip_b = id
+#	emit_signal("changed")
 
 # =========================
 # Flaschen & Auswahlslots (aus InventoryState.gd zusammengeführt)
@@ -166,9 +176,11 @@ var equip_c := {"left":"", "right":"", "down":""}
 # API – Besitz/Acquire
 # =========================
 func has(id: String) -> bool:
+	id = _norm_id(id)
 	return bool(owned.get(id, false))
 
 func acquire(id: String) -> void:
+	id = _norm_id(id)
 	# doppelte Erfassung vermeiden, aber Upgrades trotzdem verarbeiten
 	var was_new := not has(id)
 	if was_new:
@@ -198,6 +210,40 @@ func acquire(id: String) -> void:
 			set_quiver(max(get_quiver(), Quiver.START))
 		"bombe":
 			set_bomb_bag(max(get_bomb_bag(), BombBag.START))
+
+		# ============================
+		#  Passive Upgrades
+		# ============================
+
+		# Tauch-Schuppen
+		"silberne_schuppe", "silber_schuppe":
+			set_scale(max(get_scale(), Scale.SILVER))
+		"goldene_schuppe", "gold_schuppe":
+			set_scale(Scale.GOLD)
+
+		# Köcher (falls du die Upgrades auch als Items einsammelst)
+		"klein_koecher", "klein_köcher", "quiver_start":
+			set_quiver(max(get_quiver(), Quiver.START))
+		"mittlerer_koecher", "mittlerer_köcher", "quiver_upgrade":
+			set_quiver(max(get_quiver(), Quiver.UPGRADE))
+		"gross_koecher", "groß_köcher", "quiver_max":
+			set_quiver(Quiver.MAX)
+
+		# Bombentasche
+		"bomben_tasche_klein", "bomb_bag_start":
+			set_bomb_bag(max(get_bomb_bag(), BombBag.START))
+		"mittlere_bombentasche", "bomb_bag_upgrade":
+			set_bomb_bag(max(get_bomb_bag(), BombBag.UPGRADE))
+		"grosse_bombentasche", "große_bombentasche", "bomb_bag_max":
+			set_bomb_bag(BombBag.MAX)
+
+		# Kern-Tasche
+		"kleine_kern_tasche", "kernel_pouch_start":
+			set_kernel_pouch(max(get_kernel_pouch(), KernelPouch.START))
+		"mittlere_kerntasche", "kernel_pouch_upgrade":
+			set_kernel_pouch(max(get_kernel_pouch(), KernelPouch.UPGRADE))
+		"grosse_kerntasche", "große_kerntasche", "kernel_pouch_max":
+			set_kernel_pouch(KernelPouch.MAX)
 
 		_:
 			pass
@@ -260,6 +306,7 @@ var wallet_level: int = Wallet.START
 var kernel_pouch_level: int = KernelPouch.NONE
 var quiver_level: int = Quiver.NONE
 var bomb_bag_level: int = BombBag.NONE
+var scale_level: int = Scale.NONE
 
 func set_ocarina(level: int) -> void:
 	ocarina_level = max(ocarina_level, level)
@@ -291,6 +338,14 @@ func set_quiver(level: int) -> void:
 	quiver_level = level
 	equipment_changed.emit()
 	emit_signal("changed")
+
+func get_scale() -> int:
+	return scale_level
+func set_scale(level: int) -> void:
+	scale_level = clamp(level, Scale.NONE, Scale.GOLD)
+	equipment_changed.emit()
+	emit_signal("changed")
+
 
 func get_bomb_bag() -> int:
 	return bomb_bag_level

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EquippableGearDatabase" load_steps=14 format=3 uid="uid://3nxrkjlwu0yp"]
+
+[ext_resource type="Resource" uid="uid://b0qym0rny1qrr" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Kokiri-Schwert.tres" id="1_1mdrd"]
+[ext_resource type="Script" uid="uid://56grlan0qsee" path="res://Skripts/EquippableGearDatabase.gd" id="1_uxxki"]
+[ext_resource type="Resource" uid="uid://mwsvhoryq5ws" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Master-Schwert.tres" id="2_bxcf2"]
+[ext_resource type="Resource" uid="uid://mu448d0ak127" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Biggoron-Schwert.tres" id="3_ws62r"]
+[ext_resource type="Resource" uid="uid://d4be0piw4fyqa" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Deku-Schild.tres" id="4_4ophx"]
+[ext_resource type="Resource" uid="uid://qm42xv602vkd" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Hylia-Schild.tres" id="5_dhoju"]
+[ext_resource type="Resource" uid="uid://dk3gtjiu5uown" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Spiegel-Schild.tres" id="6_t4v7g"]
+[ext_resource type="Resource" uid="uid://bewdja614jffh" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Kokiri-Rüstung.tres" id="7_3hpqr"]
+[ext_resource type="Resource" uid="uid://d2i63sdtxh0as" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Goronen-Rüstung.tres" id="8_ckcqo"]
+[ext_resource type="Resource" uid="uid://djqw0xlg8c8yh" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Zora-Rüstung.tres" id="9_mgkf8"]
+[ext_resource type="Resource" uid="uid://dpa2tckgknfrc" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Leder-Stiefel.tres" id="10_odlqh"]
+[ext_resource type="Resource" uid="uid://bcq11w4d16er8" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Eisen-Stiefel.tres" id="11_fjabk"]
+[ext_resource type="Resource" uid="uid://cxdlcwmwywr8o" path="res://Daten/Ausrüstung/Aurüstung Anlegbar/Gleit-Stiefel.tres" id="12_upyfu"]
+
+[resource]
+script = ExtResource("1_uxxki")
+Items = Array[Resource]([ExtResource("1_1mdrd"), ExtResource("2_bxcf2"), ExtResource("3_ws62r"), ExtResource("4_4ophx"), ExtResource("5_dhoju"), ExtResource("6_t4v7g"), ExtResource("7_3hpqr"), ExtResource("8_ckcqo"), ExtResource("9_mgkf8"), ExtResource("10_odlqh"), ExtResource("11_fjabk"), ExtResource("12_upyfu")])

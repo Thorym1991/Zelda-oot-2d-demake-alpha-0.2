@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PassiveGearDatabase" load_steps=16 format=3 uid="uid://d2daxh465lcei"]
+
+[ext_resource type="Resource" uid="uid://byyrwutu6tid2" path="res://Daten/Ausrüstung/Ausrüstung Passive/Bomben-Tasche-Klein.tres" id="1_awrmk"]
+[ext_resource type="Script" uid="uid://btlqa6ryn1od" path="res://Skripts/PassiveGearDatabase.gd" id="1_w33oi"]
+[ext_resource type="Resource" uid="uid://77ij61slv63r" path="res://Daten/Ausrüstung/Ausrüstung Passive/Mittlere-Bombentasche.tres" id="2_e62v8"]
+[ext_resource type="Resource" uid="uid://bycfol6emfvac" path="res://Daten/Ausrüstung/Ausrüstung Passive/Große-Bombentasche.tres" id="3_gau0n"]
+[ext_resource type="Resource" uid="uid://bvm6s1mj62ui6" path="res://Daten/Ausrüstung/Ausrüstung Passive/Kleine-Kern-Tasche.tres" id="4_413r5"]
+[ext_resource type="Resource" uid="uid://cohg32whty1a0" path="res://Daten/Ausrüstung/Ausrüstung Passive/Mittlere-Kerntasche.tres" id="5_sp2fe"]
+[ext_resource type="Resource" uid="uid://die5xp5ptfjib" path="res://Daten/Ausrüstung/Ausrüstung Passive/Große-Kerntasche.tres" id="6_itwo5"]
+[ext_resource type="Resource" uid="uid://cvkqi8xerq4dw" path="res://Daten/Ausrüstung/Ausrüstung Passive/Klein-Köcher.tres" id="7_gkbtb"]
+[ext_resource type="Resource" uid="uid://bgs05n6ox4kox" path="res://Daten/Ausrüstung/Ausrüstung Passive/Mittlerer-Köcher.tres" id="8_aiw7w"]
+[ext_resource type="Resource" uid="uid://di5loa8bbhbq0" path="res://Daten/Ausrüstung/Ausrüstung Passive/Gross-Köcher.tres" id="9_bjxdr"]
+[ext_resource type="Resource" uid="uid://cqhr2npti0agj" path="res://Daten/Ausrüstung/Ausrüstung Passive/Goronen-Armband.tres" id="10_pe8tt"]
+[ext_resource type="Resource" uid="uid://dlie8ajsuspew" path="res://Daten/Ausrüstung/Ausrüstung Passive/Silberhandschuhe.tres" id="11_peear"]
+[ext_resource type="Resource" uid="uid://bd3lkg0yjoqsc" path="res://Daten/Ausrüstung/Ausrüstung Passive/Titan-Handschuhe.tres" id="12_lf4yv"]
+[ext_resource type="Resource" uid="uid://bgxgj5fwu7nau" path="res://Daten/Ausrüstung/Ausrüstung Passive/Silberne-Schuppe.tres" id="13_gqcoo"]
+[ext_resource type="Resource" uid="uid://bo7mfwp7ob7dx" path="res://Daten/Ausrüstung/Ausrüstung Passive/Goldene-Schuppe.tres" id="14_f6rah"]
+
+[resource]
+script = ExtResource("1_w33oi")
+Items = Array[Resource]([ExtResource("1_awrmk"), ExtResource("2_e62v8"), ExtResource("3_gau0n"), ExtResource("4_413r5"), ExtResource("5_sp2fe"), ExtResource("6_itwo5"), ExtResource("7_gkbtb"), ExtResource("8_aiw7w"), ExtResource("9_bjxdr"), ExtResource("10_pe8tt"), ExtResource("11_peear"), ExtResource("12_lf4yv"), ExtResource("13_gqcoo"), ExtResource("14_f6rah")])

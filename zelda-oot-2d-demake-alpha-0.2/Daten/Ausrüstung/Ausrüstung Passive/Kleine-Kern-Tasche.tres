@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_snf4x")
-id = ""
+id = "kleine_kern_tasche"
 name = "Kleine Kern-Tasche"
 icon = ExtResource("1_c5qdy")
 kind = ""

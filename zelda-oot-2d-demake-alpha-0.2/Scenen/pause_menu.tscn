@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwlc72ivf7qkc"]
+[gd_scene load_steps=17 format=3 uid="uid://dwlc72ivf7qkc"]
 
 [ext_resource type="Script" uid="uid://b62qqw0la3dq1" path="res://Skripts/pauseMenu.gd" id="1_2q6ei"]
 [ext_resource type="Script" uid="uid://cv3pvvq83shi7" path="res://Skripts/ItemsTab.gd" id="2_dpy1j"]
@@ -6,19 +6,16 @@
 [ext_resource type="Resource" uid="uid://dg3t3448nt3as" path="res://Daten/Items/Layout/ErsteReihe.tres" id="4_12115"]
 [ext_resource type="Texture2D" uid="uid://ccao41bmfl7h1" path="res://Art/HuD/Zelda hud/Menu/Gegenstände/Gegenstände.png" id="5_k3n2e"]
 [ext_resource type="PackedScene" uid="uid://pldl6tce8kbx" path="res://Scenen/item_slot.tscn" id="6_772r3"]
-[ext_resource type="Texture2D" uid="uid://dyt13mjhs5rch" path="res://Art/HuD/Zelda hud/Menu/Ausrüstung/Ausrüstungs_rahmen.png" id="7_28u6h"]
+[ext_resource type="Texture2D" uid="uid://dyt13mjhs5rch" path="res://Art/HuD/Zelda hud/Menu/Ausrüstung/Ausrüstungs_rahmen.png" id="7_2q6ei"]
 [ext_resource type="Script" uid="uid://b1kq8dk0i234k" path="res://Scenen/ausrüstung.gd" id="7_c2sir"]
-[ext_resource type="PackedScene" uid="uid://b8t86e0c7ciom" path="res://Skripts/ausrüstungs_slot.tscn" id="8_dpy1j"]
+[ext_resource type="Resource" uid="uid://3nxrkjlwu0yp" path="res://Daten/gear_equippable_db.tres" id="8_28u6h"]
+[ext_resource type="Resource" uid="uid://d2daxh465lcei" path="res://Daten/passive_gear_db.tres" id="8_12115"]
 [ext_resource type="Texture2D" uid="uid://doq5fkalupjec" path="res://Art/HuD/Zelda hud/Menu/Status/Dtatus.png" id="8_qkgnx"]
 [ext_resource type="Texture2D" uid="uid://dj2h8v4xtyeoj" path="res://Art/HuD/Platzhalter_map.png" id="9_yduwy"]
+[ext_resource type="PackedScene" uid="uid://b8t86e0c7ciom" path="res://Skripts/ausrüstungs_slot.tscn" id="10_772r3"]
 [ext_resource type="Script" uid="uid://cbwe4lksssv0w" path="res://Skripts/EquipToggle.gd" id="10_12115"]
 [ext_resource type="Texture2D" uid="uid://c7oasm33uvkf" path="res://Art/HuD/Zelda hud/Menu/Dungeonmap/Rahmenmap.png" id="10_il4o6"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_dpy1j"]
-font_size = 39
-font_color = Color(0, 0, 0, 0.929412)
-outline_size = 16
-outline_color = Color(0.0326824, 0.562873, 3.85046e-07, 1)
+[ext_resource type="Texture2D" uid="uid://cjtr7d1qye1yk" path="res://Art/Spieler/paperdolls/Kind/kid_all.png" id="11_k3n2e"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -157,253 +154,189 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Ausrüstung" type="Control" parent="Root"]
-anchors_preset = 0
-offset_right = 820.0
-offset_bottom = 520.0
-script = ExtResource("7_c2sir")
-
-[node name="ColorRect2" type="ColorRect" parent="Root/Ausrüstung"]
-layout_mode = 0
-offset_right = 820.0
-offset_bottom = 520.0
-color = Color(0.0117647, 0.0117647, 0.0117647, 0.784314)
-
-[node name="TextureRect2" type="TextureRect" parent="Root/Ausrüstung"]
-layout_mode = 0
-offset_right = 820.0
-offset_bottom = 520.0
-texture = ExtResource("7_28u6h")
-
-[node name="Label" type="Label" parent="Root/Ausrüstung"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -105.0
-offset_top = 12.0
-offset_right = 112.0
-offset_bottom = 66.0
-grow_horizontal = 2
-text = "Ausrüstung"
-label_settings = SubResource("LabelSettings_dpy1j")
-
-[node name="Ausrüstung reihe 1" type="GridContainer" parent="Root/Ausrüstung"]
-custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 425.0
-offset_top = 90.0
-offset_right = -315.0
-offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/v_separation = 23
+script = ExtResource("7_c2sir")
+db_gear_equippable = ExtResource("8_28u6h")
+db_gear_passive = ExtResource("8_12115")
+paperdoll_path = NodePath("PaperdollSprite")
+left_category_buttons = Array[NodePath]([NodePath("GridContainer/Munition"), NodePath("GridContainer/Bomben"), NodePath("GridContainer/Tauchen"), NodePath("GridContainer/Stärke")])
+grid_rows = Array[NodePath]([NodePath("Ausrüstung reihe 1"), NodePath("Ausrüstung reihe 2"), NodePath("Ausrüstung reihe 3")])
+item_groups = Array[NodePath]([NodePath("Ausrüstung reihe 1"), NodePath("Ausrüstung reihe 2"), NodePath("Ausrüstung reihe 3"), NodePath("GridContainer")])
 
-[node name="Kokiri-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="ColorRect2" type="ColorRect" parent="Root/Ausrüstung"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0117647, 0.0117647, 0.0117647, 0.784314)
+
+[node name="TextureRect" type="TextureRect" parent="Root/Ausrüstung"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2q6ei")
+
+[node name="Ausrüstung reihe 1" type="GridContainer" parent="Root/Ausrüstung"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 457.0
+offset_top = 99.0
+offset_right = 521.0
+offset_bottom = 367.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 39
+
+[node name="Kokiri-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 value = 1
-owned_id = "\"kokiri_schwert\""
+owned_id = "kokiri_schwert"
 requires_child = true
 
-[node name="Deku-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Deku-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 1
 value = 1
-owned_id = "\"deku_schild\""
+owned_id = "deku_schild"
 requires_child = true
 
-[node name="Kokiri-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Kokiri-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 2
-value = 1
-owned_id = "\"kokiri_rüstung\""
+owned_id = "kokiri_rüstung"
 
-[node name="Leder-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Leder-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 1" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 3
-value = 1
-owned_id = "\"leder_stiefel\""
+owned_id = "leder_stiefel"
 
 [node name="Ausrüstung reihe 2" type="GridContainer" parent="Root/Ausrüstung"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 1
-offset_left = 547.0
-offset_top = 90.0
-offset_right = 627.0
-offset_bottom = 422.0
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 23
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 568.0
+offset_top = 99.0
+offset_right = 632.0
+offset_bottom = 469.0
+theme_override_constants/v_separation = 38
 
-[node name="Master-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Master-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 value = 2
-owned_id = "\"master_schwert\""
+owned_id = "master_schwert"
 requires_adult = true
 
-[node name="Hylia-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Hylia-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 1
 value = 2
-owned_id = "\"hylia_schild\""
+owned_id = "hylia_schild"
 
-[node name="Goronen-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Goronen-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 2
-value = 2
-owned_id = "\"goronen_rüstung\""
+value = 1
+owned_id = "goronen_rüstung"
 requires_adult = true
 
-[node name="Eisen-Stifel" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Eisen-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 2" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 3
-value = 2
-owned_id = "\"eisen_stiefel\""
+value = 1
+owned_id = "eisen_stiefel"
 requires_adult = true
 
 [node name="Ausrüstung reihe 3" type="GridContainer" parent="Root/Ausrüstung"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 671.0
-offset_top = 90.0
-offset_right = -69.0
-offset_bottom = -41.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/v_separation = 23
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 675.0
+offset_top = 99.0
+offset_right = 739.0
+offset_bottom = 163.0
+theme_override_constants/v_separation = 38
 
-[node name="Biggoronen-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Biggoronen-Schwert" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 value = 3
-owned_id = "\"biggoron_schwert\""
+owned_id = "biggoron_schwert"
 requires_adult = true
 
-[node name="Spiegel-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Spiegel-Schild" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 1
 value = 3
-owned_id = "\"spiegel_schild\""
+owned_id = "spiegel_schild"
 requires_adult = true
 
-[node name="Zora-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Zora-Rüstung" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 2
-value = 3
-owned_id = "\"zora_rüstung\""
+value = 2
+owned_id = "zora_rüstung"
 requires_adult = true
 
-[node name="Gleit-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Gleit-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 3" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 3
-value = 3
-owned_id = "\"gleit_stiefel\""
+value = 2
+owned_id = "gleit_stiefel"
 requires_adult = true
 
 [node name="PaperdollSprite" type="Sprite2D" parent="Root/Ausrüstung"]
-position = Vector2(283, 264)
+position = Vector2(274, 277)
+texture = ExtResource("11_k3n2e")
+hframes = 3
+vframes = 3
 
 [node name="GridContainer" type="GridContainer" parent="Root/Ausrüstung"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 45.0
-offset_top = 86.0
-offset_right = -695.0
-offset_bottom = -41.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 22
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 53.0
+offset_top = 99.0
+offset_right = 117.0
+offset_bottom = 472.0
+theme_override_constants/v_separation = 39
 
-[node name="Munition" type="Control" parent="Root/Ausrüstung/GridContainer"]
-custom_minimum_size = Vector2(80, 80)
+[node name="Munition" parent="Root/Ausrüstung/GridContainer" instance=ExtResource("10_772r3")]
 layout_mode = 2
+script = ExtResource("10_12115")
+passive_ids_child = Array[String](["kleine_kern_tasche", "mittlere_kerntasche", "grosse_kerntasche"])
+passive_ids_adult = Array[String](["klein_koecher", "mittlerer_koecher", "gross_koecher"])
 
-[node name="ausrüstungs_slot" parent="Root/Ausrüstung/GridContainer/Munition" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Bomben" parent="Root/Ausrüstung/GridContainer" instance=ExtResource("10_772r3")]
 layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 4.0
-offset_right = 80.0
-offset_bottom = 84.0
-stretch_mode = 0
+script = ExtResource("10_12115")
+passive_ids = Array[String](["bomben_tasche_klein", "mittlere_bombentasche", "grosse_bombentasche"])
 
-[node name="Bomben" type="Control" parent="Root/Ausrüstung/GridContainer"]
-custom_minimum_size = Vector2(80, 80)
+[node name="Tauchen" parent="Root/Ausrüstung/GridContainer" instance=ExtResource("10_772r3")]
 layout_mode = 2
+script = ExtResource("10_12115")
+passive_ids_child = Array[String](["silberne_schuppe", "goldene_schuppe"])
 
-[node name="ausrüstungs_slot2" parent="Root/Ausrüstung/GridContainer/Bomben" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Stärke" parent="Root/Ausrüstung/GridContainer" instance=ExtResource("10_772r3")]
 layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 4.0
-offset_right = 80.0
-offset_bottom = 84.0
-stretch_mode = 0
-
-[node name="Tauchen" type="Control" parent="Root/Ausrüstung/GridContainer"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="ausrüstungs_slot3" parent="Root/Ausrüstung/GridContainer/Tauchen" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 8.0
-offset_right = 80.0
-offset_bottom = 88.0
-stretch_mode = 0
-
-[node name="Stärke" type="Control" parent="Root/Ausrüstung/GridContainer"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="ausrüstungs_slot4" parent="Root/Ausrüstung/GridContainer/Stärke" instance=ExtResource("8_dpy1j")]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 4.0
-offset_right = 80.0
-offset_bottom = 84.0
-stretch_mode = 0
+script = ExtResource("10_12115")
+passive_ids = Array[String](["goron_bracelet", "power_gauntlets", "titan_gauntlets"])
 
 [node name="Quest-Status" type="Control" parent="Root"]
 visible = false
@@ -439,3 +372,4 @@ offset_bottom = 520.0
 texture = ExtResource("10_il4o6")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Root"]
+position = Vector2(17, 429)

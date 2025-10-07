@@ -18,15 +18,17 @@ var index := 0
 var switching := false
 
 func _ready() -> void:
-	# (deine bestehenden Zeilen)
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	get_tree().paused = true
 
-	# >>> NEU: UIBus flag + Signal setzen <<<
 	ui_bus.menu_open = true
 	ui_bus.menu_opened.emit()
 
 	_show_only(index, true)
+
+	# >>> NEU: Erst-Boost, falls Item-Tab zuerst sichtbar ist
+	await get_tree().process_frame
+	_bootstrap_focus_for(panels[index])
 
 func _close() -> void:
 	# >>> NEU: UIBus flag + Signal zurücksetzen <<<
@@ -68,9 +70,11 @@ func _show_only(i: int, instant: bool = false) -> void:
 		p.modulate.a = 1.0
 		p.position = _centered_pos(p)
 		p.scale = Vector2.ONE
+
 	panels[i].visible = true
 	if instant:
 		panels[i].position = _centered_pos(panels[i])
+
 
 func _centered_pos(ctrl: Control) -> Vector2:
 	var rect := root.get_rect()
@@ -103,6 +107,8 @@ func _end_swap(out: Control, inn: Control) -> void:
 	out.visible = false
 	inn.scale = Vector2.ONE
 	switching = false
+	# >>> NEU: Sobald der neue Tab sichtbar ist, Fokus setzen
+	_bootstrap_focus_for(inn)
 
 func _use_item(id: String) -> void:
 	if id == "":
@@ -134,3 +140,50 @@ func _use_item(id: String) -> void:
 
 		_:
 			print("Benutze Item:", id)
+
+func _first_focusable_in(root: Node) -> TextureButton:
+	if root is TextureButton:
+		var b := root as TextureButton
+		if b.visible and b.focus_mode != Control.FOCUS_NONE and not b.disabled:
+			return b
+	if root is Control and (root as Control).visible:
+		for c in root.get_children():
+			var found := _first_focusable_in(c)
+			if found != null:
+				return found
+	return null
+
+
+func _call_force_focus_in(panel: Node) -> bool:
+	# 1) direkt am Panel?
+	if panel != null and panel.has_method("_force_focus_bootstrap"):
+		panel._force_focus_bootstrap()
+		return true
+
+	# 2) Tiefensuche: erstes Kind mit der Methode
+	var queue: Array = [panel]
+	while not queue.is_empty():
+		var n: Node = queue.pop_front()
+		if n != null and n.has_method("_force_focus_bootstrap"):
+			n._force_focus_bootstrap()
+			return true
+		for c in n.get_children():
+			queue.append(c)
+	return false
+
+
+func _bootstrap_focus_for(panel: Control) -> void:
+	if panel == null or not panel.visible:
+		return
+	# Warte etwas, bis Kinder aufgebaut/animiert sind
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	# Spezifische Methode im Panel-Baum suchen und aufrufen
+	if _call_force_focus_in(panel):
+		return
+
+	# Fallback: erstes fokussierbares Button-Kind
+	var btn := _first_focusable_in(panel)
+	if btn != null:
+		btn.grab_focus()
