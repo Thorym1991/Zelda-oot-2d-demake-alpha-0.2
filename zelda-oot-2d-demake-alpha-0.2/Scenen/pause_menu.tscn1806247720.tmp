@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwlc72ivf7qkc"]
+[gd_scene load_steps=16 format=3 uid="uid://dwlc72ivf7qkc"]
 
 [ext_resource type="Script" uid="uid://b62qqw0la3dq1" path="res://Skripts/pauseMenu.gd" id="1_2q6ei"]
 [ext_resource type="Script" uid="uid://cv3pvvq83shi7" path="res://Skripts/ItemsTab.gd" id="2_dpy1j"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://b8t86e0c7ciom" path="res://Skripts/ausrüstungs_slot.tscn" id="10_772r3"]
 [ext_resource type="Script" uid="uid://cbwe4lksssv0w" path="res://Skripts/EquipToggle.gd" id="10_12115"]
 [ext_resource type="Texture2D" uid="uid://c7oasm33uvkf" path="res://Art/HuD/Zelda hud/Menu/Dungeonmap/Rahmenmap.png" id="10_il4o6"]
-[ext_resource type="Script" uid="uid://cqa76cw452kys" path="res://Skripts/Paperdoll.gd" id="13_28u6h"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -161,10 +160,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_c2sir")
-rows = Array[NodePath]([NodePath("Ausrüstung reihe 1"), NodePath("Ausrüstung reihe 2"), NodePath("Ausrüstung reihe 3"), NodePath("Ausrüstung reihe 4"), NodePath("GridContainer")])
+paperdoll_path = NodePath("PaperdollSprite")
+rows = null
 item_groups = Array[NodePath]([NodePath("Ausrüstung reihe 1"), NodePath("Ausrüstung reihe 2"), NodePath("Ausrüstung reihe 3"), NodePath("Ausrüstung reihe 4"), NodePath("GridContainer")])
 db_gear_equippable = ExtResource("8_28u6h")
 db_gear_passive = ExtResource("8_12115")
+gray_out_locked = null
+owned_id_aliases = null
 
 [node name="ColorRect2" type="ColorRect" parent="Root/Ausrüstung"]
 layout_mode = 1
@@ -322,7 +324,8 @@ owned_id = "gleit_stiefel"
 
 [node name="PaperdollSprite" type="Sprite2D" parent="Root/Ausrüstung"]
 position = Vector2(274, 277)
-script = ExtResource("13_28u6h")
+hframes = 2
+vframes = 2
 
 [node name="GridContainer" type="GridContainer" parent="Root/Ausrüstung"]
 custom_minimum_size = Vector2(64, 64)
@@ -340,29 +343,29 @@ script = ExtResource("10_12115")
 type = 4
 value = 1
 is_passive = true
-passive_ids_child = Array[String](["", "kleine_kern_tasche", "mittlere_kerntasche", "große_kerntasche"])
-passive_ids_adult = Array[String](["", "klein_köcher", "mittlerer_köcher", "gross_koecher"])
+passive_ids_child = Array[String](["kleine_kern_tasche", "mittlere_kerntasche", "große_kerntasche"])
+passive_ids_adult = Array[String](["klein_köcher", "mittlerer_köcher", "gross_koecher"])
 
 [node name="Bomben" parent="Root/Ausrüstung/GridContainer" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 5
 is_passive = true
-passive_ids = Array[String](["", "bomben_tasche_klein", "bomben_tasche_mittel", "bomben_tasche_gross"])
+passive_ids = Array[String](["bomben_tasche_klein", "bomben_tasche_mittel", "bomben_tasche_gross"])
 
 [node name="Tauchen" parent="Root/Ausrüstung/GridContainer" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 6
 is_passive = true
-passive_ids = Array[String](["", "silberne_schuppe", "goldene_schuppe"])
+passive_ids = Array[String](["silberne_schuppe", "goldene_schuppe"])
 
 [node name="Stärke" parent="Root/Ausrüstung/GridContainer" instance=ExtResource("10_772r3")]
 layout_mode = 2
 script = ExtResource("10_12115")
 type = 7
 is_passive = true
-passive_ids = Array[String](["", "goronen_armband", "silberhandschuhe", "titan_handschuh"])
+passive_ids = Array[String](["goronen_armband", "silberhandschuhe", "titan_handschuh"])
 
 [node name="Quest-Status" type="Control" parent="Root"]
 visible = false

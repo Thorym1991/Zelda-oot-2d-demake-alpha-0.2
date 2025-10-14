@@ -14,7 +14,7 @@ func get_item(id: String) -> Resource:
 			return it
 	return null
 
-func get_icon(id: String, variant: String = "default") -> Texture2D:
+func get_icon(id: String = "default") -> Texture2D:
 	var it := get_item(id)
 	if it and it.has("icon"):
 		return it.get("icon") as Texture2D

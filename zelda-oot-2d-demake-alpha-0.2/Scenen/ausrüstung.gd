@@ -1,709 +1,440 @@
+# res://Skripts/AusruestungLean.gd
 extends Control
 
-# === Datenbanken ===
-@export var db_gear_equippable: Resource     # akzeptiert jede DB-Klasse
-@export var db_gear_passive: Resource        # (hast du schon so)
-
-# === Paperdoll ===
-@export var paperdoll_path: NodePath
-@onready var doll: Sprite2D = get_node_or_null(paperdoll_path)
-
-
-# === Navigation ===
-@export var left_category_buttons: Array[NodePath] = []  # Reihenfolge top->bottom
-@export var grid_rows: Array[NodePath] = []              # jeder Eintrag ist ein HBox/Grid mit Slot-Buttons
-
-@export var wrap_navigation := true
-@export var skip_locked_slots := true
-
-@export var close_action := "ui_cancel"
-@export var accept_action := "Aktion"
-@export var up_action := "up"
-@export var down_action := "down"
-@export var left_action := "left"
-@export var right_action := "right"
-
-enum Zone { LEFT, RIGHT }
-var _zone: int = Zone.LEFT
-var _left_index := 0
-var _row := 0
-var _col := 0
-var _focus_bootstrapped := false
-
-# === Alias-Mapping für Datenbank-Schlüssel ===
-const DB_ALIAS_BY_ID := {
-	#"inventar_id" : "db_key"
-	# Beispiel:
-	"kleine_kern_tasche": "kleine_kern_tasche",
-	"goron_bracelet": "goronen_armband",
-	"kleine_bombentasche": "bomben_tasche_klein",
-	"silberne_schuppe": "silberne_schuppe",
-}
-
-# === Paperdoll Sheets ===
-const SHEETS := {
-	# Kind
-	"kid_all":        {"path":"res://Art/Spieler/paperdolls/Kind/kid_all.png",            "h":3, "v":3},
-	"kid_goron":      {"path":"res://Art/Spieler/paperdolls/Kind/kid_goron_bracelet.png", "h":2, "v":1},
-
-	# Erwachsene
-	"adult_green":       {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_green.png",       "h":4, "v":5},
-	"adult_red":         {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_red.png",         "h":4, "v":5},
-	"adult_blue":        {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_blue.png",        "h":4, "v":5},
-	"adult_green_power": {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_green_power.png", "h":4, "v":5},
-	"adult_red_power":   {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_red_power.png",   "h":4, "v":5},
-	"adult_blue_power":  {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_blue_power.png",  "h":4, "v":5},
-	"adult_green_titan": {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_green_titan.png", "h":4, "v":5},
-	"adult_red_titan":   {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_red_titan.png",   "h":4, "v":5},
-	"adult_blue_titan":  {"path":"res://Art/Spieler/paperdolls/Erwachsen/adult_blue_titan.png",  "h":4, "v":5},
-}
-
-# === ID -> Enum Mapping für Gear ===
-const SWORD_BY_ID := {
-	"kokiri_schwert": Inventory.Sword.KOKIRI,
-	"master_schwert": Inventory.Sword.MASTER,
-	"biggoron_schwert": Inventory.Sword.BIGGORON,
-}
-const SHIELD_BY_ID := {
-	"deku_schild": Inventory.Shield.DEKU,
-	"hylia_schild": Inventory.Shield.HYLIA,
-	"spiegel_schild": Inventory.Shield.MIRROR,
-}
-const ARMOR_BY_ID := {
-	"kokiri_rüstung": Inventory.Armor.GREEN,
-	"goronen_rüstung": Inventory.Armor.RED,
-	"zora_rüstung": Inventory.Armor.BLUE,
-}
-const BOOTS_BY_ID := {
-	"leder_stiefel": Inventory.Boots.LEATHER,
-	"eisen_stiefel": Inventory.Boots.IRON,
-	"gleit_stiefel": Inventory.Boots.HOVER,
-}
-
-# === Quickslots ===
-const QUICK_EQUIPPABLE := {
-	"deku_stab": true, "deku_nuss": true,
-	"bumerang": true, "feenschleuder": true, "bogen": true, "bombe": true,
-	"stahlhammer": true, "auge_der_wahrheit": true,
-	"feuerpfeil": true, "eispfeil": true, "lichtpfeil": true,
-	"ocarina_fairy": true, "ocarina_time": true
-}
-
-@export var default_quick_target := "B"
-var quick_target := "B"
-
-# --- INVENTAR ---
-@export var inventory_path: NodePath
-var _inv: Inventory
-
-# --- ICON-LOADER ---
-@export var item_groups: Array[NodePath] = []
+@export var rows: Array[NodePath] = []            # deine 4 Reihen
+@export var item_groups: Array[NodePath] = []     # Wurzeln, unter denen Icons/Buttons liegen
+@export var db_gear_equippable: Resource
+@export var db_gear_passive: Resource
 @export var gray_out_locked := true
+@export var placeholder_empty: Texture2D = null
 
-# === READY ===
+# --- IDs für passive Stufen (falls du sie im Editor NICHT befüllst) ---
+const PASSIVE_IDS_AMMO_CHILD := [
+	"seed_pouch_none", "seed_pouch_small", "seed_pouch_medium", "seed_pouch_max"  # 0..3
+]
+const PASSIVE_IDS_AMMO_ADULT := [
+	"quiver_none", "quiver_small", "quiver_medium", "quiver_max"                  # 0..3
+]
+const PASSIVE_IDS_BOMB_BAG := [
+	"bomb_bag_none", "bomb_bag_small", "bomb_bag_medium", "bomb_bag_max"          # 0..3
+]
+const PASSIVE_IDS_DIVE := [
+	"", "silver_scale", "gold_scale"                                              # 0..2 (0 = kein Icon)
+]
+const PASSIVE_IDS_STRENGTH := [
+	"", "goron_bracelet", "power_gauntlets", "titan_gauntlets"                    # 0..3
+]
+
+# EquipType (spiegelt deine Buttons)
+const ET_SWORD := 0
+const ET_SHIELD := 1
+const ET_ARMOR := 2
+const ET_BOOTS := 3
+const ET_AMMO := 4
+const ET_BOMB_BAG := 5
+const ET_DIVE_SCALE := 6
+const ET_STRENGTH := 7
+
+var _inv: Inventory
+var _group_by_row := {}
+var owned_id_aliases: Dictionary = {}  # falls du Aliase pflegst
+
 func _ready() -> void:
-	
-	if inventory_path != NodePath():
-		_inv = get_node(inventory_path) as Inventory
-	elif has_node("/root/Inventar"):
-		_inv = get_node("/root/Inventar") as Inventory
-	elif has_node("/root/Inventory"):
-		_inv = get_node("/root/Inventory") as Inventory
-
+	_inv = get_node("/root/Inventar") as Inventory
 	if _inv:
-		_inv.changed.connect(_on_inventory_changed)
-		_inv.equipment_changed.connect(_on_inventory_changed)
+		if not _inv.changed.is_connected(_on_inv):
+			_inv.changed.connect(_on_inv)
+		if not _inv.equipment_changed.is_connected(_on_inv):
+			_inv.equipment_changed.connect(_on_inv)
+	_on_inv()
 
-	_on_inventory_changed()
-	_refresh_item_groups()
-	_update_focus_visuals()
-	_set_initial_focus()
-	if not self.visibility_changed.is_connected(_on_visibility_changed):
-		self.visibility_changed.connect(_on_visibility_changed)
-	call_deferred("_force_focus_bootstrap")  # direkt beim Start
+func _on_inv() -> void:
+	_refresh_icons()
+	_wire_groups()
+	_ensure_debug_actions()
+	set_process_input(true)
 
-# === PAPERDOLL ===
-func _on_inventory_changed() -> void:
-	var key: String = "kid_all"
-	if _inv != null:
-		key = _inv.get_paperdoll_key()
-	update_paperdoll(key, 0)
-	_refresh_item_groups()
+# ------------------ Icons / Buttons ------------------
 
-func update_paperdoll(key: String, frame: int = 0) -> void:
-	if doll == null:
-		push_warning("Paperdoll-Node nicht gesetzt.")
-		return
-
-	if not SHEETS.has(key):
-		push_warning("Unbekanntes Sheet: " + key)
-		return
-
-	var cfg: Dictionary = SHEETS[key]
-	var path: String = String(cfg["path"])
-	var tex: Texture2D = load(path) as Texture2D
-
-	if tex:
-		doll.texture = tex
-		doll.hframes = int(cfg["h"])
-		doll.vframes = int(cfg["v"])
-		doll.frame = clamp(frame, 0, doll.hframes * doll.vframes - 1)
-		doll.centered = true
-	else:
-		push_warning("Paperdoll-Texture nicht gefunden: " + path)
-
-# === ICONS ===
-func _refresh_item_groups() -> void:
+func _refresh_icons() -> void:
 	for p in item_groups:
 		var root := get_node_or_null(p)
 		if root:
-			_populate_group(root)
-			_zone = Zone.LEFT
-			_left_index = 0
-			_row = 0
-			_col = 0
-			_update_focus_visuals()
+			_populate(root)
 
-func _icon_target_for(n: Node) -> Node:
-	# Wenn ein TextureButton ein Kind namens "Icon" hat, benutze dieses Kind als Ziel
+func _populate(n: Node) -> void:
+	# 1) rekursiv in die Tiefe
+	var kids: Array = n.get_children()
+	for i in kids.size():
+		_populate(kids[i])
+
+	# 2) Buttons (inkl. passive-Autofill)
 	if n is TextureButton:
-		var icon := n.get_node_or_null(^"Icon")
-		if icon and (icon is TextureRect or icon is Sprite2D):
-			return icon
-	return n
+		var btn: TextureButton = n as TextureButton
 
-func _populate_group(root: Node) -> void:
-	for child: Node in root.get_children():
-		# rekursiv zuerst
-		_populate_group(child)
+		var id: String = ""
+		var v_owned: Variant = btn.get("owned_id")
+		if v_owned != null:
+			id = String(v_owned)
 
-		# 1) Buttons: IDs vom Button (oder Icon-Kind als Fallback) → Icon auf Kind setzen
-		if child is TextureButton:
-			var ids: Array[String] = _get_item_ids_for_node(child)
-			if ids.is_empty():
-				var icon_node: Node = _icon_target_for(child)
-				ids = _get_item_ids_for_node(icon_node)
+		if id == "" and btn.has_meta("item_id"):
+			id = String(btn.get_meta("item_id"))
 
-			if ids.is_empty():
-				continue
+		var is_passive_btn: bool = _is_passive_button(btn)
 
-			var item_id: String = _resolve_best_id(ids)
-			var target: Node = _icon_target_for(child)  # meist das Kind "Icon"
-			_apply_icon(target, item_id)
+		# Typ/Value nur fürs Logging/Backup
+		var t_prop: Variant = btn.get("type")
+		var v_prop: Variant = btn.get("value")
+		var t: int = (int(t_prop) if t_prop != null else -1)
+		var v: int = (int(v_prop) if v_prop != null else -1)
 
-			var btn := child as TextureButton
-			if not btn.has_meta("_handler_set"):
-				btn.set_meta("_handler_set", true)
-				btn.pressed.connect(_on_any_item_button_pressed.bind(btn))
+		# (t,v werden hier nicht mehr geloggt, nur falls du sie brauchst)
 
-		# 2) Standalone-Icons (kein Parent-Button)
-		elif (child is TextureRect or child is Sprite2D) and not (child.get_parent() is TextureButton):
-			var ids2: Array[String] = _get_item_ids_for_node(child)
-			if ids2.is_empty():
-				continue
-			var item_id2: String = _resolve_best_id(ids2)
-			_apply_icon(child, item_id2)
+		# Passive Buttons: ID dynamisch ermitteln
+		if id == "" and is_passive_btn:
+			id = _resolve_passive_item_id(btn)
+			if id != "":
+				btn.set_meta("item_id", id)
 
+		if id == "":
+			# kein Icon zu setzen
+			return
 
-func _get_item_ids_for_node(n: Node) -> Array[String]:
-	var result: Array[String] = []
-
-	# 0) HARDCODE: EquipToggle-Buttons → nimm owned_id (verhindert falsche Zuordnung)
-	if n is TextureButton:
-		# Script hängt auf dem Button; owned_id ist direkte Property
-		var owned: Variant = n.get("owned_id")
-		if owned != null and String(owned) != "":
-			result.append(_norm_id(String(owned)))
-			return result
-		# Falls kein owned_id gesetzt, dann optional Meta am Button lesen
-		if n.has_meta("item_id"):
-			result.append(_norm_id(String(n.get_meta("item_id"))))
-			return result
-		if n.has_meta("item_ids"):
-			var arr_btn: Array = n.get_meta("item_ids")
-			for v in arr_btn:
-				result.append(_norm_id(String(v)))
-			return result
-
-	# 1) Normale (Standalone-)Icons: Metas direkt am Node
-	if n.has_meta("item_ids"):
-		var arr: Array = n.get_meta("item_ids")
-		for v in arr:
-			result.append(_norm_id(String(v)))
-		return result
-
-	if n.has_meta("item_id"):
-		result.append(_norm_id(String(n.get_meta("item_id"))))
-		return result
-
-	# 2) Fallback: beim Parent nachsehen (z. B. Icon-Kind unter Button ohne eigenes Meta)
-	var p := n.get_parent()
-	if p != null:
-		# wenn Parent ein Button (EquipToggle) ist → wieder owned_id bevorzugen
-		if p is TextureButton:
-			var owned2: Variant = p.get("owned_id")
-			if owned2 != null and String(owned2) != "":
-				result.append(_norm_id(String(owned2)))
-				return result
-			if p.has_meta("item_id"):
-				result.append(_norm_id(String(p.get_meta("item_id"))))
-				return result
-			if p.has_meta("item_ids"):
-				var arr2: Array = p.get_meta("item_ids")
-				for v2 in arr2:
-					result.append(_norm_id(String(v2)))
-				return result
-
-		# sonst normale Metas am Parent (falls vorhanden)
-		if p.has_meta("item_id"):
-			result.append(_norm_id(String(p.get_meta("item_id"))))
-			return result
-		if p.has_meta("item_ids"):
-			var arr3: Array = p.get_meta("item_ids")
-			for v3 in arr3:
-				result.append(_norm_id(String(v3)))
-			return result
-
-	return result
-
-func _resolve_best_id(ids: Array[String]) -> String:
-	if _inv != null:
-		for id in ids:
-			if _inv.has(id):
-				return id
-	return ids[0]
-
-# === ICON ANWENDEN ===
-var _EMPTY_TEX: Texture2D
-
-func _get_empty_tex() -> Texture2D:
-	if _EMPTY_TEX:
-		return _EMPTY_TEX
-	var img := Image.create(1, 1, false, Image.FORMAT_RGBA8)
-	img.fill(Color(0,0,0,0))
-	_EMPTY_TEX = ImageTexture.create_from_image(img)
-	return _EMPTY_TEX
-
-func _apply_icon(node: Node, item_id: String) -> void:
-	var tex: Texture2D = _icon_from_dbs(item_id)
-	if tex == null:
-		tex = _get_empty_tex()
-	if tex == null:
+		_apply_icon(btn, id)
 		return
 
-	var owned: bool = (_inv != null and _inv.has(item_id))
+	# Standalone-Icon (NICHT die Paperdoll)
+	if (n is TextureRect) or (n is Sprite2D and not (n is Paperdoll)):
+		var icon_id: String = (String(n.get_meta("item_id")) if n.has_meta("item_id") else "")
+		if icon_id != "":
+			_apply_icon(n, icon_id)
+			return
 
+# Suche Icon in DB-Resourcen
+func _icon_from_db(id: String) -> Texture2D:
+	if id == "" or id == null:
+		return null
+
+	var tex: Texture2D = null
+	var db_list: Array = [db_gear_equippable, db_gear_passive]
+	for db_val in db_list:
+		var db: Resource = db_val as Resource
+		if db == null:
+			continue
+		tex = _find_icon_in_resource_recursive(db, id, 0)
+		if tex != null:
+			return tex
+
+	return null
+
+func _find_icon_in_resource_recursive(res: Variant, wanted_id: String, depth: int) -> Texture2D:
+	if res == null or depth > 8:
+		return null
+
+	# 1) Resource direkt prüfen
+	if res is Resource:
+		var r: Resource = res as Resource
+
+		# ID lesen (mehrere mögliche Keys)
+		var rid: String = ""
+		var id_keys: Array = ["ID", "id", "Name", "name"]
+		for i in range(id_keys.size()):
+			var key: String = String(id_keys[i])
+			var val_any: Variant = r.get(key)
+			if val_any != null and String(val_any) != "":
+				rid = String(val_any)
+				break
+
+		# ID-Match -> Icon auslesen
+		if rid == wanted_id:
+			var icon_keys: Array = ["Icon", "icon", "Texture", "texture"]
+			for j in range(icon_keys.size()):
+				var ik: String = String(icon_keys[j])
+				var iv: Variant = r.get(ik)
+				if iv is Texture2D:
+					var tex_match: Texture2D = iv
+					return tex_match
+			# kein direktes Icon-Feld gefunden → weiter nachschauen
+
+		# Eigenschaften rekursiv durchsuchen
+		var props: Array = r.get_property_list()
+		for p_i in range(props.size()):
+			var p: Dictionary = props[p_i]
+			var pname: String = String(p.get("name", ""))
+			if pname == "":
+				continue
+			var pv: Variant = r.get(pname)
+			if pv is Array or pv is Resource or pv is Dictionary:
+				var found: Texture2D = _find_icon_in_resource_recursive(pv, wanted_id, depth + 1)
+				if found != null:
+					return found
+
+	# 2) Array durchlaufen
+	if res is Array:
+		var arr: Array = res as Array
+		for k in range(arr.size()):
+			var found2: Texture2D = _find_icon_in_resource_recursive(arr[k], wanted_id, depth + 1)
+			if found2 != null:
+				return found2
+
+	# 3) Dictionary durchlaufen
+	if res is Dictionary:
+		var d: Dictionary = res as Dictionary
+		for key in d.keys():
+			var found3: Texture2D = _find_icon_in_resource_recursive(d[key], wanted_id, depth + 1)
+			if found3 != null:
+				return found3
+
+	return null
+
+# Besitz prüfen (+ Alias-Unterstützung)
+func _is_owned(item_id: String) -> bool:
+	if _inv == null or item_id == "":
+		return false
+	# direkter Treffer?
+	if _inv.has(item_id):
+		return true
+	# Alias?
+	if owned_id_aliases.has(item_id):
+		var alt_id: String = String(owned_id_aliases[item_id])
+		if _inv.has(alt_id):
+			return true
+	return false
+
+func _apply_icon(node: Node, item_id: String) -> void:
+	if item_id == "" or item_id == null:
+		_clear_node_texture(node)
+		return
+
+	var owned: bool = _is_owned(item_id)
+
+	# Passive Buttons: Anzeige unabhängig vom Besitz
+	if node is TextureButton and _is_passive_button(node as TextureButton):
+		owned = true
+
+	if not owned:
+		_clear_node_texture(node)
+		return
+
+	var tex: Texture2D = _icon_from_db(item_id)
+	if tex == null:
+		_clear_node_texture(node)
+		return
+
+	_set_node_texture(node, tex)
+
+	if node is TextureRect and gray_out_locked:
+		(node as TextureRect).modulate.a = 1.0
+	elif node is Sprite2D and gray_out_locked:
+		(node as Sprite2D).modulate = Color(1,1,1,1.0)
+
+# Helfer zum Setzen/Löschen
+func _set_node_texture(node: Node, tex: Texture2D) -> void:
 	if node is TextureButton:
 		var b := node as TextureButton
 		b.texture_normal = tex
 		b.texture_hover = tex
 		b.texture_pressed = tex
 		b.texture_disabled = tex
-		b.disabled = (not owned) and gray_out_locked
-		if gray_out_locked:
-			if owned:
-				b.modulate.a = 1.0
-			else:
-				b.modulate.a = 0.35
-
 	elif node is TextureRect:
-		var r := node as TextureRect
-		r.texture = tex
-		if gray_out_locked:
-			if owned:
-				r.modulate.a = 1.0
-			else:
-				r.modulate.a = 0.35
+		(node as TextureRect).texture = tex
+	elif node is Sprite2D:
+		(node as Sprite2D).texture = tex
 
-	elif node is Sprite2D and node != doll:
-		var s := node as Sprite2D
-		s.texture = tex
-		if gray_out_locked:
-			if owned:
-				s.modulate = Color(1, 1, 1, 1)
-			else:
-				s.modulate = Color(1, 1, 1, 0.35)
+func _clear_node_texture(node: Node) -> void:
+	if node is TextureButton:
+		var b := node as TextureButton
+		b.texture_normal = null
+		b.texture_hover = null
+		b.texture_pressed = null
+		b.texture_disabled = null
+	elif node is TextureRect:
+		(node as TextureRect).texture = null
+	elif node is Sprite2D:
+		(node as Sprite2D).texture = null
 
-	# --- Ausgewähltes Gear hervorheben (ohne Ternary/Python-If) ---
-	var selected: bool = false
-	if has_method("_is_equipped_id"):
-		selected = _is_equipped_id(item_id)
-
-	if selected:
-		if node is TextureButton or node is TextureRect:
-			node.modulate.a = 1.0
-		elif node is Sprite2D:
-			node.modulate = Color(1, 1, 1, 1)
-
-	
-
-func _on_any_item_button_pressed(btn: TextureButton) -> void:
-	var ids: Array[String] = _get_item_ids_for_node(btn)
-	if ids.is_empty():
-		return
-	var item_id: String = _resolve_best_id(ids)
-	_on_item_pressed(item_id)
-
-func _on_item_pressed(item_id: String) -> void:
-	if _inv == null:
-		return
-
-	var owned := _inv.has(item_id)
-	var is_gear := SWORD_BY_ID.has(item_id) or SHIELD_BY_ID.has(item_id) or ARMOR_BY_ID.has(item_id) or BOOTS_BY_ID.has(item_id)
-	var is_quick := QUICK_EQUIPPABLE.has(item_id)
-
-	if not owned and not is_gear:
-		return
-
-	if SWORD_BY_ID.has(item_id):
-		_inv.equip_sword(SWORD_BY_ID[item_id]); return
-	if SHIELD_BY_ID.has(item_id):
-		_inv.equip_shield(SHIELD_BY_ID[item_id]); return
-	if ARMOR_BY_ID.has(item_id):
-		_inv.equip_armor(ARMOR_BY_ID[item_id]); return
-	if BOOTS_BY_ID.has(item_id):
-		_inv.equip_boots(BOOTS_BY_ID[item_id]); return
-
-	if is_quick:
-		_assign_quick(item_id)
-
-func _assign_quick(item_id: String) -> void:
-	if quick_target == null or String(quick_target) == "":
-		quick_target = default_quick_target
-	match quick_target:
-		"A":    _inv.set_equip_a(item_id)
-		"B":    _inv.set_equip_b(item_id)
-		"left", "right", "down":
-			_inv.set_equip_c(quick_target, item_id)
-		_:      _inv.set_equip_b(item_id)
-
-# === ICONS AUS DATENBANK ===
-func _icon_from_dbs(id: String) -> Texture2D:
-	if id == "":
-		return null
-	var key := String(DB_ALIAS_BY_ID.get(id, id))
-	#print("🔍 Suche Icon für:", id, " (key:", key, ")")
-
-	var tex := _icon_from_array_db(db_gear_equippable, key)
-	if tex:
-		#print("✅ Gefunden in EQUIPPABLE:", key)
-		return tex
-
-	tex = _icon_from_array_db(db_gear_passive, key)
-	if tex:
-		#print("✅ Gefunden in PASSIVE:", key)
-		return tex
-
-	#print("❌ Nichts gefunden für:", key)
-	return null
-
-func _icon_from_array_db(db: Resource, key: String) -> Texture2D:
-	if db == null:
-		return null
-
-	var list_prop: String = ""
-	for p in db.get_property_list():
-		var n: String = String(p.get("name", ""))
-		if n == "Items" or n == "items":
-			list_prop = n
-			break
-	if list_prop == "":
-		return null
-
-	var arr: Array = db.get(list_prop) as Array
-	for it in arr:
-		if it == null:
+# Button-Gruppen (für togglende Equip-Buttons – passive Buttons ausnehmen)
+func _wire_groups() -> void:
+	_group_by_row.clear()
+	for path in rows:
+		var row := get_node_or_null(path)
+		if row == null:
 			continue
 
-		var id_val: Variant = it.get("ID")
-		if id_val == null or String(id_val) == "":
-			id_val = it.get("id")
-		if id_val == null or String(id_val) == "":
-			id_val = it.get("Name")
-		if id_val == null or String(id_val) == "":
-			id_val = it.get("name")
+		var g := ButtonGroup.new()
+		g.allow_unpress = false
+		_group_by_row[row] = g
 
-		var id_in_res: String = String(id_val)
-		if id_in_res == key:
-			var ic: Variant = it.get("Icon")
-			if ic == null:
-				ic = it.get("icon")
-			if ic is Texture2D:
-				return ic as Texture2D
-			else:
-				push_warning("Eintrag '%s' hat kein gültiges Icon." % id_in_res)
-				return null
+		for child in row.get_children():
+			if child is TextureButton:
+				var btn: TextureButton = child as TextureButton
 
-	return null
+				var passive: bool = false
+				var v_meta: Variant = btn.get("is_passive")
+				if v_meta != null:
+					passive = bool(v_meta)
 
-# === HILFSFUNKTIONEN ===
-func _is_equipped_id(item_id: String) -> bool:
-	if _inv == null:
-		return false
-	if SWORD_BY_ID.has(item_id):
-		return _inv.sword == int(SWORD_BY_ID[item_id])
-	if SHIELD_BY_ID.has(item_id):
-		return _inv.shield == int(SHIELD_BY_ID[item_id])
-	if ARMOR_BY_ID.has(item_id):
-		return _inv.armor == int(ARMOR_BY_ID[item_id])
-	if BOOTS_BY_ID.has(item_id):
-		return _inv.boots == int(BOOTS_BY_ID[item_id])
-	return false
+				if passive:
+					btn.focus_mode = Control.FOCUS_NONE
+					btn.toggle_mode = false
+					btn.button_group = null
+				else:
+					btn.toggle_mode = true
+					btn.button_group = g
+					btn.focus_mode = Control.FOCUS_ALL
 
-func _norm_id(s: String) -> String:
-	var t := String(s).strip_edges()
-	if t.begins_with('"') and t.ends_with('"') and t.length() >= 2:
-		t = t.substr(1, t.length() - 2)
-	t = t.replace('"', "")
-	return t
+func _is_passive_button(btn: TextureButton) -> bool:
+	var v: Variant = btn.get("is_passive")
+	return v != null and bool(v)
 
-# --- FOKUS-HILFSMETHODEN ---
+# ID-Auflösung für passive Buttons anhand Inventar-Levels
+func _resolve_passive_item_id(btn: TextureButton) -> String:
+	# Button-Properties
+	var t_prop: Variant = btn.get("type")
+	var v_prop: Variant = btn.get("value")
+	if t_prop == null or v_prop == null:
+		return ""
+	var t: int = int(t_prop)
+	var v: int = int(v_prop)  # wird nur für Fallback genutzt
 
-func _focusable_of(n: Node) -> TextureButton:
-	if n == null:
-		return null
-	if n is TextureButton:
-		return n as TextureButton
-	var p: Node = n.get_parent()
-	if p != null and p is TextureButton:
-		return p as TextureButton
-	return null
+	# Editor-Arrays (falls gesetzt)
+	var arr_single: Array = []
+	var arr_child: Array = []
+	var arr_adult: Array = []
 
+	var a_single: Variant = btn.get("passive_ids")
+	if a_single is Array:
+		arr_single = a_single as Array
 
-func _visible_enabled(n: Node) -> bool:
-	if n == null:
-		return false
-	var btn: TextureButton = _focusable_of(n)
-	if btn == null:
-		return n.visible
-	return btn.visible and not (skip_locked_slots and btn.disabled)
+	var a_child: Variant = btn.get("passive_ids_child")
+	if a_child is Array:
+		arr_child = a_child as Array
 
-func _current_target() -> Control:
-	if _zone == Zone.LEFT:
-		if _left_index >= 0 and _left_index < left_category_buttons.size():
-			return get_node_or_null(left_category_buttons[_left_index]) as Control
-		return null
-	else:
-		var m: Array = _get_grid_matrix()
-		if _row < 0 or _row >= m.size():
-			return null
-		var row: Array = m[_row] as Array
-		if row.is_empty():
-			return null
-		var col: int = clampi(_col, 0, row.size() - 1)  # <— WICHTIG: int + clampi
-		return row[col] as Control
+	var a_adult: Variant = btn.get("passive_ids_adult")
+	if a_adult is Array:
+		arr_adult = a_adult as Array
 
-func _get_grid_matrix() -> Array:
-	var matrix: Array = []
-	for row_path in grid_rows:
-		var row_node := get_node_or_null(row_path)
-		var line: Array = []
-		if row_node:
-			for c in row_node.get_children():
-				if c is Control:
-					line.append(c)
-		matrix.append(line)
-	return matrix
-	
-func _update_focus_visuals() -> void:
-	var tgt: Control = _current_target()
-	if tgt == null:
-		return
-	var btn: TextureButton = _focusable_of(tgt)
-	if btn != null:
-		btn.grab_focus()
+	var idx: int = 0
 
-func _skip_invalid_in_row(step: int) -> void:
-	var m := _get_grid_matrix()
-	if _row < 0 or _row >= m.size():
-		return
-	var row: Array = m[_row] as Array
-	if row.is_empty():
-		return
-	var tries := row.size()
-	while tries > 0 and not _visible_enabled(row[_col]):
-		_col += step
-		if wrap_navigation:
-			if _col < 0: _col = row.size() - 1
-			if _col >= row.size(): _col = 0
+	if t == ET_AMMO:
+		if _inv != null and _inv.age == Inventory.Age.CHILD:
+			if arr_child.size() == 0:
+				return ""
+			idx = clamp(_inv.seed_pouch_level, 0, arr_child.size() - 1)
+			return String(arr_child[idx])
 		else:
-			_col = clamp(_col, 0, row.size() - 1)
-			break
-		tries -= 1
+			if arr_adult.size() == 0:
+				return ""
+			idx = clamp(_inv.quiver_level, 0, arr_adult.size() - 1)
+			return String(arr_adult[idx])
 
-func _nav(dx: int, dy: int) -> void:
-	if _zone == Zone.LEFT:
-		if dy != 0:
-			var count := left_category_buttons.size()
-			if count == 0: return
-			_left_index += dy
-			if wrap_navigation:
-				if _left_index < 0: _left_index = count - 1
-				if _left_index >= count: _left_index = 0
-			else:
-				_left_index = clamp(_left_index, 0, count - 1)
-		if dx > 0:
-			_zone = Zone.RIGHT
-			_focus_first_right()
-	elif _zone == Zone.RIGHT:
-		var m: Array = _get_grid_matrix()
-		if m.is_empty(): return
-		if dy != 0:
-			_row += dy
-			if wrap_navigation:
-				if _row < 0: _row = m.size() - 1
-				if _row >= m.size(): _row = 0
-			else:
-				_row = clamp(_row, 0, m.size() - 1)
-			_col = 0
-			_skip_invalid_in_row(+1)
-		if dx != 0:
-			_col += dx
-			var size: int = (m[_row] as Array).size()
-			if size == 0: return
-			if wrap_navigation:
-				if _col < 0: _col = size - 1
-				if _col >= size: _col = 0
-			else:
-				_col = clamp(_col, 0, size - 1)
-			_skip_invalid_in_row(dx)
-	_update_focus_visuals()
+	elif t == ET_BOMB_BAG:
+		if arr_single.size() == 0:
+			return ""
+		idx = clamp(_inv.bomb_bag_level, 0, arr_single.size() - 1)
+		return String(arr_single[idx])
 
-func _find_first_focusable() -> TextureButton:
-	# ZUERST linke Kategorie/Passive-Buttons
-	for i in range(left_category_buttons.size()):
-		var n: Node = get_node_or_null(left_category_buttons[i])
-		if n is TextureButton and n.visible and not (n as TextureButton).disabled and n.focus_mode != Control.FOCUS_NONE:
-			_zone = Zone.LEFT
-			_left_index = i
-			return n as TextureButton
+	elif t == ET_DIVE_SCALE:
+		if arr_single.size() == 0:
+			return ""
+		idx = clamp(_inv.dive_scale, 0, arr_single.size() - 1)
+		return String(arr_single[idx])
 
-	# Dann rechte Ausrüstungs-Buttons
-	var m: Array = _get_grid_matrix()
-	for r in range(m.size()):
-		var row: Array = m[r] as Array
-		for c in range(row.size()):
-			var btn: TextureButton = _focusable_of(row[c])
-			if btn != null and btn.visible and not btn.disabled and btn.focus_mode != Control.FOCUS_NONE:
-				_zone = Zone.RIGHT
-				_row = r
-				_col = c
-				return btn
-	return null
+	elif t == ET_STRENGTH:
+		if arr_single.size() == 0:
+			return ""
+		idx = clamp(_inv.strength, 0, arr_single.size() - 1)
+		return String(arr_single[idx])
 
+	# Fallbacks (falls Type falsch gesetzt ist)
+	if arr_single.size() > 0:
+		idx = clamp(v, 0, arr_single.size() - 1)
+		return String(arr_single[idx])
 
+	if _inv != null and _inv.age == Inventory.Age.CHILD and arr_child.size() > 0:
+		idx = clamp(v, 0, arr_child.size() - 1)
+		return String(arr_child[idx])
 
-func _force_focus_bootstrap() -> void:
-	if _focus_bootstrapped:
-		return
-	# mehrstufig, damit es wirklich greift
-	await get_tree().process_frame
-	var btn := _find_first_focusable()
-	if btn != null:
-		btn.grab_focus()
-		_focus_bootstrapped = true
+	if _inv != null and _inv.age == Inventory.Age.ADULT and arr_adult.size() > 0:
+		idx = clamp(v, 0, arr_adult.size() - 1)
+		return String(arr_adult[idx])
+
+	return ""
+
+# ------------------ kleine Debug-Steuerung (Zahlenreihe 1..9) ------------------
+
+func _bind_key(action: String, key: Key) -> void:
+	if not InputMap.has_action(action):
+		InputMap.add_action(action)
+	# doppelte Einträge vermeiden
+	for ev in InputMap.action_get_events(action):
+		if ev is InputEventKey and ev.physical_keycode == key:
+			return
+	var e := InputEventKey.new()
+	e.physical_keycode = key
+	InputMap.action_add_event(action, e)
+
+func _ensure_debug_actions() -> void:
+	_bind_key("inv_toggle_age",     KEY_1)
+	_bind_key("inv_ammo_up",        KEY_2)
+	_bind_key("inv_ammo_down",      KEY_3)
+	_bind_key("inv_bomb_up",        KEY_4)
+	_bind_key("inv_bomb_down",      KEY_5)
+	_bind_key("inv_dive_up",        KEY_6)
+	_bind_key("inv_dive_down",      KEY_7)
+	_bind_key("inv_strength_up",    KEY_8)
+	_bind_key("inv_strength_down",  KEY_9)
+
+func _input(event: InputEvent) -> void:
+	var inv := get_node_or_null("/root/Inventar") as Inventory
+	if inv == null:
 		return
 
-	# falls beim ersten Frame noch nichts da war, noch 2 Versuche
-	await get_tree().process_frame
-	btn = _find_first_focusable()
-	if btn != null:
-		btn.grab_focus()
-		_focus_bootstrapped = true
-		return
+	# Alter (Kind/Erwachsen)
+	if event.is_action_pressed("inv_toggle_age"):
+		inv.set_age(inv.age != Inventory.Age.ADULT)
+		print("AGE -> ", "ADULT" if inv.age == Inventory.Age.ADULT else "CHILD")
 
-	# letzter Versuch „auf Nummer sicher“
-	call_deferred("_deferred_grab_focus")
+	# Munition (Kind=Kerne; Erwachsen=Pfeile)
+	if event.is_action_pressed("inv_ammo_up"):
+		if inv.age == Inventory.Age.CHILD:
+			inv.set_seed_pouch_level(inv.seed_pouch_level + 1)
+			print("seed_pouch_level -> ", inv.seed_pouch_level)
+		else:
+			inv.set_quiver_level(inv.quiver_level + 1)
+			print("quiver_level -> ", inv.quiver_level)
 
+	if event.is_action_pressed("inv_ammo_down"):
+		if inv.age == Inventory.Age.CHILD:
+			inv.set_seed_pouch_level(inv.seed_pouch_level - 1)
+			print("seed_pouch_level -> ", inv.seed_pouch_level)
+		else:
+			inv.set_quiver_level(inv.quiver_level - 1)
+			print("quiver_level -> ", inv.quiver_level)
 
-func _deferred_grab_focus() -> void:
-	var btn := _find_first_focusable()
-	if btn != null:
-		btn.grab_focus()
-		_focus_bootstrapped = true
+	# Bombentasche
+	if event.is_action_pressed("inv_bomb_up"):
+		inv.set_bomb_bag_level(inv.bomb_bag_level + 1)
+		print("bomb_bag_level -> ", inv.bomb_bag_level)
 
+	if event.is_action_pressed("inv_bomb_down"):
+		inv.set_bomb_bag_level(inv.bomb_bag_level - 1)
+		print("bomb_bag_level -> ", inv.bomb_bag_level)
 
-func _set_initial_focus() -> void:
-	var btn: TextureButton = null
+	# Taucher-Schuppen
+	if event.is_action_pressed("inv_dive_up"):
+		inv.set_dive_scale(inv.dive_scale + 1)
+		print("dive_scale -> ", inv.dive_scale)
 
-	# 1) erst linke Kategorien durchsuchen
-	for i in range(left_category_buttons.size()):
-		var n: Node = get_node_or_null(left_category_buttons[i])
-		if n is TextureButton and n.visible and not (n as TextureButton).disabled:
-			btn = n as TextureButton
-			_zone = Zone.LEFT
-			_left_index = i
-			break
+	if event.is_action_pressed("inv_dive_down"):
+		inv.set_dive_scale(inv.dive_scale - 1)
+		print("dive_scale -> ", inv.dive_scale)
 
-	# 2) sonst erstes nutzbares Feld rechts suchen
-	if btn == null:
-		var m: Array = _get_grid_matrix()
-		for r in range(m.size()):
-			var row: Array = m[r] as Array
-			for c in range(row.size()):
-				var fb: TextureButton = _focusable_of(row[c])
-				if fb != null and fb.visible and not fb.disabled:
-					btn = fb
-					_zone = Zone.RIGHT
-					_row = r
-					_col = c
-					break
-			if btn != null:
-				break
+	# Stärke (Handschuhe)
+	if event.is_action_pressed("inv_strength_up"):
+		inv.set_strength_level(inv.strength + 1)
+		print("strength -> ", inv.strength)
 
-	# 3) Fokus setzen
-	if btn != null:
-		btn.grab_focus()
-
-func _focus_first_right() -> void:
-	_row = 0
-	_col = 0
-	_skip_invalid_in_row(+1)
-	_update_focus_visuals()
-
-func _select_current() -> void:
-	var tgt := _current_target()
-	if tgt == null:
-		return
-	# Linke Seite: Kategorie
-	if _zone == Zone.LEFT:
-		_on_category_selected(_left_index)
-		return
-	# Rechte Seite: Button drücken
-	var btn := _focusable_of(tgt)
-	if btn:
-		btn.emit_signal("pressed")
-
-func _on_category_selected(idx: int) -> void:
-	# Hier könntest du filtern/umschalten; vorerst nur Fokus rüber setzen:
-	_zone = Zone.RIGHT
-	_focus_first_right()
-
-func _on_visibility_changed() -> void:
-	if visible:
-		_focus_bootstrapped = false
-		_force_focus_bootstrap()   # beim Öffnen erneut Fokus setzen
-
-
-func _unhandled_input(e: InputEvent) -> void:
-	var owner := get_viewport().gui_get_focus_owner()
-	if owner == null or not is_instance_valid(owner):
-		_force_focus_bootstrap()
-	if e.is_action_pressed(close_action):
-		visible = false
-		get_viewport().set_input_as_handled()
-		return
-
-	if e.is_action_pressed(accept_action):
-		_select_current()
-		get_viewport().set_input_as_handled()
-		return
-
-	if e.is_action_pressed(up_action):
-		_nav(0, -1); get_viewport().set_input_as_handled(); return
-	if e.is_action_pressed(down_action):
-		_nav(0, +1); get_viewport().set_input_as_handled(); return
-	if e.is_action_pressed(left_action):
-		_nav(-1, 0); get_viewport().set_input_as_handled(); return
-	if e.is_action_pressed(right_action):
-		_nav(+1, 0); get_viewport().set_input_as_handled(); return
+	if event.is_action_pressed("inv_strength_down"):
+		inv.set_strength_level(inv.strength - 1)
+		print("strength -> ", inv.strength)

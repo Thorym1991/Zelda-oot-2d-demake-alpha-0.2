@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_qkdtr")
-id = "nayrus-umarmun"
+id = "nayrus_umarmun"
 display_name = "Nayrus Umarmung"
 icon = ExtResource("1_epu2q")
 variants = {}

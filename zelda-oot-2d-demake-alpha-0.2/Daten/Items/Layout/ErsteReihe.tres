@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_elqef")
-slots = Array[String](["deku_stab", "deku_nuss", "bombe", "bogen", "feuerpfeil", "dins_feuerinferno", "feenschleuder", "okarina", "krabbelminen", "haken", "eispfeil", "farores_donnersturm", "bumerang", "auge_der_wahrheit", "wundererbsen", "stahlhammer", "lichtpfeil", "nayrus-umarmun", "flasche", "flasche", "flasche", "flasche", "tausch", "maske"])
+slots = Array[String](["deku_stab", "deku_nuss", "bombe", "bogen", "feuerpfeil", "dins_feuerinferno", "feenschleuder", "okarina", "krabbelminen", "haken", "eispfeil", "farores_donnersturm", "bumerang", "auge_der_wahrheit", "wundererbsen", "stahlhammer", "lichtpfeil", "nayrus_umarmun", "flasche", "flasche", "flasche", "flasche", "tausch", "maske"])
 metadata/_custom_type_script = "uid://v06vfcnieqq"

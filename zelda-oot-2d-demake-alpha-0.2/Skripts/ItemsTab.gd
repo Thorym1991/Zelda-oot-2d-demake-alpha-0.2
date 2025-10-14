@@ -16,7 +16,31 @@ const C_DISALLOW := {
 
 
 func _ready() -> void:
-	call_deferred("_focus_first_slot")
+	# Erst einen Frame warten, bis Kindknoten existieren
+	call_deferred("_after_ready")
+
+
+func _after_ready() -> void:
+	# --- Testdaten sauber setzen (NUR wenn du das gerade zum Test brauchst) ---
+	if typeof(Inventar) != TYPE_NIL:
+		# Besitz
+		Inventar.acquire("deku_stab")
+		Inventar.acquire("bogen")
+		Inventar.acquire("bombe")
+
+		# Mengen
+		Inventar.set_amount("deku_stab", 10)
+		Inventar.set_arrows(30)         # Pfeile separat
+		Inventar.set_amount("bombe", 10)
+
+		# HUD/Grids refreshen
+		Inventar.emit_signal("changed")
+
+	# Slots fokusierbar machen und ersten Slot wählen
+	_init_slot_focus()
+	_select_slot(0)
+	# (optional) dein vorhandenes UI-Refresh
+	update_inventory()
 
 func _on_slot_focus_entered(slot: Control) -> void:
 	# index des fokussierten Slots in der Grid-Reihenfolge
@@ -33,20 +57,7 @@ func _focus_first_slot() -> void:
 
 
 
-	Inventar.owned = {
-		"deku_stab": 10,
-		"bogen": 30,
-		"bombe": 10
-	}
-	Inventar.variants = {
-		"bogen": "Feuer"
-	}
-	update_inventory()
-	
-	#call_deferred("_focus_first_slot")
-	
-	_init_slot_focus()
-	_select_slot(0)
+
 
 func _init_slot_focus() -> void:
 	for s in grid.get_children():
@@ -68,7 +79,7 @@ func _move_selection(dx: int, dy: int) -> void:
 	var cols := grid.columns
 	var rows := int(ceil(float(slots.size()) / cols))
 
-	var row := selected_index / cols
+	var row := float(selected_index) / cols
 	var col := selected_index % cols
 
 	row = clamp(row + dy, 0, rows - 1)

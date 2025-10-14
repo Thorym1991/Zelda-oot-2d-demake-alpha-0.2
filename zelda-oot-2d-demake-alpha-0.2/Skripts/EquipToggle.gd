@@ -1,133 +1,139 @@
 extends TextureButton
 class_name EquipToggle
 
-# --- Equippable ---
-enum EquipType { SWORD, SHIELD, ARMOR, BOOTS }
+# Auswahl- und Anzeige-Slots
+enum EquipType {
+	SWORD, SHIELD, ARMOR, BOOTS,
+	AMMO, BOMB_BAG, DIVE_SCALE, STRENGTH
+}
+
+
 @export var type: EquipType = EquipType.SWORD
-@export var value: int = 0
-@export var owned_id: String = ""  # Inventar-ID für equippable
+@export var value: int = 0                 # Level/Index je nach Slot
+@export var owned_id: String = ""          # optional: Besitzprüfung für echte Items
+@export var is_passive: bool = false       # reine Anzeige? (nicht gruppieren/anklickbar)
 
-# --- Passive-Mode ---
-# Wenn != [], läuft der Slot im PASSIVE-MODE (höchste Stufe wird angezeigt)
-@export var passive_ids: Array[String] = []
-@export var passive_ids_child: Array[String] = []
-@export var passive_ids_adult: Array[String] = []
+@onready var _frame: Control = get_node_or_null(^"Frame")
+@onready var _icon_node: Node = get_node_or_null(^"Icon")
 
-# Name/Pfad des Icon-Knotens unter diesem Button
-@export var icon_node_path: NodePath = ^"Icon"
-@onready var _icon: Node = get_node_or_null(icon_node_path)
-
-# Altersanforderungen
-@export var requires_child: bool = false
-@export var requires_adult: bool = false
-
-func _use_passive_mode() -> bool:
-	return passive_ids.size() > 0 or passive_ids_child.size() > 0 or passive_ids_adult.size() > 0
-
-func _update_passive_meta() -> void:
-	if _icon == null: 
-		return
-	var ids: Array[String] = []
-	if passive_ids_child.size() > 0 or passive_ids_adult.size() > 0:
-		var is_child: bool = (typeof(Inventar) != TYPE_NIL and Inventar.age == Inventar.Age.CHILD)
-		ids = passive_ids_child if is_child else passive_ids_adult   # <-- hier statt "? :"
-	else:
-		ids = passive_ids
-	_icon.set_meta("item_ids", ids)
+# --- Editor-konfigurierbare IDs für passive Anzeigen ---
+@export var passive_ids: Array[String] = []           # für BOMB_BAG, DIVE_SCALE, STRENGTH (Reihenfolge = Level-Index)
+@export var passive_ids_child: Array[String] = []     # für AMMO (Kind)  Index 0..3 = keine/klein/mittel/max
+@export var passive_ids_adult: Array[String] = []     # für AMMO (Erwachsen)
 
 func _ready() -> void:
-	set_meta("_handler_set", true)
+	# Erzwinge Passiv-Verhalten für stufige Anzeige-Typen
+	if _is_forced_passive_type():
+		is_passive = true
 
-	# Alters-/Sichtbarkeits-Gating einmal initial werten
-	if typeof(Inventar) != TYPE_NIL:
-		Inventar.changed.connect(_refresh)
-		Inventar.equipment_changed.connect(_refresh)
+	toggle_mode = not is_passive
+	focus_mode = Control.FOCUS_ALL if not is_passive else Control.FOCUS_NONE
 
-	if _use_passive_mode():
-		# PASSIVE MODE
-		toggle_mode = false
-		focus_mode = Control.FOCUS_ALL   # ← Fokus erlauben
-		disabled = false                 # ← NICHT disabled, sonst kein Fokus
-		_update_passive_meta()
-		_refresh()
-		return
+	if _frame:
+		_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if _icon_node is Control:
+		(_icon_node as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	# EQUIPPABLE MODE
-	# Falls item_id im Node fehlt, aus owned_id ergänzen (für Icon-Loader)
-	if owned_id != "" and (not has_meta("item_id") or String(get_meta("item_id")) == ""):
-		set_meta("item_id", owned_id)
+	if has_node("/root/Inventar"):
+		var inv: Inventory = get_node("/root/Inventar") as Inventory
+		if not inv.changed.is_connected(_refresh):
+			inv.changed.connect(_refresh)
+		if not inv.equipment_changed.is_connected(_refresh):
+			inv.equipment_changed.connect(_refresh)
 
-	toggle_mode = true
-	focus_mode = Control.FOCUS_ALL
-
-	# WICHTIG: Signal nur EINMAL verbinden – auf self (TextureButton)!
-	if not pressed.is_connected(_on_accept):
-		pressed.connect(_on_accept)
+	if not pressed.is_connected(_on_pressed):
+		pressed.connect(_on_pressed)
 
 	_refresh()
+
+func _is_forced_passive_type() -> bool:
+	return type == EquipType.AMMO \
+		or type == EquipType.BOMB_BAG \
+		or type == EquipType.DIVE_SCALE \
+		or type == EquipType.STRENGTH
 
 func _refresh() -> void:
-	if typeof(Inventar) != TYPE_NIL:
-		if requires_child and Inventar.age != Inventar.Age.CHILD:
-			visible = true
+	var inv: Inventory = get_node_or_null("/root/Inventar") as Inventory
+	if inv == null:
+		return
+
+	# Standard: Frame aus
+	if _frame:
+		_frame.visible = false
+
+	# Passive Buttons sind deaktiviert (nur Anzeige)
+	disabled = is_passive
+
+	# Besitz-Check nur für echte ausrüstbare Items
+	if owned_id.length() > 0 and not _is_forced_passive_type():
+		if not inv.has(owned_id):
 			disabled = true
-			modulate.a = 0.35
-		return
-	if requires_adult and Inventar.age != Inventar.Age.ADULT:
-		visible = true
-		disabled = true
-		modulate.a = 0.35
-		return
-
-# freigegeben
-	visible = true
-	disabled = false
-	modulate.a = 1.0
-
-	# --- EQUIPPABLE: Besitz-/Pressed-Status aktualisieren ---
-	# Besitzcheck
-	var has_item: bool = true
-	if owned_id != "":
-		has_item = Inventar.has(owned_id)
-	disabled = not has_item
-
-	# pressed-State je nach Typ
-	if typeof(Inventar) != TYPE_NIL:
-		match type:
-			EquipType.SWORD:
-				button_pressed = (Inventar.sword == value)
-			EquipType.SHIELD:
-				button_pressed = (Inventar.shield == value)
-			EquipType.ARMOR:
-				button_pressed = (Inventar.armor == value)
-			EquipType.BOOTS:
-				button_pressed = (Inventar.boots == value)
-
-func _gui_input(e: InputEvent) -> void:
-	if _use_passive_mode():
-		# Fokus ja, Aktion nein (hier könntest du später Tooltip/Info öffnen)
-		# if e.is_action_pressed("ui_accept"): show_info(...)
-		return
-	if e.is_action_pressed("ui_accept") and not disabled:
-		_on_accept()
-
-func _on_accept() -> void:
-	if _use_passive_mode() or disabled:
-		return
 
 	match type:
+		# --- aktive, wählbare Slots ---
 		EquipType.SWORD:
-			if owned_id == "" or Inventar.has(owned_id):
-				Inventar.equip_sword(value)
-				if owned_id != "":
-					Inventar.set_equip_b(owned_id) # optional: auf Quickslot B
-		EquipType.SHIELD:
-			if owned_id == "" or Inventar.has(owned_id):
-				Inventar.equip_shield(value)
-		EquipType.ARMOR:
-			Inventar.equip_armor(value)
-		EquipType.BOOTS:
-			if owned_id == "" or Inventar.has(owned_id):
-				Inventar.equip_boots(value)
+			if not is_passive:
+				var cur: int = int(inv.sword)
+				button_pressed = (cur == value)
+				if _frame: _frame.visible = button_pressed
 
-	_refresh()
+		EquipType.SHIELD:
+			if not is_passive:
+				var cur: int = int(inv.shield)
+				button_pressed = (cur == value)
+				if _frame: _frame.visible = button_pressed
+
+		EquipType.ARMOR:
+			if not is_passive:
+				var cur: int = int(inv.armor)
+				button_pressed = (cur == value)
+				if _frame: _frame.visible = button_pressed
+
+		EquipType.BOOTS:
+			if not is_passive:
+				var cur: int = int(inv.boots)
+				button_pressed = (cur == value)
+				if _frame: _frame.visible = button_pressed
+
+		# --- passive, stufige Slots (nur Anzeige) ---
+		EquipType.AMMO:
+			# Kind → Kerne-Tasche; Erwachsen → Köcher (0..3 inkl. „keine“)
+			var is_child: bool = (int(inv.age) == int(Inventory.Age.CHILD))
+			var seed_lvl: int = int(inv.seed_pouch_level)  # 0..3
+			var quiver_lvl: int = int(inv.quiver_level)    # 0..3
+
+			var lvl: int = 0
+			if is_child:
+				lvl = seed_lvl
+			else:
+				lvl = quiver_lvl
+
+			button_pressed = (lvl == value)
+			if _frame: _frame.visible = (lvl == value)
+
+		EquipType.BOMB_BAG:
+			var bb: int = int(inv.bomb_bag_level)  # 0..3
+			button_pressed = (bb == value)
+			if _frame: _frame.visible = (bb == value)
+
+		EquipType.DIVE_SCALE:
+			var ds: int = int(inv.dive_scale)  # 0..2 (0=keine,1=silber,2=gold)
+			button_pressed = (ds == value)
+			if _frame: _frame.visible = (ds == value)
+
+		EquipType.STRENGTH:
+			var st: int = int(inv.strength)  # 0=keine,1=Armband,2=Kraft,3=Titan
+			button_pressed = (st == value)
+			if _frame: _frame.visible = (st == value)
+
+func _on_pressed() -> void:
+	if is_passive or disabled:
+		return
+	var inv: Inventory = get_node("/root/Inventar") as Inventory
+	match type:
+		EquipType.SWORD:  inv.equip_sword(value)
+		EquipType.SHIELD: inv.equip_shield(value)
+		EquipType.ARMOR:  inv.equip_armor(value)
+		EquipType.BOOTS:  inv.equip_boots(value)
+		_:
+			pass  # passive Typen: keine Aktion

@@ -4,13 +4,12 @@ extends CanvasLayer
 #  - ui_cancel (close)
 #  - menu_prev_tab (previous tab)
 #  - menu_next_tab (next tab)
-
 @onready var root: Control = $Root
-@onready var panels = [
-	$Root/Item,
-	$Root/Ausrüstung,
-	$"Root/Quest-Status",
-	$Root/Karte
+@onready var panels: Array[Control] = [
+	$Root/Item as Control,
+	$Root/Ausrüstung as Control,
+	$"Root/Quest-Status" as Control,
+	$Root/Karte as Control
 ]
 
 var sfx_switch: AudioStreamPlayer = null
@@ -119,36 +118,37 @@ func _use_item(id: String) -> void:
 			if Inventar.arrows <= 0:
 				return
 			# TODO: Pfeil instanzieren & schießen
-			Inventar.arrows -= 1
+			Inventar.set_arrows(Inventar.arrows - 1)
 			Inventar.emit_signal("changed")  # HUD updaten
 
 		"bombe":
-			var n := Inventar.get_amount("bombe")
+			var n: int = Inventar.get_amount("bombe")
 			if n <= 0:
 				return
 			# TODO: Bombe instanzieren & werfen
-			Inventar.owned["bombe"] = n - 1
+			Inventar.set_amount("bombe", n - 1)
 			Inventar.emit_signal("changed")
 
 		"deku_nuss":
-			var m := Inventar.get_amount("deku_nuss")
+			var m: int = Inventar.get_amount("deku_nuss")
 			if m <= 0:
 				return
 			# TODO: Effekt auslösen
-			Inventar.owned["deku_nuss"] = m - 1
+			Inventar.set_amount("deku_nuss", m - 1)
 			Inventar.emit_signal("changed")
 
 		_:
 			print("Benutze Item:", id)
 
-func _first_focusable_in(root: Node) -> TextureButton:
-	if root is TextureButton:
-		var b := root as TextureButton
+
+func _first_focusable_in(local_root: Node) -> TextureButton:
+	if local_root is TextureButton:
+		var b: TextureButton = local_root as TextureButton
 		if b.visible and b.focus_mode != Control.FOCUS_NONE and not b.disabled:
 			return b
-	if root is Control and (root as Control).visible:
-		for c in root.get_children():
-			var found := _first_focusable_in(c)
+	if local_root is Control and (local_root as Control).visible:
+		for c in (local_root as Control).get_children():
+			var found: TextureButton = _first_focusable_in(c as Node)
 			if found != null:
 				return found
 	return null
@@ -161,15 +161,18 @@ func _call_force_focus_in(panel: Node) -> bool:
 		return true
 
 	# 2) Tiefensuche: erstes Kind mit der Methode
-	var queue: Array = [panel]
+	var queue: Array[Node] = []
+	queue.append(panel)
+
 	while not queue.is_empty():
-		var n: Node = queue.pop_front()
+		var n: Node = queue.pop_front() as Node
 		if n != null and n.has_method("_force_focus_bootstrap"):
 			n._force_focus_bootstrap()
 			return true
 		for c in n.get_children():
-			queue.append(c)
+			queue.append(c as Node)
 	return false
+
 
 
 func _bootstrap_focus_for(panel: Control) -> void:

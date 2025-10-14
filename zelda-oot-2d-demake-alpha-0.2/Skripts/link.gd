@@ -226,27 +226,25 @@ func _use_item(id: String) -> void:
 		"bogen":
 			if Inventar.arrows <= 0:
 				return
-			# TODO: Pfeil instanzieren & schießen
+			# Pfeil verbrauchen (hier nur Counter runter)
 			Inventar.arrows -= 1
-			Inventar.emit_signal("changed") # HUD-Update
+			Inventar.emit_signal("changed")  # HUD-Update
 
 		"bombe":
-			var n := Inventar.get_amount("bombe")
+			var n: int = Inventar.get_amount("bombe")
 			if n <= 0:
 				return
-			# TODO: Bombe instanzieren & werfen
-			Inventar.owned["bombe"] = n - 1
+			Inventar.set_amount("bombe", n - 1)
 			Inventar.emit_signal("changed")
 
 		"deku_nuss":
-			# TODO: Deku-Nuss werfen / Flash
-			var m := Inventar.get_amount("deku_nuss")
-			if m > 0:
-				Inventar.owned["deku_nuss"] = m - 1
-				Inventar.emit_signal("changed")
+			var m: int = Inventar.get_amount("deku_nuss")
+			if m <= 0:
+				return
+			Inventar.set_amount("deku_nuss", m - 1)
+			Inventar.emit_signal("changed")
 
 		_:
-			# Platzhalter für weitere Items
 			print("Benutze Item:", id)
 
 #endregion
