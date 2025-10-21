@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://buip7myigsqpj"]
+[gd_scene load_steps=40 format=3 uid="uid://buip7myigsqpj"]
 
 [ext_resource type="PackedScene" uid="uid://c5dm8yxfnj8pp" path="res://Scenen/herz.tscn" id="1_37p78"]
 [ext_resource type="Script" uid="uid://bek035hli2epp" path="res://Scenen/hud.gd" id="1_t8nt0"]
@@ -32,7 +32,10 @@
 [ext_resource type="Resource" uid="uid://d2akdj3wwi6ci" path="res://Daten/Items/Flasche.tres" id="21_5twne"]
 [ext_resource type="Resource" uid="uid://0h081x76wdet" path="res://Daten/Items/Tausch.tres" id="22_pl6at"]
 [ext_resource type="Resource" uid="uid://yx88t16ir1uc" path="res://Daten/Items/Masken.tres" id="23_o2mfy"]
+[ext_resource type="Resource" uid="uid://3nxrkjlwu0yp" path="res://Daten/gear_equippable_db.tres" id="25_nbv7o"]
+[ext_resource type="Resource" uid="uid://d2daxh465lcei" path="res://Daten/passive_gear_db.tres" id="26_vmvvm"]
 [ext_resource type="LabelSettings" uid="uid://b3jj5q5nd6pjt" path="res://Scenen/hud.tres" id="29_n1svs"]
+[ext_resource type="Texture2D" uid="uid://d6i8aq7usuty" path="res://Daten/Ausrüstung/Ausrüstung Icon/Kokiri_schwert.png" id="33_vmvvm"]
 
 [sub_resource type="Resource" id="Resource_55ekv"]
 script = ExtResource("3_epuyx")
@@ -52,6 +55,8 @@ font_size = 9
 process_mode = 3
 script = ExtResource("1_t8nt0")
 db = SubResource("Resource_55ekv")
+db_gear_equippable = ExtResource("25_nbv7o")
+db_gear_passive = ExtResource("26_vmvvm")
 
 [node name="Root" type="Control" parent="."]
 layout_mode = 3
@@ -206,19 +211,21 @@ autowrap_mode = 2
 uppercase = true
 
 [node name="B Knopf" type="TextureRect" parent="Root/ActionGroup"]
-z_index = 1
 layout_mode = 2
 texture = ExtResource("5_1xsix")
 expand_mode = 3
 
 [node name="B Icon" type="TextureRect" parent="Root/ActionGroup/B Knopf"]
 unique_name_in_owner = true
-z_index = 2
+z_index = 1
+z_as_relative = false
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-offset_left = 19.5
-offset_top = 18.0
-offset_right = 19.5
-offset_bottom = 18.0
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource("33_vmvvm")
 
 [node name="CGroup" type="GridContainer" parent="."]
 anchors_preset = 1

@@ -21,6 +21,7 @@ Signalhub="*res://Globels/Signalhub.gd"
 ItemDb="*res://Skripts/item_db.gd"
 ui_bus="*res://Skripts/ui_bus.gd"
 Inventar="*res://Globels/Inventar.gd"
+EquipMgr="*res://Globels/EquipmentManager.gd"
 
 [file_customization]
 

@@ -1,9 +1,9 @@
-# res://Skripts/Paperdoll.gd
 extends Sprite2D
 class_name Paperdoll
 
 @export var inventory_path: NodePath = ^"/root/Inventar"
-
+@export var equipmgr_path: NodePath = ^"/root/EquipMgr"
+var _mgr: EquipmentManager
 # Map: key -> {path, h, v, frame}
 @export var sheets: Dictionary = {
 	# --- Kind ---
@@ -35,6 +35,9 @@ func _ready() -> void:
 			_inv.changed.connect(_on_inventory_changed)
 		if not _inv.equipment_changed.is_connected(_on_inventory_changed):
 			_inv.equipment_changed.connect(_on_inventory_changed)
+			_mgr = get_node_or_null(equipmgr_path) as EquipmentManager
+	if _mgr:
+		_mgr.changed.connect(_on_inventory_changed)
 	_on_inventory_changed()
 
 func _apply_override_flag(value: bool) -> void:
@@ -46,7 +49,7 @@ func _on_inventory_changed() -> void:
 	if _inv == null:
 		return
 	# Inventory liefert den Key (das hast du bereits implementiert)
-	var key := _inv.get_paperdoll_key()
+	var key := _mgr.get_paperdoll_key() if _mgr else _inv.get_paperdoll_key()
 	set_key(key)
 
 func set_key(key: String) -> void:

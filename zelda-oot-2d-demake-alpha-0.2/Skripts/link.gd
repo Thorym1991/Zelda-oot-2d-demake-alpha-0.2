@@ -49,6 +49,11 @@ func _ready() -> void:
 #region _physics_process
 
 func _physics_process(delta: float) -> void:
+	# Wenn das Pause-/Ausrüstungsmenü offen ist, blockiere Player-Logik
+	if ui_bus.menu_open:
+		velocity = Vector2.ZERO
+		animation_tree.get("parameters/playback").travel("Idle")
+		return
 	# 1) Attack-State
 	if is_attacking:
 		attack_timer -= delta

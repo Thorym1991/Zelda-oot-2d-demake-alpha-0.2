@@ -1,9 +1,13 @@
-# res://Skripts/InventoryLite.gd
 extends Node
 class_name Inventory
 
 signal changed
 signal equipment_changed
+signal owned_changed(id: String, has_item: bool)
+signal equipped_slot_changed(slot: String, value: int) # "sword","shield","armor","boots"
+signal meta_changed()                                  # age/strength/variants geändert
+signal ammo_changed(id: String, amount: int)           # "arrows" oder item-id
+
 
 enum Age { CHILD, ADULT }
 enum Sword { NONE, KOKIRI, MASTER, BIGGORON }
@@ -114,85 +118,68 @@ var arrows: int = 0
 func get_amount(id: String) -> int:
 	return int(amounts.get(id, 0))
 
-func set_amount(id: String, n: int) -> void:
-	amounts[id] = max(0, n)
-	equipment_changed.emit()
-	emit_signal("changed")
-
-func set_arrows(n: int) -> void:
-	arrows = max(0, n)
-	equipment_changed.emit()
-	emit_signal("changed")
-
 # ------- API: Besitz/Equip --------
 func has(id: String) -> bool:
 	return bool(owned.get(id, false))
 
 func acquire(id: String) -> void:
-	if not has(id):
-		owned[id] = true
-		changed.emit()
-		# Auto-Mapping für Upgrades (optional; passe IDs an deine DB an)
-		match id:
-			# Kerne-Tasche (Kind)
-			"seed_pouch_small":  set_seed_pouch_level(PouchLevel.SMALL)
-			"seed_pouch_medium": set_seed_pouch_level(PouchLevel.MEDIUM)
-			"seed_pouch_max":    set_seed_pouch_level(PouchLevel.MAX)
+	if has(id):
+		return
 
-			# Köcher (Erwachsen)
-			"quiver_small":  set_quiver_level(PouchLevel.SMALL)
-			"quiver_medium": set_quiver_level(PouchLevel.MEDIUM)
-			"quiver_max":    set_quiver_level(PouchLevel.MAX)
+	owned[id] = true
 
-			# Bombentasche
-			"bomb_bag_small":  set_bomb_bag_level(PouchLevel.SMALL)
-			"bomb_bag_medium": set_bomb_bag_level(PouchLevel.MEDIUM)
-			"bomb_bag_max":    set_bomb_bag_level(PouchLevel.MAX)
+	# -> NEU: gezieltes Besitz-Signal
+	owned_changed.emit(id, true)
 
-			# Taucher-Schuppen
-			"silver_scale": set_dive_scale(DiveScale.SILVER)
-			"gold_scale":   set_dive_scale(DiveScale.GOLD)
+	# -> Altes Gesamt-Refresh-Signal beibehalten (Kompatibilität)
+	changed.emit()
 
-			# Stärke via Handschuhe
-			"goron_bracelet":
-				if strength < GloveLevel.CHILD_BRACELET: set_strength_level(GloveLevel.CHILD_BRACELET)
-			"power_gauntlets":
-				if strength < GloveLevel.POWER: set_strength_level(GloveLevel.POWER)
-			"titan_gauntlets":
-				set_strength_level(GloveLevel.TITAN)
-			_:
-				pass
+	# Auto-Mapping für Upgrades (dein bestehender Code)
+	match id:
+		# Kerne-Tasche (Kind)
+		"seed_pouch_small":  set_seed_pouch_level(PouchLevel.SMALL)
+		"seed_pouch_medium": set_seed_pouch_level(PouchLevel.MEDIUM)
+		"seed_pouch_max":    set_seed_pouch_level(PouchLevel.MAX)
 
-func equip_sword(v: int) -> void:
-	if sword == v: return
-	sword = v; equipment_changed.emit(); changed.emit()
+		# Köcher (Erwachsen)
+		"quiver_small":  set_quiver_level(PouchLevel.SMALL)
+		"quiver_medium": set_quiver_level(PouchLevel.MEDIUM)
+		"quiver_max":    set_quiver_level(PouchLevel.MAX)
 
-func equip_shield(v: int) -> void:
-	if shield == v: return
-	shield = v; equipment_changed.emit(); changed.emit()
+		# Bombentasche
+		"bomb_bag_small":  set_bomb_bag_level(PouchLevel.SMALL)
+		"bomb_bag_medium": set_bomb_bag_level(PouchLevel.MEDIUM)
+		"bomb_bag_max":    set_bomb_bag_level(PouchLevel.MAX)
 
-func equip_armor(v: int) -> void:
-	if armor == v: return
-	armor = v; equipment_changed.emit(); changed.emit()
+		# Taucher-Schuppen
+		"silver_scale": set_dive_scale(DiveScale.SILVER)
+		"gold_scale":   set_dive_scale(DiveScale.GOLD)
 
-func equip_boots(v: int) -> void:
-	if boots == v: return
-	boots = v; equipment_changed.emit(); changed.emit()
+		# Stärke via Handschuhe
+		"goron_bracelet":
+			if strength < int(GloveLevel.CHILD_BRACELET):
+				set_strength_level(int(GloveLevel.CHILD_BRACELET))
+		"power_gauntlets":
+			if strength < int(GloveLevel.POWER):
+				set_strength_level(int(GloveLevel.POWER))
+		"titan_gauntlets":
+			set_strength_level(int(GloveLevel.TITAN))
 
-func set_age(is_adult: bool) -> void:
-	age = Age.ADULT if is_adult else Age.CHILD
-	equipment_changed.emit(); changed.emit()
+
+
+
 
 func get_paperdoll_key() -> String:
-	if age == Age.CHILD:
-		return "kid_goron" if has("goron_bracelet") or gloves >= GloveLevel.CHILD_BRACELET else "kid_all"
+	if age == int(Age.CHILD):
+		return "kid_goron" if has("goron_bracelet") or gloves >= int(GloveLevel.CHILD_BRACELET) else "kid_all"
 
 	var col: String = String(ARMOR_NAMES[armor])
-	if gloves >= GloveLevel.TITAN:
+	if gloves >= int(GloveLevel.TITAN):
 		return "adult_%s_titan" % col
-	if gloves >= GloveLevel.POWER:
+	if gloves >= int(GloveLevel.POWER):
 		return "adult_%s_power" % col
 	return "adult_%s" % col
+
 
 # ------- Schnellzugriff-Slots (A/B/C) --------
 var equip_a: String = ""
@@ -206,6 +193,20 @@ func set_equip_a(id: String) -> void:
 func set_equip_b(id: String) -> void:
 	equip_b = id
 	emit_signal("changed")
+
+var b_override_id: String = ""  # "" = kein Override
+
+func set_b_override(id: String) -> void:
+	b_override_id = id
+	equipment_changed.emit()
+	changed.emit()
+
+func clear_b_override() -> void:
+	if b_override_id == "": return
+	b_override_id = ""
+	equipment_changed.emit()
+	changed.emit()
+
 
 func set_equip_c(dir: String, id: String) -> void:
 	if not equip_c.has(dir): return
@@ -278,4 +279,49 @@ func set_strength_level(level: int) -> void:
 	level = clamp(level, 0, 3)
 	if strength == level: return
 	strength = level
+	equipment_changed.emit(); changed.emit()
+
+func equip_sword(v: int) -> void:
+	if sword == v: return
+	sword = v
+	equipped_slot_changed.emit("sword", sword)
+	equipment_changed.emit(); changed.emit()
+
+func equip_shield(v: int) -> void:
+	if shield == v: return
+	shield = v
+	equipped_slot_changed.emit("shield", shield)
+	equipment_changed.emit(); changed.emit()
+
+func equip_armor(v: int) -> void:
+	if armor == v: return
+	armor = v
+	equipped_slot_changed.emit("armor", armor)
+	equipment_changed.emit(); changed.emit()
+
+func equip_boots(v: int) -> void:
+	if boots == v: return
+	boots = v
+	equipped_slot_changed.emit("boots", boots)
+	equipment_changed.emit(); changed.emit()
+
+
+func set_age(is_adult: bool) -> void:
+	var new_age: int = int(Age.ADULT) if is_adult else int(Age.CHILD)
+	if age == new_age: return
+	age = new_age
+	meta_changed.emit()
+	equipment_changed.emit(); changed.emit()
+
+
+
+func set_amount(id: String, n: int) -> void:
+	n = max(0, n)
+	amounts[id] = n
+	ammo_changed.emit(id, n)
+	equipment_changed.emit(); changed.emit()
+
+func set_arrows(n: int) -> void:
+	arrows = max(0, n)
+	ammo_changed.emit("arrows", arrows)
 	equipment_changed.emit(); changed.emit()

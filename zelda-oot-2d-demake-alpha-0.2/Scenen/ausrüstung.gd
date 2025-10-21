@@ -1,4 +1,3 @@
-# res://Skripts/AusruestungLean.gd
 extends Control
 
 @export var rows: Array[NodePath] = []            # deine 4 Reihen
@@ -48,6 +47,10 @@ func _ready() -> void:
 			_inv.equipment_changed.connect(_on_inv)
 	_on_inv()
 
+	# NEU:
+	set_process_unhandled_input(true)
+	_focus_first_toggle()
+
 func _on_inv() -> void:
 	_refresh_icons()
 	_wire_groups()
@@ -88,9 +91,7 @@ func _populate(n: Node) -> void:
 		var t: int = (int(t_prop) if t_prop != null else -1)
 		var v: int = (int(v_prop) if v_prop != null else -1)
 
-		# (t,v werden hier nicht mehr geloggt, nur falls du sie brauchst)
-
-		# Passive Buttons: ID dynamisch ermitteln
+	# Passive Buttons: ID dynamisch ermitteln
 		if id == "" and is_passive_btn:
 			id = _resolve_passive_item_id(btn)
 			if id != "":
@@ -438,3 +439,43 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inv_strength_down"):
 		inv.set_strength_level(inv.strength - 1)
 		print("strength -> ", inv.strength)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not visible:
+		return
+
+	# Passe die Actions an deine InputMap an (z. B. "Aktion" oder zusätzlich "ui_accept")
+	if event.is_action_pressed("Aktion"):
+		print("[EquipTab] Aktion erkannt!")
+
+		var f := get_viewport().gui_get_focus_owner()
+		print("[EquipTab] Fokus:", f)
+
+		if f is EquipToggle:
+			print("[EquipTab] Fokus ist EquipToggle:", f.type, "Value:", f.value, "Passiv:", f.is_passive, "Disabled:", f.disabled)
+
+			if not f.is_passive and not f.disabled:
+				print("[EquipTab] -> Sende pressed-Signal an:", f)
+				f.emit_signal("pressed")  # triggert _on_pressed() im EquipToggle
+				get_viewport().set_input_as_handled()
+			else:
+				print("[EquipTab] Button ist passiv oder deaktiviert – kein Signal gesendet.")
+		else:
+			print("[EquipTab] Fokus ist kein EquipToggle.")
+
+ 
+func _focus_first_toggle() -> void:
+	# Falls du deine EquipToggle-Buttons in die Gruppe "equip_toggle" gepackt hast:
+	for n in get_tree().get_nodes_in_group("equip_toggle"):
+		if n is EquipToggle and not n.is_passive and not n.disabled:
+			(n as Control).grab_focus()
+			return
+	# Fallback: suche rekursiv im Baum
+	var stack := [self]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		for child in node.get_children():
+			if child is EquipToggle and not child.is_passive and not child.disabled:
+				(child as Control).grab_focus()
+				return
+			stack.push_back(child)
