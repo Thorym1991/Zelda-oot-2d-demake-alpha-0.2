@@ -8,12 +8,11 @@ signal equipped_slot_changed(slot: String, value: int) # "sword","shield","armor
 signal meta_changed()                                  # age/strength/variants geändert
 signal ammo_changed(id: String, amount: int)           # "arrows" oder item-id
 
-
 enum Age { CHILD, ADULT }
 enum Sword { NONE, KOKIRI, MASTER, BIGGORON }
 enum Shield { NONE, DEKU, HYLIA, MIRROR }
 enum Armor { GREEN, RED, BLUE }
-enum Boots { LEATHER, IRON, HOVER }
+enum Boots { NONE,LEATHER, IRON, HOVER }
 enum GloveLevel { NONE, CHILD_BRACELET, POWER, TITAN }
 
 # Passive/Upgrades (mit „keine“-Stufe)
@@ -38,7 +37,6 @@ var bomb_bag_level   = PouchLevel.NONE
 var dive_scale       = DiveScale.NONE
 var strength         = GloveLevel.NONE
 
-
 # Besitztabelle (nur das, was dein Menü braucht)
 var owned: Dictionary = {
 	# --- Waffen / Schilde / Rüstungen / Stiefel ---
@@ -59,9 +57,9 @@ var owned: Dictionary = {
 	"gleit_stiefel": true,
 
 	# --- Handschuhe ---
-	"goron_bracelet": true,
-	"power_gauntlets": true,
-	"titan_gauntlets": true,
+	"goron_bracelet": false,
+	"power_gauntlets": false,
+	"titan_gauntlets": false,
 
 	# --- Magie & Spezialfähigkeiten ---
 	"dins_feuerinferno": true,
@@ -165,21 +163,16 @@ func acquire(id: String) -> void:
 		"titan_gauntlets":
 			set_strength_level(int(GloveLevel.TITAN))
 
-
-
-
-
 func get_paperdoll_key() -> String:
 	if age == int(Age.CHILD):
-		return "kid_goron" if has("goron_bracelet") or gloves >= int(GloveLevel.CHILD_BRACELET) else "kid_all"
+		return "kid_goron" if has("goron_bracelet") or strength >= int(GloveLevel.CHILD_BRACELET) else "kid_all"
 
 	var col: String = String(ARMOR_NAMES[armor])
-	if gloves >= int(GloveLevel.TITAN):
+	if strength >= int(GloveLevel.TITAN):
 		return "adult_%s_titan" % col
-	if gloves >= int(GloveLevel.POWER):
+	if strength >= int(GloveLevel.POWER):
 		return "adult_%s_power" % col
 	return "adult_%s" % col
-
 
 # ------- Schnellzugriff-Slots (A/B/C) --------
 var equip_a: String = ""
@@ -206,7 +199,6 @@ func clear_b_override() -> void:
 	b_override_id = ""
 	equipment_changed.emit()
 	changed.emit()
-
 
 func set_equip_c(dir: String, id: String) -> void:
 	if not equip_c.has(dir): return
@@ -252,34 +244,41 @@ func get_bomb_capacity() -> int:
 
 # Set-Helper fürs UI/Debug
 func set_seed_pouch_level(level: int) -> void:
-	level = clamp(level, 0, 3)
-	if seed_pouch_level == level: return
-	seed_pouch_level = level
+	level = clampi(level, 0, 3)
+	var lv: Inventory.PouchLevel = level as Inventory.PouchLevel
+	if seed_pouch_level == lv: return
+	seed_pouch_level = lv
 	equipment_changed.emit(); changed.emit()
 
 func set_quiver_level(level: int) -> void:
-	level = clamp(level, 0, 3)
-	if quiver_level == level: return
-	quiver_level = level
+	level = clampi(level, 0, 3)
+	var lv: Inventory.PouchLevel = level as Inventory.PouchLevel
+	if quiver_level == lv: return
+	quiver_level = lv
 	equipment_changed.emit(); changed.emit()
 
 func set_bomb_bag_level(level: int) -> void:
-	level = clamp(level, 0, 3)
-	if bomb_bag_level == level: return
-	bomb_bag_level = level
+	level = clampi(level, 0, 3)
+	var lv: Inventory.PouchLevel = level as Inventory.PouchLevel
+	if bomb_bag_level == lv: return
+	bomb_bag_level = lv
 	equipment_changed.emit(); changed.emit()
 
 func set_dive_scale(level: int) -> void:
-	level = clamp(level, 0, 2)
-	if dive_scale == level: return
-	dive_scale = level
+	level = clampi(level, 0, 2)
+	var lv: Inventory.DiveScale = level as Inventory.DiveScale
+	if dive_scale == lv: return
+	dive_scale = lv
 	equipment_changed.emit(); changed.emit()
 
 func set_strength_level(level: int) -> void:
-	level = clamp(level, 0, 3)
-	if strength == level: return
-	strength = level
+	level = clampi(level, 0, 3)
+	var lv: Inventory.GloveLevel = level as Inventory.GloveLevel
+	if strength == lv: return
+	strength = lv
+	meta_changed.emit()                    # ⬅️ neu
 	equipment_changed.emit(); changed.emit()
+
 
 func equip_sword(v: int) -> void:
 	if sword == v: return
@@ -305,15 +304,12 @@ func equip_boots(v: int) -> void:
 	equipped_slot_changed.emit("boots", boots)
 	equipment_changed.emit(); changed.emit()
 
-
 func set_age(is_adult: bool) -> void:
 	var new_age: int = int(Age.ADULT) if is_adult else int(Age.CHILD)
 	if age == new_age: return
 	age = new_age
 	meta_changed.emit()
 	equipment_changed.emit(); changed.emit()
-
-
 
 func set_amount(id: String, n: int) -> void:
 	n = max(0, n)

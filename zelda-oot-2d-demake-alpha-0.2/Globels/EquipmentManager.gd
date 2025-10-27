@@ -17,23 +17,16 @@ func _ready() -> void:
 	_inv = get_node_or_null(^"/root/Inventar") as Inventory
 	if _inv and not _inv.changed.is_connected(_on_inv_changed):
 		_inv.changed.connect(_on_inv_changed)
-
-	# equipped_slot_changed nur EINMAL spiegeln
-	if _inv and _inv.has_signal("equipped_slot_changed"):
-		if not _inv.equipped_slot_changed.is_connected(_on_inv_equipped_forward):
-			_inv.equipped_slot_changed.connect(_on_inv_equipped_forward)
-
 	call_deferred("_link_once")
 
-func _on_inv_equipped_forward(slot, v):
-	print("[EquipMgr] equipped_slot_changed:", slot, v)
-	equipped_slot_changed.emit(slot, v)
-	changed.emit()
 
 func _link_once() -> void:
 	_try_link()
+	if _db == null:
+		push_warning("EquipMgr: ItemDB nicht gefunden unter %s" % str(itemdb_path))
 	if _inv == null:
 		push_warning("EquipMgr: Inventar noch nicht bereit – versuche erneut beim ersten Zugriff.")
+
 
 func _try_link() -> void:
 	# Versuche, Inventar/DB zu finden
@@ -53,6 +46,12 @@ func _try_link() -> void:
 			_inv.ammo_changed.connect(_on_ammo_changed)
 		if _inv.has_signal("owned_changed") and not _inv.owned_changed.is_connected(_on_owned_changed):
 			_inv.owned_changed.connect(_on_owned_changed)
+		if _inv:
+		# Nach dem Verbinden einen initialen Refresh stoßen
+			print_debug("[EquipMgr] initial refresh after link")
+			changed.emit()
+		# optional gezielt spiegeln, falls dein UI darauf hört:
+		# meta_changed.emit()
 
 func _ensure_inv() -> bool:
 	if _inv == null:
@@ -68,6 +67,9 @@ func _on_equipped_slot_changed(slot: String, v: int) -> void:
 	changed.emit()
 
 func _on_meta_changed() -> void:
+	print_debug("[EquipMgr] meta_changed  ammo_lv=%d bomb=%d dive=%d str=%d" % [
+		get_ammo_level(), get_bomb_bag_level(), get_dive_scale_level(), get_strength_level()
+	])
 	meta_changed.emit()
 	changed.emit()
 
@@ -172,3 +174,10 @@ func get_paperdoll_key() -> String:
 
 func icon_for(id: String, variant: String = "default") -> Texture2D:
 	return _db.get_icon(id, variant) if (_db and id != "") else null
+
+# Kompatibilitäts-Aliase (falls Toggles noch alte Namen verwenden)
+func is_owned(id: String) -> bool:
+	return has(id)
+
+func amount_for(id: String) -> int:
+	return get_amount(id)

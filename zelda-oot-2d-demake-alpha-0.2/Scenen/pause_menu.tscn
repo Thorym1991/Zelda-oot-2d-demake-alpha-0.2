@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwlc72ivf7qkc"]
+[gd_scene load_steps=28 format=3 uid="uid://dwlc72ivf7qkc"]
 
 [ext_resource type="Script" uid="uid://b62qqw0la3dq1" path="res://Skripts/pauseMenu.gd" id="1_2q6ei"]
 [ext_resource type="Script" uid="uid://cv3pvvq83shi7" path="res://Skripts/ItemsTab.gd" id="2_dpy1j"]
@@ -16,6 +16,17 @@
 [ext_resource type="Script" uid="uid://cbwe4lksssv0w" path="res://Skripts/EquipToggle.gd" id="10_12115"]
 [ext_resource type="Texture2D" uid="uid://c7oasm33uvkf" path="res://Art/HuD/Zelda hud/Menu/Dungeonmap/Rahmenmap.png" id="10_il4o6"]
 [ext_resource type="Script" uid="uid://cqa76cw452kys" path="res://Skripts/Paperdoll.gd" id="13_28u6h"]
+[ext_resource type="Texture2D" uid="uid://cjtr7d1qye1yk" path="res://Art/Spieler/paperdolls/Kind/kid_all.png" id="14_proi7"]
+[ext_resource type="Texture2D" uid="uid://xr4823y81t73" path="res://Art/Spieler/paperdolls/Kind/kid_goron_bracelet.png" id="15_d5n4k"]
+[ext_resource type="Texture2D" uid="uid://dx3nioij811hg" path="res://Art/Spieler/paperdolls/Erwachsen/adult_green.png" id="16_2fyyf"]
+[ext_resource type="Texture2D" uid="uid://tdljr3t8kk65" path="res://Art/Spieler/paperdolls/Erwachsen/adult_red.png" id="17_lxphh"]
+[ext_resource type="Texture2D" uid="uid://dcmhkr7vxlffa" path="res://Art/Spieler/paperdolls/Erwachsen/adult_blue.png" id="18_3bafm"]
+[ext_resource type="Texture2D" uid="uid://slnnemqbgamu" path="res://Art/Spieler/paperdolls/Erwachsen/adult_green_power.png" id="19_4ahgv"]
+[ext_resource type="Texture2D" uid="uid://d3opylf31mdbd" path="res://Art/Spieler/paperdolls/Erwachsen/adult_red_power.png" id="20_kegj6"]
+[ext_resource type="Texture2D" uid="uid://dm2130dc1r7y2" path="res://Art/Spieler/paperdolls/Erwachsen/adult_blue_power.png" id="21_b1wat"]
+[ext_resource type="Texture2D" uid="uid://ktmdqlatt3sb" path="res://Art/Spieler/paperdolls/Erwachsen/adult_green_titan.png" id="22_nv24j"]
+[ext_resource type="Texture2D" uid="uid://b4cxt60icc141" path="res://Art/Spieler/paperdolls/Erwachsen/adult_red_titan.png" id="23_kwutb"]
+[ext_resource type="Texture2D" uid="uid://nklsu3td0aq4" path="res://Art/Spieler/paperdolls/Erwachsen/adult_blue_titan.png" id="24_dq6y7"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -302,6 +313,7 @@ layout_mode = 2
 toggle_mode = true
 script = ExtResource("10_12115")
 type = 3
+value = 1
 owned_id = "leder_stiefel"
 
 [node name="Eisen-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 4" instance=ExtResource("10_772r3")]
@@ -309,7 +321,7 @@ layout_mode = 2
 toggle_mode = true
 script = ExtResource("10_12115")
 type = 3
-value = 1
+value = 2
 owned_id = "eisen_stiefel"
 
 [node name="Gleit-Stiefel" parent="Root/Ausrüstung/Ausrüstung reihe 4" instance=ExtResource("10_772r3")]
@@ -317,12 +329,225 @@ layout_mode = 2
 toggle_mode = true
 script = ExtResource("10_12115")
 type = 3
-value = 2
+value = 3
 owned_id = "gleit_stiefel"
 
 [node name="PaperdollSprite" type="Sprite2D" parent="Root/Ausrüstung"]
-position = Vector2(274, 277)
+position = Vector2(281, 242)
 script = ExtResource("13_28u6h")
+frame_size = Vector2i(190, 200)
+sheet_columns = 2
+sheets = {
+"adult_blue": ExtResource("18_3bafm"),
+"adult_blue_power": ExtResource("21_b1wat"),
+"adult_blue_titan": ExtResource("24_dq6y7"),
+"adult_green": ExtResource("16_2fyyf"),
+"adult_green_power": ExtResource("19_4ahgv"),
+"adult_green_titan": ExtResource("22_nv24j"),
+"adult_red": ExtResource("17_lxphh"),
+"adult_red_power": ExtResource("20_kegj6"),
+"adult_red_titan": ExtResource("23_kwutb"),
+"kid_all": ExtResource("14_proi7"),
+"kid_goron": ExtResource("15_d5n4k")
+}
+combo_index_by_key = {
+"adult_blue": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"adult_blue_power": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"adult_blue_titan": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"adult_green": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"adult_green_power": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"adult_green_titan": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"adult_red": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"adult_red_power": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"adult_red_titan": {
+"2|0|1": 0,
+"2|0|2": 1,
+"2|0|3": 2,
+"2|2|1": 3,
+"2|2|2": 4,
+"2|2|3": 5,
+"2|3|1": 12,
+"2|3|2": 13,
+"2|3|3": 14,
+"3|0|1": 6,
+"3|0|2": 7,
+"3|0|3": 8,
+"3|2|1": 9,
+"3|2|2": 10,
+"3|2|3": 11,
+"3|3|1": 15,
+"3|3|2": 16,
+"3|3|3": 17
+},
+"kid_all": {
+"0|1|1": 2,
+"1|0|1": 1,
+"1|1|1": 3,
+"1|2|1": 4
+},
+"kid_goron": {
+"1|1|1": 1,
+"1|2|1": 2
+}
+}
+child_default_columns = 2
+adult_default_columns = 4
+frame_size_by_key = {
+"kid_all": Vector2i(190, 200),
+"kid_goron": Vector2i(190, 200)
+}
 
 [node name="GridContainer" type="GridContainer" parent="Root/Ausrüstung"]
 custom_minimum_size = Vector2(64, 64)

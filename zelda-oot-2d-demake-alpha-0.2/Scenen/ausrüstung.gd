@@ -7,6 +7,9 @@ extends Control
 @export var gray_out_locked := true
 @export var placeholder_empty: Texture2D = null
 
+
+
+
 # --- IDs für passive Stufen (falls du sie im Editor NICHT befüllst) ---
 const PASSIVE_IDS_AMMO_CHILD := [
 	"seed_pouch_none", "seed_pouch_small", "seed_pouch_medium", "seed_pouch_max"  # 0..3
@@ -68,7 +71,7 @@ func _refresh_icons() -> void:
 func _populate(n: Node) -> void:
 	# 1) rekursiv in die Tiefe
 	var kids: Array = n.get_children()
-	for i in kids.size():
+	for i in range(kids.size()):
 		_populate(kids[i])
 
 	# 2) Buttons (inkl. passive-Autofill)
@@ -85,31 +88,30 @@ func _populate(n: Node) -> void:
 
 		var is_passive_btn: bool = _is_passive_button(btn)
 
-		# Typ/Value nur fürs Logging/Backup
-		var t_prop: Variant = btn.get("type")
-		var v_prop: Variant = btn.get("value")
-		var t: int = (int(t_prop) if t_prop != null else -1)
-		var v: int = (int(v_prop) if v_prop != null else -1)
-
-	# Passive Buttons: ID dynamisch ermitteln
+	# ---- DEBUG + Auflösung für PASSIVE Buttons ----
 		if id == "" and is_passive_btn:
 			id = _resolve_passive_item_id(btn)
+			print("[PASSIVE] btn=", btn.name, " -> id=", id)  # <- wichtig
 			if id != "":
 				btn.set_meta("item_id", id)
 
+	# Nichts zum Setzen?
 		if id == "":
-			# kein Icon zu setzen
 			return
 
+	# Icon anwenden (passive werden in _apply_icon nie „weg-gegraut“)
 		_apply_icon(btn, id)
 		return
 
-	# Standalone-Icon (NICHT die Paperdoll)
+
+
+	# 3) Standalone-Icon (NICHT die Paperdoll)
 	if (n is TextureRect) or (n is Sprite2D and not (n is Paperdoll)):
 		var icon_id: String = (String(n.get_meta("item_id")) if n.has_meta("item_id") else "")
 		if icon_id != "":
 			_apply_icon(n, icon_id)
 			return
+
 
 # Suche Icon in DB-Resourcen
 func _icon_from_db(id: String) -> Texture2D:
@@ -210,7 +212,8 @@ func _apply_icon(node: Node, item_id: String) -> void:
 	var owned: bool = _is_owned(item_id)
 
 	# Passive Buttons: Anzeige unabhängig vom Besitz
-	if node is TextureButton and _is_passive_button(node as TextureButton):
+	var is_passive_btn := (node is TextureButton) and _is_passive_button(node as TextureButton)
+	if is_passive_btn:
 		owned = true
 
 	if not owned:
@@ -218,6 +221,12 @@ func _apply_icon(node: Node, item_id: String) -> void:
 		return
 
 	var tex: Texture2D = _icon_from_db(item_id)
+
+	# --- NEU: Fallback für passive Buttons ---
+	if tex == null and is_passive_btn and placeholder_empty != null:
+		_set_node_texture(node, placeholder_empty)
+		return
+
 	if tex == null:
 		_clear_node_texture(node)
 		return
@@ -228,6 +237,7 @@ func _apply_icon(node: Node, item_id: String) -> void:
 		(node as TextureRect).modulate.a = 1.0
 	elif node is Sprite2D and gray_out_locked:
 		(node as Sprite2D).modulate = Color(1,1,1,1.0)
+
 
 # Helfer zum Setzen/Löschen
 func _set_node_texture(node: Node, tex: Texture2D) -> void:
@@ -296,7 +306,7 @@ func _resolve_passive_item_id(btn: TextureButton) -> String:
 	if t_prop == null or v_prop == null:
 		return ""
 	var t: int = int(t_prop)
-	var v: int = int(v_prop)  # wird nur für Fallback genutzt
+	var v: int = int(v_prop)  # nur für Fallback
 
 	# Editor-Arrays (falls gesetzt)
 	var arr_single: Array = []
@@ -315,52 +325,66 @@ func _resolve_passive_item_id(btn: TextureButton) -> String:
 	if a_adult is Array:
 		arr_adult = a_adult as Array
 
-	var idx: int = 0
+	# ---------- Fallback-Listen, falls im Editor nichts gesetzt wurde ----------
+	if t == ET_AMMO:
+		if arr_child.size() == 0:
+			arr_child = PASSIVE_IDS_AMMO_CHILD.duplicate()
+		if arr_adult.size() == 0:
+			arr_adult = PASSIVE_IDS_AMMO_ADULT.duplicate()
+	else:
+		if arr_single.size() == 0:
+			match t:
+				ET_BOMB_BAG:
+					arr_single = PASSIVE_IDS_BOMB_BAG.duplicate()
+				ET_DIVE_SCALE:
+					arr_single = PASSIVE_IDS_DIVE.duplicate()
+				ET_STRENGTH:
+					arr_single = PASSIVE_IDS_STRENGTH.duplicate()
 
+	# ---------- Level aus Inventar lesen und passende ID liefern ----------
 	if t == ET_AMMO:
 		if _inv != null and _inv.age == Inventory.Age.CHILD:
 			if arr_child.size() == 0:
 				return ""
-			idx = clamp(_inv.seed_pouch_level, 0, arr_child.size() - 1)
+			var idx: int = clamp(_inv.seed_pouch_level, 0, arr_child.size() - 1)
 			return String(arr_child[idx])
 		else:
 			if arr_adult.size() == 0:
 				return ""
-			idx = clamp(_inv.quiver_level, 0, arr_adult.size() - 1)
+			var idx: int = clamp(_inv.quiver_level, 0, arr_adult.size() - 1)
 			return String(arr_adult[idx])
 
 	elif t == ET_BOMB_BAG:
 		if arr_single.size() == 0:
 			return ""
-		idx = clamp(_inv.bomb_bag_level, 0, arr_single.size() - 1)
+		var idx: int = clamp(_inv.bomb_bag_level, 0, arr_single.size() - 1)
 		return String(arr_single[idx])
 
 	elif t == ET_DIVE_SCALE:
 		if arr_single.size() == 0:
 			return ""
-		idx = clamp(_inv.dive_scale, 0, arr_single.size() - 1)
+		var idx: int = clamp(_inv.dive_scale, 0, arr_single.size() - 1)
 		return String(arr_single[idx])
 
 	elif t == ET_STRENGTH:
 		if arr_single.size() == 0:
 			return ""
-		idx = clamp(_inv.strength, 0, arr_single.size() - 1)
+		var idx: int = clamp(_inv.strength, 0, arr_single.size() - 1)
 		return String(arr_single[idx])
 
-	# Fallbacks (falls Type falsch gesetzt ist)
+	# --- Fallbacks nach Value, falls Type falsch gesetzt ist ---
 	if arr_single.size() > 0:
-		idx = clamp(v, 0, arr_single.size() - 1)
+		var idx: int = clamp(v, 0, arr_single.size() - 1)
 		return String(arr_single[idx])
-
 	if _inv != null and _inv.age == Inventory.Age.CHILD and arr_child.size() > 0:
-		idx = clamp(v, 0, arr_child.size() - 1)
+		var idx: int = clamp(v, 0, arr_child.size() - 1)
 		return String(arr_child[idx])
-
 	if _inv != null and _inv.age == Inventory.Age.ADULT and arr_adult.size() > 0:
-		idx = clamp(v, 0, arr_adult.size() - 1)
+		var idx: int = clamp(v, 0, arr_adult.size() - 1)
 		return String(arr_adult[idx])
 
 	return ""
+
 
 # ------------------ kleine Debug-Steuerung (Zahlenreihe 1..9) ------------------
 

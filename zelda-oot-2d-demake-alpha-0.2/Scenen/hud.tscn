@@ -35,7 +35,7 @@
 [ext_resource type="Resource" uid="uid://3nxrkjlwu0yp" path="res://Daten/gear_equippable_db.tres" id="25_nbv7o"]
 [ext_resource type="Resource" uid="uid://d2daxh465lcei" path="res://Daten/passive_gear_db.tres" id="26_vmvvm"]
 [ext_resource type="LabelSettings" uid="uid://b3jj5q5nd6pjt" path="res://Scenen/hud.tres" id="29_n1svs"]
-[ext_resource type="Texture2D" uid="uid://d6i8aq7usuty" path="res://Daten/Ausrüstung/Ausrüstung Icon/Kokiri_schwert.png" id="33_vmvvm"]
+[ext_resource type="Texture2D" uid="uid://c2g02xtu67yqy" path="res://Daten/Ausrüstung/Ausrüstung Icon/Silberschuppe.png" id="33_vmvvm"]
 
 [sub_resource type="Resource" id="Resource_55ekv"]
 script = ExtResource("3_epuyx")
@@ -59,6 +59,7 @@ db_gear_equippable = ExtResource("25_nbv7o")
 db_gear_passive = ExtResource("26_vmvvm")
 
 [node name="Root" type="Control" parent="."]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -178,6 +179,7 @@ tint_over = Color(0.821789, 0.821789, 0.821789, 1)
 tint_progress = Color(0.4173, 0.782568, 0.131324, 1)
 
 [node name="ActionGroup" type="HBoxContainer" parent="Root"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -211,21 +213,32 @@ autowrap_mode = 2
 uppercase = true
 
 [node name="B Knopf" type="TextureRect" parent="Root/ActionGroup"]
+z_index = 10
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("5_1xsix")
 expand_mode = 3
 
 [node name="B Icon" type="TextureRect" parent="Root/ActionGroup/B Knopf"]
 unique_name_in_owner = true
-z_index = 1
-z_as_relative = false
+z_index = 11
 custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchor_left = 0.1
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -20.0
+offset_right = 19.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("33_vmvvm")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CGroup" type="GridContainer" parent="."]
 anchors_preset = 1

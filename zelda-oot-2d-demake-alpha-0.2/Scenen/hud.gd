@@ -104,28 +104,6 @@ func _on_inv_changed() -> void:
 	_set_c_slot("right", c_right)
 	_set_c_slot("down",  c_down)
 
-
-	# B-Icon
-	if b_icon != null:
-		var b_id: String = ""
-		var tmp: Variant = null
-		if typeof(Inventar) != TYPE_NIL:
-			tmp = Inventar.get("equip_b")  # null, falls Property fehlt
-		if tmp != null:
-			b_id = String(tmp)
-
-		var b_tex: Texture2D = null
-		if b_id != "":
-			var b_var: String = _get_variant_for(b_id)
-			b_tex = db.get_icon(b_id, b_var)
-		b_icon.texture = b_tex
-
-	# C-Icons
-	_set_c_slot("left",  c_left)
-	_set_c_slot("right", c_right)
-	_set_c_slot("down",  c_down)
-
-
 func _set_c_slot(dir: String, node: TextureRect) -> void:
 	if node == null or db == null or EquipMgr == null:
 		return
